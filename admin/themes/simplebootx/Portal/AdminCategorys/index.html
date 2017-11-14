@@ -1,0 +1,59 @@
+<admintpl file="header"/>
+<body class="J_scroll_fixed">
+<div class="wrap jj">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="{:U('AdminCategorys/index')}">分类管理</a></li>
+     <li><a href="{:U('AdminCategorys/add')}">添加分类</a></li>
+  </ul>
+  <form class="well form-search" method="post" action="{:u('AdminCategorys/index')}">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+        <span class="mr20">分类：
+        <select class="select_2" name="type">
+          	<option value='0' <if condition = "$type eq 0">selected="selected"</if>>信息分类</option>
+          	<option value='1' <if condition = "$type eq 1">selected="selected"</if>>圈子分类</option>
+        </select>
+        <!-- &nbsp;&nbsp;时间：
+        <input type="text" name="start_time" class="input length_2 J_date" value="{$formget.start_time|default=''}" style="width:80px;" autocomplete="off">-<input type="text" class="input length_2 J_date" name="end_time" value="{$formget.end_time}" style="width:80px;" autocomplete="off">
+         -->
+        <!-- 
+        <select class="select_2" name="searchtype" style="width:70px;">
+          <option value='0' >标题</option>
+        </select>
+         -->
+       <!--         &nbsp; &nbsp;关键字：
+        <input type="text" class="input length_2" name="keyword" style="width:200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> -->
+        <input type="submit" class="btn" value="搜索"/>
+        </span>
+      </div>
+    </div>
+  </form>
+  <div class="common-form">
+    <form method="post" class="J_ajaxForm" action="{:U('AdminCategorys/listorders')}">
+      <div class="table_list">
+	    <table width="100%" class="table table-hover">
+	        <thead>
+	          <tr>
+	            <th width="80">排序</th>
+	            <th width="100">ID</th>
+	            <th>分类名称</th>
+	            <th>分类类型</th>
+              <th>分类图标</th>
+	            <th>操作</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	        	{$taxonomys}
+			</tbody>
+	      </table>
+  </div>
+  		<div class="form-actions">
+  			<input name="type" value="{$type}" type="hidden"/>
+            <button type="submit" class="btn btn-primary btn_submit J_ajax_submit_btn">排序</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="__ROOT__/statics/js/common.js?"></script>
+</body>
+</html>

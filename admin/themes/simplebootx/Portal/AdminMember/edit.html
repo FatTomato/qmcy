@@ -1,0 +1,148 @@
+<admintpl file="header" />
+<style type="text/css">
+.pic-list li {
+	margin-bottom: 5px;
+}
+</style>
+<script type="text/html" id="photos-item-wrapper">
+	<li id="savedimage{id}">
+		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}"> 
+		<input id="photo-{id}-name" type="text" name="photos_alt[]" value="{name}" style="width: 160px;" title="图片名称">
+		<img id="photo-{id}-preview" src="{url}" style="height:36px;width: 36px;" onclick="parent.image_preview_dialog(this.src);">
+		<a href="javascript:upload_one_image('图片上传','#photo-{id}');">替换</a>
+		<a href="javascript:(function(){$('#savedimage{id}').remove();})();">移除</a>
+	</li>
+</script>
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('AdminMember/index')}">会员管理</a></li>
+			<li class="active"><a href="#">会员信息</a></li>
+		</ul>
+		<!-- <form action="" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data"> -->
+			<div class="row-fluid">
+				<div class="span9">
+					<table class="table table-bordered">
+						
+						<tr>
+							<th>昵称</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[username]" required value="{$member.username}" placeholder=""/>
+							</td>
+							<th>头像</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[userphoto]" required value="{$member.userphoto}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>手机</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[phone]" required value="{$member.phone}" placeholder=""/>
+							</td>
+							<th>邮箱</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[user_email]" required value="{$member.user_email}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>真实姓名</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[realname]" required value="{$member.realname}" placeholder=""/>
+							</td>
+							<th>公司名</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[firmname]" required value="{$member.firmname}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>职务</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[job]" required value="{$member.job}" placeholder=""/>
+							</td>
+							<th>主营业务</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[main_business]" required value="{$member.main_business}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>经验</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[exp]" required value="{$member.exp}" placeholder=""/>
+							</td>
+							<th>等级</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[level]" required value="{$member.level}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>当前金币</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[gold]" required value="{$member.gold}" placeholder=""/>
+							</td>
+							<th>金币总量</th>
+							<td>
+								<input type="text" style="width: 400px;" name="member[gold_total]" required value="{$member.gold_total}" placeholder=""/>
+							</td>
+						</tr>
+						<tr>
+							<th>加入圈子</th>
+							<td>
+								<ul>
+									<foreach name="cicles" item="vo">
+										<li>圈子：{$vo.cg_name}&nbsp;&nbsp;&nbsp;加入时间：{$vo.addtime}</li>
+									</foreach>
+								</ul>
+							</td>
+							
+						</tr>
+						<tr>
+							<th>关注列表</th>
+							<td>
+								<ul>
+									<foreach name="follows" item="vo">
+										<li>昵称：<a href="{:U('AdminMember/edit',array('id'=>$vo['follow_id']))}">{$vo.follow_name}</a>&nbsp;&nbsp;&nbsp;关注时间：{$vo.addtime}</li>
+									</foreach>
+								</ul>
+							</td>
+							
+						</tr>
+						<tr>
+							<th>粉丝列表</th>
+							<td>
+								<ul>
+									<foreach name="fans" item="vo">
+										<li>昵称：<a href="{:U('AdminMember/edit',array('id'=>$vo['fan_id']))}">{$vo.fan_name}</a>&nbsp;&nbsp;&nbsp;关注时间：{$vo.addtime}</li>
+									</foreach>
+								</ul>
+							</td>
+							
+						</tr>
+						<tr>
+							<th>我的收藏</th>
+							<td>
+								<a href="{:U('AdminInfo/index',array('stars'=>1,'m_id'=>$member['user_id']))}" target="_blank">我的收藏</a>
+							</td>
+							
+						</tr>
+						<tr>
+							<th>我的发布</th>
+							<td>
+								<a href="{:U('AdminInfo/index',array('post'=>1,'m_id'=>$member['user_id']))}" target="_blank">我的发布</a>
+							</td>
+							
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="form-actions">
+				<a class="btn" href="{:U('AdminMember/index')}">返回</a>
+			</div>
+		<!-- </form> -->
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+		$(".table-bordered input").attr("readonly","readonly");
+	</script>
+</body>
+</html>
