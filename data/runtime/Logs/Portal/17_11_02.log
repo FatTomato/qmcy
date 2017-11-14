@@ -1,0 +1,83 @@
+[ 2017-11-02T15:45:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T15:45:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T15:46:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T15:46:03+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:14:44+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:15:00+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002159s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002278s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001143s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006564s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.003064s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003202s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0012s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`type`,`icon`) VALUES ('0','房屋租售','房屋租售房屋租售','0','portal/20171102/59fae212d739a.png') [ RunTime:0.0006s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7' WHERE ( cg_id=7 ) [ RunTime:0.0004s ]
+
+[ 2017-11-02T17:15:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:15:41+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001530s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002274s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001154s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005634s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002998s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003102s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0009s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`type`,`icon`) VALUES ('7','买房租房','买房租房买房租房','0','portal/20171102/59fae23486abd.png') [ RunTime:0.0004s ]
+SQL: SELECT * FROM `xcx_categorys` WHERE ( cg_id=7 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7-8' WHERE ( cg_id=8 ) [ RunTime:0.0003s ]
+
+[ 2017-11-02T17:15:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:15:49+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:16:13+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001432s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002623s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.003517s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008250s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002902s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003031s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`type`,`icon`) VALUES ('7','卖房出租','卖房出租卖房出租','0','portal/20171102/59fae25b070d8.png') [ RunTime:0.0003s ]
+SQL: SELECT * FROM `xcx_categorys` WHERE ( cg_id=7 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7-9' WHERE ( cg_id=9 ) [ RunTime:0.0004s ]
+
+[ 2017-11-02T17:16:13+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-02T17:30:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+

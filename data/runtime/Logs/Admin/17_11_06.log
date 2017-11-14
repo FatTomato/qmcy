@@ -1,0 +1,85 @@
+[ 2017-11-06T12:09:58+08:00 ] 127.0.0.1 /index.php?g=Admin&m=public&a=dologin
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000377s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001752s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000231s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002828s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001126s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001204s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0163s ]
+SQL: SELECT * FROM `xcx_users` WHERE `user_login` = 'admin' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_role_user` [ RunTime:0.0124s ]
+SQL: SELECT `role_id` FROM xcx_role_user a INNER JOIN xcx_role as b on a.role_id =b.id  WHERE `user_id` = '1' AND `status` = 1  [ RunTime:0.0108s ]
+SQL: UPDATE `xcx_users` SET `user_login`='admin',`user_pass`='###768709a5b8b6c83f8d5492e387c25415',`user_nicename`='admin',`user_email`='chengzheng67@126.com',`user_url`='',`avatar`=NULL,`sex`='0',`birthday`='2000-01-01',`signature`=NULL,`last_login_ip`='127.0.0.1',`last_login_time`='2017-11-06 12:09:58',`create_time`='2017-10-19 01:01:23',`user_activation_key`='',`user_status`='1',`score`='0',`user_type`='1',`coin`='0',`mobile`='' WHERE `id` = '1' [ RunTime:0.0030s ]
+
+[ 2017-11-06T12:10:11+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:10:22+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=195&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:10:23+08:00 ] 127.0.0.1 /index.php?g=Admin&m=menu&a=add
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:10:57+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000708s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001394s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000351s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003336s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001995s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002118s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_menu` [ RunTime:0.0011s ]
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+SQL: SHOW COLUMNS FROM `xcx_auth_rule` [ RunTime:0.0007s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+SQL: SELECT * FROM `xcx_menu` WHERE `app` = 'Portal' AND `model` = 'AdminShops' AND `action` = 'index' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `parentid` FROM `xcx_menu` WHERE `id` = 0 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_menu` (`parentid`,`name`,`app`,`model`,`action`,`data`,`icon`,`remark`,`status`,`type`) VALUES ('0','店铺管理','Portal','AdminShops','index','','','','1','1') [ RunTime:0.0010s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xcx_auth_rule` WHERE `name` = 'portal/adminshops/index' LIMIT 1   [ RunTime:0.0017s ]
+SQL: INSERT INTO `xcx_auth_rule` (`name`,`module`,`type`,`title`) VALUES ('portal/adminshops/index','Portal','admin_url','店铺管理') [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_menu` WHERE `app` = 'Portal' ORDER BY `listorder` ASC,`app` ASC,`model` ASC,`action` ASC  [ RunTime:0.0006s ]
+NOTIC: [2] mkdir(): File exists D:\Work\thinkcmf\ThinkCMFX\application\Admin\Controller\MenuController.class.php 第 247 行.
+
+[ 2017-11-06T12:10:57+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:12:53+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:12:56+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=196&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2017-11-06T12:12:58+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000379s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000982s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000421s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002504s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001326s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001452s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_menu` [ RunTime:0.0006s ]
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+SQL: SHOW COLUMNS FROM `xcx_auth_rule` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_menu` WHERE `id` = 196 LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+SQL: SELECT `id` FROM `xcx_menu` WHERE `app` = 'Portal' AND `model` = 'AdminShop' AND `action` = 'index' LIMIT 1   [ RunTime:0.0012s ]
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_menu` SET `parentid`='0',`name`='店铺管理',`app`='Portal',`model`='AdminShop',`action`='index',`data`='',`icon`='',`remark`='',`status`='1',`type`='1' WHERE `id` = 196 [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xcx_auth_rule` WHERE `name` = 'portal/adminshop/index' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT `id` FROM `xcx_auth_rule` WHERE `name` = 'portal/adminshops/index' LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `xcx_auth_rule` SET `name`='portal/adminshop/index',`module`='Portal',`type`='admin_url',`title`='店铺管理' WHERE `id` = 183 [ RunTime:0.0003s ]
+SQL: SELECT * FROM `xcx_menu` WHERE `app` = 'Portal' ORDER BY `listorder` ASC,`app` ASC,`model` ASC,`action` ASC  [ RunTime:0.0005s ]
+NOTIC: [2] mkdir(): File exists D:\Work\thinkcmf\ThinkCMFX\application\Admin\Controller\MenuController.class.php 第 247 行.
+
+[ 2017-11-06T12:12:58+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=196&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+

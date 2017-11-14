@@ -1,0 +1,12 @@
+[ 2017-11-01T16:52:45+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=category&a=getCgList
+ERR: 1054:Unknown column 'a.cg_id' in 'field list'
+ [ SQL语句 ] : SELECT a.cg_id,a.name,a.icon,a.description,b.status FROM `xcx_categorys` INNER JOIN xcx_cicles_relationships b ON a.cg_id = b.cg_id  WHERE a.type = 1 AND b.member_id = 1 ORDER BY a.listorder desc LIMIT 10  
+
+[ 2017-11-01T22:29:23+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=info&a=getInfoList
+ERR: 1054:Unknown column 'b.userphoto' in 'field list'
+ [ SQL语句 ] : SELECT a.post_addr,a.post_date,a.post_content,a.smeta,a.comment_count,a.post_like,a.stars,b.userphoto,b.username,b.user_id FROM xcx_infos a INNER JOIN xcx_member c ON a.post_author = c.user_id  WHERE b.status = 1 AND b.cg_id = 4 ORDER BY a.post_date DESC LIMIT 10  
+
+[ 2017-11-01T22:29:46+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=info&a=getInfoList
+ERR: 1054:Unknown column 'b.status' in 'where clause'
+ [ SQL语句 ] : SELECT a.post_addr,a.post_date,a.post_content,a.smeta,a.comment_count,a.post_like,a.stars,c.userphoto,c.username,c.user_id FROM xcx_infos a INNER JOIN xcx_member c ON a.post_author = c.user_id  WHERE b.status = 1 AND b.cg_id = 4 ORDER BY a.post_date DESC LIMIT 10  
+

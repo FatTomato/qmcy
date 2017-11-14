@@ -1,0 +1,562 @@
+[ 2017-10-28T15:33:39+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check&uncheck=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000379s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000685s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001808s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000861s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000944s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 183 行.
+SQL: UPDATE `xcx_infos` SET `post_status`='1' WHERE `id` IN ('423','424','425') [ RunTime:0.0005s ]
+
+[ 2017-10-28T17:21:32+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000351s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000682s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000273s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001736s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001721s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001821s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0018s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0013s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0010s ]
+
+[ 2017-10-28T17:21:45+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000409s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000712s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000296s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001951s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000993s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001130s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0006s ]
+
+[ 2017-10-28T17:22:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000436s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.003358s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001130s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005593s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001200s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001314s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 207 行.
+NOTIC: [8] Undefined index: uncheck D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 216 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000843s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000959s ]
+
+[ 2017-10-28T17:24:09+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000476s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002143s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000294s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003533s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001125s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001251s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0009s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 207 行.
+NOTIC: [8] Undefined index: uncheck D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 216 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002191s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002462s ]
+
+[ 2017-10-28T17:24:56+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000525s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001793s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000810s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004014s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000935s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001060s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0016s ]
+
+[ 2017-10-28T17:26:47+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000562s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.004544s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000520s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006569s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000885s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.000972s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0010s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0011s ]
+
+[ 2017-10-28T17:27:18+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000345s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000832s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000385s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001995s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000929s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001014s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0016s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 207 行.
+NOTIC: [8] Undefined index: uncheck D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 216 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001777s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002008s ]
+
+[ 2017-10-28T17:51:51+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-28T17:52:02+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check&check=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000418s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001144s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000504s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002582s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002079s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002331s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0004s ]
+SQL: UPDATE `xcx_infos` SET `post_status`='0' WHERE `id` IN ('425') [ RunTime:0.0004s ]
+
+[ 2017-10-28T17:52:04+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check&uncheck=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000387s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000676s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000239s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001712s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001275s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001392s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminInfoController.class.php 第 185 行.
+SQL: UPDATE `xcx_infos` SET `post_status`='1' WHERE `id` IN ('425') [ RunTime:0.0003s ]
+
+[ 2017-10-28T20:36:00+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check&check=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000576s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000746s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000337s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002314s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001167s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001269s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0014s ]
+SQL: UPDATE `xcx_infos` SET `post_status`='0' WHERE `id` IN ('425') [ RunTime:0.0008s ]
+
+[ 2017-10-28T20:40:32+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check&check=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000565s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000867s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000313s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002210s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.000976s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001068s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0011s ]
+SQL: UPDATE `xcx_infos` SET `post_status`='0' WHERE `id` IN ('424') [ RunTime:0.0006s ]
+
+[ 2017-10-28T20:44:14+08:00 ] 127.0.0.1 /index.php?g=&m=AdminInfo&a=check_comments&check=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000551s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.000798s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000304s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002161s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001525s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001680s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos` [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_infos_relationships` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_info_comments` [ RunTime:0.0004s ]
+SQL: UPDATE `xcx_info_comments` SET `status`='0' WHERE `id` IN ('4') [ RunTime:0.0020s ]
+
+[ 2017-10-28T22:36:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-28T22:50:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+
+[ 2017-10-28T22:52:01+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:52:50+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:14+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:15+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:17+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:17+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:54:17+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:55:33+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:57:30+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:57:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-28T22:58:32+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:58:45+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:07+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T22:59:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\MemberModel
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:25+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:25+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:25+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:29+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:31+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-28T23:02:32+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:02:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-28T23:02:33+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:04:34+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:38+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:39+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:39+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:39+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:39+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:39+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:05:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:06:59+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:06:59+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:06:59+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:06:59+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:00+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:00+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:07+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:08+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:12+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:07:53+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:02+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:26+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:09:44+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:10:01+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:10:14+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:10:27+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:10:27+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:10:50+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:11:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:11:23+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:11:33+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:12:04+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:13:09+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:14:42+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:14:51+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:15:25+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:15:48+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:16:10+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:16:37+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:18:06+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 模板不存在:themes/simplebootx/Portal/AdminMember/index.html
+
+[ 2017-10-28T23:22:50+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminMember&a=index
+ERR: 1054:Unknown column 'a.id' in 'on clause'
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM xcx_member a INNER JOIN xcx_infos_relationships b ON a.id = b.object_id  LIMIT 1  
+

@@ -1,0 +1,1176 @@
+[ 2017-10-21T10:12:29+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T10:13:30+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T10:14:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T10:14:15+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T10:14:24+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T14:42:29+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:43:37+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:43:38+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:43:38+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:43:38+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:43:41+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminInfoTerm&a=index
+ERR: 1146:Table 'xcx.xcx_categorys' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_categorys`
+
+[ 2017-10-21T14:44:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T14:47:56+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T14:48:00+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T14:52:20+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminCategorys&a=index
+ERR: 模板不存在:admin/themes/simplebootx/Portal/AdminCategorys/index.html
+
+[ 2017-10-21T14:53:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T14:56:44+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:01:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:06:40+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:17:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:17:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:25:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:29:40+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:34:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:35:12+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:35:13+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:35:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:37:15+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:37:48+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:37:51+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:37:55+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:37:59+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:41:28+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:43:55+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:44:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:44:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:44:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:44:44+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:12+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:15+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:18+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:46+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:49+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:45:52+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:46:22+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:46:22+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:46:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:46:34+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:46:35+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:47:02+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:47:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:47:08+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:49:11+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:49:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:49:56+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:49:59+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:05+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:16+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:18+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:20+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:22+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:23+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:36+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:38+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:40+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:51:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:52:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:53:00+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:53:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T15:53:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:00:11+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:00:19+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:00:56+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:00:57+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:04:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:04:11+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:05:26+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:05:28+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:05:36+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:06:04+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:06:06+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:06:38+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:07:30+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:07:51+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:07:52+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:16+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:16+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:16+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:17+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:17+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:43+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:09:46+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:32:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:32:34+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:32:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:32:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:34:20+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:34:20+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:34:31+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:34:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:34:35+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:35:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:35:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:35:56+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:35:59+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:36:00+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:36:03+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:36:05+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:36:08+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:36:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:39:32+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:39:37+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:39:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:39:43+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T16:39:57+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:08+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:37+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:40+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:53+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:55+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:57+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:07:58+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:03+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:09+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:12+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:31+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:37+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:47+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:08:54+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:10:27+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:12:05+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:12:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:05+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:08+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:12+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:18+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:31+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:18:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:19:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:19:49+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:20:04+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:20:28+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:20:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:21:02+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:21:02+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:21:04+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:21:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:22:40+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:22:55+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:23:07+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:23:11+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:23:13+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:24:27+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:24:35+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:24:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:24:48+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:31:18+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:32:55+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T17:34:22+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:37:17+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:43:40+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:43:42+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:43:44+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:43:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:46:46+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T19:46:47+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:02:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:02:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:02:16+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:12:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:30:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:30:36+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:30:43+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:30:48+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:30:53+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:31:01+08:00 ] 127.0.0.1 /statics/js/common.js
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:44:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:45:18+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:45:19+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:45:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:45:28+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:47:13+08:00 ] 127.0.0.1 /index.php?g=&m=AdminTerm&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000688s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001339s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000382s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002861s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001690s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001806s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_terms` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_terms` SET `parent`='0',`name`='信息1测试',`description`='信息1测试信息1测试信息1测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `term_id` = '' [ RunTime:0.0005s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+
+[ 2017-10-21T20:47:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:47:41+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:48:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:48:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:49:29+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:49:39+08:00 ] 127.0.0.1 /index.php?g=&m=AdminTerm&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000615s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001498s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000347s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002941s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001580s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001742s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_terms` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_terms` SET `parent`='0',`name`='信息1测试',`description`='信息1测试信息1测试信息1测试信息1测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `term_id` = '' [ RunTime:0.0004s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+
+[ 2017-10-21T20:49:46+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:49:56+08:00 ] 127.0.0.1 /index.php?g=&m=AdminTerm&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000806s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001952s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000428s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003682s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.003403s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003793s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_terms` [ RunTime:0.0009s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_terms` SET `parent`='0',`name`='信息1测试',`description`='信息1测试信息1测试信息1测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `term_id` = '' [ RunTime:0.0005s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+ [ SQL语句 ] : UPDATE `xcx_terms` SET `path`='0-' WHERE ( term_id= )
+
+[ 2017-10-21T20:51:15+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:51:22+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000530s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001014s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000270s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002237s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001013s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001095s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+
+[ 2017-10-21T20:51:59+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000582s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001217s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000448s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002834s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002822s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003290s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+
+[ 2017-10-21T20:53:41+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001214s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001580s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000353s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003895s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001131s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001269s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0014s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='0',`name`='信息1测试',`description`='信息1测试信息1测试信息1测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '4' [ RunTime:0.0005s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-4' WHERE ( cg_id=4 ) [ RunTime:0.0002s ]
+
+[ 2017-10-21T20:54:21+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:54:25+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:54:26+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:54:32+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:54:34+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:54:38+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:55:02+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000724s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001090s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000283s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002715s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001291s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001425s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`taxonomy`,`seo_title`,`seo_keywords`,`seo_description`,`list_tpl`,`one_tpl`) VALUES ('3','圈子1子分类','圈子1子分类圈子1子分类','1','','','','list','article') [ RunTime:0.0004s ]
+SQL: SELECT * FROM `xcx_categorys` WHERE ( cg_id=3 ) LIMIT 1   [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-3-6' WHERE ( cg_id=6 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 85 行.
+
+[ 2017-10-21T20:55:02+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T20:55:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:00:24+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:00:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:01:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:01:53+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:02:22+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:04:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:04:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:04:23+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000552s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001128s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000445s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002589s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001183s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001296s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0009s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:24+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000535s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001006s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000370s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002341s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001057s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001140s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0011s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:24+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000659s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.005402s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000468s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007097s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001017s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001100s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:24+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001003s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002681s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000742s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005016s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001061s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001171s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:24+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000614s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001099s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000360s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002533s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001010s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001091s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:25+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000851s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001070s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000396s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002971s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001037s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001125s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:25+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000571s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001029s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000368s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002386s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001112s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001192s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:25+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000545s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001012s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000372s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002362s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001851s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002017s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+
+[ 2017-10-21T21:04:46+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:05:30+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:05:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:05:39+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000621s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001200s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000405s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002739s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001177s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001280s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`taxonomy`,`seo_title`,`seo_keywords`,`seo_description`,`list_tpl`,`one_tpl`) VALUES ('0','信息2测试','信息2测试信息2测试','0','','','','list','article') [ RunTime:0.0005s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7' WHERE ( cg_id=7 ) [ RunTime:0.0003s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 85 行.
+
+[ 2017-10-21T21:05:39+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:06:27+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:06:30+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000542s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001191s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000505s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002780s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001256s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001356s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='3',`name`='圈子1子分类',`description`='圈子1子分类圈子1子分类',`taxonomy`='1',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '6' [ RunTime:0.0003s ]
+SQL: SELECT * FROM `xcx_categorys` WHERE ( cg_id=3 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-3-6' WHERE ( cg_id=6 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 127 行.
+
+[ 2017-10-21T21:06:30+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:06:50+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:06:51+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:06:54+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:07:04+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000593s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001080s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000398s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002508s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001358s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001466s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='3',`name`='圈子1子分类',`description`='圈子1子分类圈子1子分类',`taxonomy`='1',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '6' [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_categorys` WHERE ( cg_id=3 ) LIMIT 1   [ RunTime:0.0002s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-3-6' WHERE ( cg_id=6 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 127 行.
+
+[ 2017-10-21T21:07:04+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:07:52+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000559s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001480s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000461s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003073s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001165s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001263s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0007s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='0',`name`='信息22测试',`description`='信息22测试信息22测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '7' [ RunTime:0.0004s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7' WHERE ( cg_id=7 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 127 行.
+
+[ 2017-10-21T21:07:52+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:07:57+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:07:59+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:08:09+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001033s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001088s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000532s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003618s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.004595s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.004969s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='0',`name`='圈子2测试',`description`='圈子2测试圈子2测试',`taxonomy`='1',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '5' [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-5' WHERE ( cg_id=5 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 127 行.
+
+[ 2017-10-21T21:08:09+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:08:20+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001059s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001173s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000425s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005553s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002451s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002732s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0010s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='0',`name`='信息2测试',`description`='信息2测试信息2测试',`taxonomy`='0',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '7' [ RunTime:0.0005s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-7' WHERE ( cg_id=7 ) [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: type D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminCategorysController.class.php 第 127 行.
+
+[ 2017-10-21T21:08:20+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:13+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:15+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:21+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:31+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:33+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:36+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:38+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:40+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:10:45+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000679s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001570s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000426s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003193s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001241s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001334s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: UPDATE `xcx_categorys` SET `parent`='0',`name`='圈子2测试',`description`='圈子2测试圈子2测试',`type`='1',`seo_title`='',`seo_keywords`='',`seo_description`='',`list_tpl`='list',`one_tpl`='article' WHERE `cg_id` = '5' [ RunTime:0.0004s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-5' WHERE ( cg_id=5 ) [ RunTime:0.0023s ]
+
+[ 2017-10-21T21:10:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:11:48+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:11:52+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:11:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:12:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:15:49+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:16:06+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000470s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001158s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000778s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003084s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001602s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001705s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0018s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`type`,`seo_title`,`seo_keywords`,`seo_description`,`list_tpl`,`one_tpl`) VALUES ('0','圈子2测试','圈子2测试圈子2测试','1','','','','list','article') [ RunTime:0.0008s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-8' WHERE ( cg_id=8 ) [ RunTime:0.0004s ]
+
+[ 2017-10-21T21:16:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:16:12+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:16:20+08:00 ] 127.0.0.1 /index.php?g=&m=AdminCategorys&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000435s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001160s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000412s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002439s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001410s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001523s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: validate D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\Work\thinkcmf\ThinkCMFX\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_categorys` (`parent`,`name`,`description`,`type`,`seo_title`,`seo_keywords`,`seo_description`,`list_tpl`,`one_tpl`) VALUES ('0','圈子2测试','圈子2测试圈子2测试','1','','','','list','article') [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_categorys` SET `path`='0-9' WHERE ( cg_id=9 ) [ RunTime:0.0010s ]
+
+[ 2017-10-21T21:16:21+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:17:02+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:17:04+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:19:06+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:19:10+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T21:24:56+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T22:02:45+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T22:02:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T22:03:49+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T22:03:58+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-10-21T22:06:19+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+

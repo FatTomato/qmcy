@@ -1,0 +1,390 @@
+[ 2017-11-07T20:20:01+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:02+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:03+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:20:19+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:21:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:21:57+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:22:47+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T20:25:23+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:26:50+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:27:31+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:28:46+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:29:34+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:38:35+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:46:19+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:47:07+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:53:08+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:54:20+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000937s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002473s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000580s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004672s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001416s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001550s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0012s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0016s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '13332324545' LIMIT 1   [ RunTime:0.0002s ]
+SQL: INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`add_time`,`shop_detail`,`member_id`,`shop_pic`) VALUES ('name','addr','ss','10:00:00-20:00:00','2017-11-07 21:53','2017-11-30 21:53','contact','13332324545','2017-11-07 21:53:08','<p>asdasdfadf</p>','1','portal/20171107/5a01bb09a4045.png') [ RunTime:0.0005s ]
+SQL: INSERT INTO `xcx_shop_relationships` (`cg_id`,`shop_id`) VALUES ('6','435') [ RunTime:0.0003s ]
+
+[ 2017-11-07T21:54:30+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:56:06+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:56:34+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:57:08+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:57:54+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T21:59:39+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:00:53+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:01:12+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:01:27+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:04:34+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:05:31+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:06:36+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:07:00+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:09:40+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:10:16+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:11:10+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:11:23+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:11:37+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:12:13+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:14:28+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:14:33+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:14:35+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:14:46+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:15:12+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:15:32+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:16:44+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:17:02+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:19:52+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:19:54+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:20:51+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004044s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002321s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001195s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008840s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.003444s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003545s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0004s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '13332324546' LIMIT 1   [ RunTime:0.0002s ]
+SQL: INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`add_time`,`shop_detail`,`member_id`,`shop_pic`) VALUES ('name','addr','major','09:00:00--20:00:00','2017-11-07 22:19','2017-11-30 22:19','contact','13332324546','2017-11-07 22:19:54','<p>content</p>','2','portal/20171107/5a01c1412a31f.png') [ RunTime:0.0004s ]
+SQL: INSERT INTO `xcx_shop_relationships` (`cg_id`,`shop_id`) VALUES ('6','436') [ RunTime:0.0003s ]
+
+[ 2017-11-07T22:20:52+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:22:54+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=top&top=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000755s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.004246s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000805s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006559s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001778s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001900s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0007s ]
+SQL: UPDATE `xcx_shop` SET `istop`='1' WHERE `id` IN ('436') [ RunTime:0.0005s ]
+
+[ 2017-11-07T22:22:54+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:22:56+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=top&untop=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000612s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001176s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000668s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002882s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001946s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002053s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0005s ]
+NOTIC: [8] Undefined index: top D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 247 行.
+SQL: UPDATE `xcx_shop` SET `istop`='0' WHERE `id` IN ('436') [ RunTime:0.0005s ]
+
+[ 2017-11-07T22:22:56+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:23:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=check&uncheck=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001572s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.005544s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000797s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008860s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001854s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001935s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0006s ]
+NOTIC: [8] Undefined index: check D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 225 行.
+SQL: UPDATE `xcx_shop` SET `status`='0' WHERE `id` IN ('436') [ RunTime:0.0004s ]
+
+[ 2017-11-07T22:23:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:23:50+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=check&check=1
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000661s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001164s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000684s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002940s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001655s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001776s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0006s ]
+SQL: UPDATE `xcx_shop` SET `status`='1' WHERE `id` IN ('436') [ RunTime:0.0005s ]
+
+[ 2017-11-07T22:23:50+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:24:11+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=listorders
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000915s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001232s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000752s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004385s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001702s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001787s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0005s ]
+SQL: UPDATE `xcx_shop_relationships` SET `listorder`='2' WHERE `sid` = 10 [ RunTime:0.0003s ]
+
+[ 2017-11-07T22:24:11+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:24:14+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=listorders
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000557s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001429s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000832s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003312s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001722s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001807s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0008s ]
+SQL: UPDATE `xcx_shop_relationships` SET `listorder`='0' WHERE `sid` = 10 [ RunTime:0.0010s ]
+
+[ 2017-11-07T22:24:14+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:37:08+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:37:10+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:37:20+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:38:57+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:39:22+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:39:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:40:59+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:41:13+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:42:07+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:44:08+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:44:19+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:47:52+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:48:19+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:48:36+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:50:15+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:51:05+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:52:45+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit&id=436
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:52:46+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=edit_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000567s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001076s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000556s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002637s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002178s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002281s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0015s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0004s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0012s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0010s ]
+SQL: UPDATE `xcx_shop` SET `shop_name`='name',`shop_addr`='addr',`shop_major`='major',`shop_time`='09:00:00--20:00:00',`start_time`='2017-11-07 22:19:00',`end_time`='2017-11-30 22:19:00',`shop_contact`='contact',`shop_phone`='13332324546',`shop_detail`='<p>content</p>',`shop_pic`='portal/20171107/5a01c1412a31f.png' WHERE `id` = 436 [ RunTime:0.0003s ]
+SQL: UPDATE `xcx_shop_relationships` SET `cg_id`='6' WHERE `shop_id` = '436' [ RunTime:0.0002s ]
+
+[ 2017-11-07T22:52:48+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:53:06+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:53:10+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-07T22:53:13+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+

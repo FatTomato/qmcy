@@ -1,0 +1,164 @@
+[ 2017-11-10T16:00:01+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-10T16:00:07+08:00 ] 127.0.0.1 /statics/js/common.js?
+ERR: 无法加载控制器:Statics
+
+[ 2017-11-10T23:30:41+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:30:43+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:31:12+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001363s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002192s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001102s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005800s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.003115s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.003266s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0011s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0014s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = 'dddd' LIMIT 1   [ RunTime:0.0002s ]
+ERR: 1048:Column 'member_id' cannot be null
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`shop_detail`,`member_id`,`shop_pic`,`add_time`) VALUES ('ddddd','fffff','zzzzz','ssss','2017-11-10 23:30','2017-11-30 23:30','wwww','eeeee','<p>rrrrr</p>',NULL,'portal/20171110/5a05c63d8f3f2.png','2017-11-10 11:31:12')
+ERR: 1048:Column 'member_id' cannot be null
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`shop_detail`,`member_id`,`shop_pic`,`add_time`) VALUES ('ddddd','fffff','zzzzz','ssss','2017-11-10 23:30','2017-11-30 23:30','wwww','eeeee','<p>rrrrr</p>',NULL,'portal/20171110/5a05c63d8f3f2.png','2017-11-10 11:31:12')
+
+[ 2017-11-10T23:31:21+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:31:28+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:32:21+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001418s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.006396s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001158s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009662s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002642s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002736s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0016s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0015s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = 'aaaaaaaa' LIMIT 1   [ RunTime:0.0002s ]
+ERR: 1048:Column 'member_id' cannot be null
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`shop_detail`,`member_id`,`shop_pic`,`add_time`) VALUES ('qqqqqq','ffffffffff','dddddddddddd','sssssssss','2017-11-10 23:31','2017-11-30 23:31','ddddddd','ffffffff','<p>ggggg</p>',NULL,'portal/20171110/5a05c670283b0.png','2017-11-10 11:32:21')
+ERR: 1048:Column 'member_id' cannot be null
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`shop_detail`,`member_id`,`shop_pic`,`add_time`) VALUES ('qqqqqq','ffffffffff','dddddddddddd','sssssssss','2017-11-10 23:31','2017-11-30 23:31','ddddddd','ffffffff','<p>ggggg</p>',NULL,'portal/20171110/5a05c670283b0.png','2017-11-10 11:32:21')
+
+[ 2017-11-10T23:35:03+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:35:16+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000753s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002021s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000770s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004042s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001576s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001666s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0008s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0010s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0016s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: shop_detail D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 49 行.
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('as','as','','','','','','','0','','','2017-11-10 11:35:16')
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('as','as','','','','','','','0','','','2017-11-10 11:35:16')
+
+[ 2017-11-10T23:35:46+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:35:51+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000598s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001176s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.001044s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003241s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001540s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001624s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0015s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: shop_detail D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 49 行.
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('aaaaaaa','dd','','','','','','','0','','','2017-11-10 11:35:51')
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('aaaaaaa','dd','','','','','','','0','','','2017-11-10 11:35:51')
+
+[ 2017-11-10T23:35:57+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:36:04+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001360s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.002238s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.002039s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007354s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001598s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001685s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0033s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: shop_detail D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 49 行.
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('adsasd','','','','','','','','0','','','2017-11-10 11:36:04')
+ERR: 1292:Incorrect datetime value: '' for column 'start_time' at row 1
+ [ SQL语句 ] : INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('adsasd','','','','','','','','0','','','2017-11-10 11:36:04')
+
+[ 2017-11-10T23:36:38+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+
+[ 2017-11-10T23:36:52+08:00 ] 127.0.0.1 /index.php?g=&m=AdminShop&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000627s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001143s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000656s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003016s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.004237s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.004572s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0006s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
+SQL: SHOW COLUMNS FROM `xcx_shop` [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `xcx_categorys` [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `xcx_shop_relationships` [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_member` [ RunTime:0.0004s ]
+SQL: SELECT `user_id` FROM `xcx_member` WHERE `phone` = '' LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: shop_detail D:\Work\thinkcmf\ThinkCMFX\application\Portal\Controller\AdminShopController.class.php 第 49 行.
+SQL: INSERT INTO `xcx_shop` (`shop_name`,`shop_addr`,`shop_major`,`shop_time`,`start_time`,`end_time`,`shop_contact`,`shop_phone`,`member_id`,`shop_pic`,`shop_detail`,`add_time`) VALUES ('adsf ','','','','2017-11-10 23:36','2017-11-30 23:36','','','0','','','2017-11-10 11:36:52') [ RunTime:0.0007s ]
+SQL: INSERT INTO `xcx_shop_relationships` (`cg_id`,`shop_id`) VALUES ('6','437') [ RunTime:0.0006s ]
+
