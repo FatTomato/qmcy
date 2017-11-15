@@ -2162,3 +2162,42 @@ function sp_mobile_code_log($mobile,$code,$expire_time){
     
     return $result;
 }
+
+function http_get($url)
+{return 2;
+    $ch = curl_init();
+    if (stripos($url, "https://") !== FALSE) {
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+    }
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result, true);
+}
+
+function http_post($url, $param = null)
+{
+    $ch = curl_init();
+    if (stripos($url, "https://") !== FALSE) {
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    }
+    if (is_string($param)) {
+        $postStr = $param;
+    } else {
+        $postArr = array();
+        foreach ($param as $key => $val) {
+            $postArr[] = $key . "=" . urlencode($val);
+        }
+        $postStr = join("&", $postArr);
+    }
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $postStr);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result, true);
+}

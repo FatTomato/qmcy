@@ -117,8 +117,8 @@ class MemberController extends BaseController {
 	// 基本信息
 	public function getMemberInfo(){
 		$memberinfo['id'] = $this->member_id;
-		$memberinfo['name'] = $this->username;
-		$memberinfo['photo'] = $this->userphoto;
+		$memberinfo['name'] = 'user1';//$this->username;
+		$memberinfo['photo'] = '';//$this->userphoto;
 		$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->member_id))->getField('exp');
 		$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->member_id))->count();
 		$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->member_id))->count();
@@ -131,7 +131,17 @@ class MemberController extends BaseController {
 
 	// 授权登陆
 	public function onLogin(){
+		$qm_code = '011G7DF60ibtUK1TPGG606TVF60G7DFX';//I('request.code');
+		if (isset($qm_code) && !empty($qm_code)) {
+			$appid = C('APPID');
+			$secret = C('SECRET');
+			$url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$qm_code.'&grant_type=authorization_code';
 
+			// $re = http_get($post_data, $url);
+
+		}else{
+			$this->jerror('参数缺失');
+		}
 	}
 	
 	// 手机验证

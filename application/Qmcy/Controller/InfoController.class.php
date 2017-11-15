@@ -36,7 +36,7 @@ class InfoController extends BaseController {
 		$info['post_like'] = count($post_like);
 		$info['stars'] = count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
-		$info['smeta'] = json_decode($info['smeta']);
+		$info['smeta'] = json_decode($info['smeta'],true);
 
 		$comments = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->order('createtime asc')->select();
 		$info['comments'] = $comments;
@@ -105,7 +105,7 @@ class InfoController extends BaseController {
 			$value['stars'] = count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
-			$value['smeta'] = json_decode($value['smeta']);
+			$value['smeta'] = json_decode($value['smeta'],true);
 		}
 
 		if ($list !== false) {
