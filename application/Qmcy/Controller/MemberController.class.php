@@ -137,8 +137,14 @@ class MemberController extends BaseController {
 			$secret = C('SECRET');
 			$url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$qm_code.'&grant_type=authorization_code';
 
-			// $re = http_get($post_data, $url);
-
+			$re = http_get($url);
+			/*
+				array (size=3)
+				  'session_key' => string '36yklkN8Kg6LXhR9XW7nBQ==' (length=24)
+				  'expires_in' => int 7200
+				  'openid' => string 'orTgf0RwkfEndrSO1Bom7P5aZ6Qc' (length=28)
+			*/
+			
 		}else{
 			$this->jerror('参数缺失');
 		}

@@ -53,8 +53,8 @@ class InfoController extends BaseController {
 	// 信息列表
 	public function getInfoList(){
 		$cg_id = (int)I('request.cg_id');
-		$post = I('request.post');
-		$member_id = (int)I('request.member_id');
+		$post = 'true';//I('request.post');
+		$member_id = 1;//(int)I('request.member_id');
 		$star = I('request.star');
 		$pagination = (array)I('request.pagination');
 		$type = I('request.type');
@@ -70,7 +70,7 @@ class InfoController extends BaseController {
 			$where['b.cg_id'] = $cg_id;
 		}
 		// 我的发布
-		if ($post == 'ture') {
+		if ($post == 'true') {
 			if ($member_id == $this->member_id) {
 				unset($where['b.status']);
 			}
