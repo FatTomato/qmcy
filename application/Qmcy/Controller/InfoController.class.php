@@ -124,7 +124,7 @@ class InfoController extends BaseController {
 		$post_addr = (string)I('request.post_addr');
 		$smeta = (array)I('request.smeta');
 
-		if (empty($cg_id) || empty($cg_name)|| empty($post_content)|| empty($post_addr)) {
+		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
 			$this->jerror("参数缺失");
 		}
 
