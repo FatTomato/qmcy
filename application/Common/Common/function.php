@@ -2164,7 +2164,7 @@ function sp_mobile_code_log($mobile,$code,$expire_time){
 }
 
 function http_get($url)
-{return 2;
+{
     $ch = curl_init();
     if (stripos($url, "https://") !== FALSE) {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
@@ -2200,4 +2200,23 @@ function http_post($url, $param = null)
     $result = curl_exec($ch);
     curl_close($ch);
     return json_decode($result, true);
+}
+
+function randomFromDev($len) {
+    $fp = @fopen('/dev/urandom','rb');
+    $result = '';
+    if ($fp !== FALSE) {
+        $result .= @fread($fp, $len);
+        @fclose($fp);
+    }
+    else
+    {
+        trigger_error('Can not open /dev/urandom.');
+    }
+    // convert from binary to string
+    $result = base64_encode($result);
+    // remove none url chars
+    $result = strtr($result, '+/', '-_');
+
+    return substr($result, 0, $len);
 }
