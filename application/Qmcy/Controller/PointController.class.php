@@ -6,7 +6,7 @@ use Qmcy\Lib\BaseController;
 class PointController extends BaseController {
 	
 	public function _initialize() {
-		$this->member_id = 1;
+		
 	}
 
 	// 更新积分
@@ -61,7 +61,7 @@ class PointController extends BaseController {
 
 	// 日积分详情
 	public function getDailyDetail(){
-		$where['member_id'] = $this->member_id;
+		$where['member_id'] = $this->user_result['user_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
 		$field = 'addtime,point,action';
 		$re = M('detail_points')->field($field)->where($where)->order('addtime')->select();
@@ -106,7 +106,7 @@ class PointController extends BaseController {
 
 	// 周积分详情
 	public function getWeeklyDetail(){
-		$where['member_id'] = $this->member_id;
+		$where['member_id'] = $this->user_result['user_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d'));
 		$field = 'addtime,point';
 		$re = M('daily_points')->field($field)->where($where)->order('addtime')->select();

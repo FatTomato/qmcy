@@ -5,11 +5,9 @@ use Qmcy\Lib\BaseController;
 
 class CategoryController extends BaseController {
 
-	protected $member_id;
 	protected $cg_m;
 	
 	public function _initialize() {
-		$this->member_id= 1;
 		$this->cg_m = M('Categorys');
 	}
 
@@ -26,7 +24,7 @@ class CategoryController extends BaseController {
 
 		$cicle_info = $this->cg_m->where($where)->field($field)->find();
 
-		$this->getCicleMemberRelationship($cicle_info,$this->member_id);
+		$this->getCicleMemberRelationship($cicle_info,$this->user_result['user_id']);
 
 		$cicle_info['icon'] = sp_get_image_preview_url($cicle_info['icon']);
 
@@ -55,7 +53,7 @@ class CategoryController extends BaseController {
 
 		if ($type == 1) {			
 			foreach ($cg_list as &$value) {
-				$this->getCicleMemberRelationship($value,$this->member_id);
+				$this->getCicleMemberRelationship($value,$this->user_result['user_id']);
 				$value['icon'] = sp_get_image_preview_url($value['icon']);
 				$son_num = $this->cg_m->where(array('parent'=>$value['cg_id']))->count();
 				$value['is_parent'] = $son_num>0? 1: 0;
@@ -79,9 +77,9 @@ class CategoryController extends BaseController {
 
 	// 圈子发布条数、人数、是否加入
 	protected function getCicleMemberRelationship(&$param=[],$member_id){
-		$param['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$param['cg_id'],'status'=>1))->count();
-		$param['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id'],'status'=>1))->count();
-		$status = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id'],'member_id'=>$member_id))->getField('status');
-		$param['status'] = (int)$status;
+		$param['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$param['cg_id']))->count();
+		$param['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id']))->count();
+		$status = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id'],'member_id'=>$member_id))->find();
+		$param['status'] = isset($status)? true: false;
 	}
 }

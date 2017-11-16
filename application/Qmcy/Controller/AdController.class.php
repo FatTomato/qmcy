@@ -32,6 +32,8 @@ class AdController extends BaseController {
 		$ad = $this->ad_m->field($field)->where($where)->find();
 
 		$ad['smeta'] = sp_get_image_preview_url($ad['smeta']);
+		$ad['start_time'] = substr($ad['start_time'], 0, 10);
+		$ad['end_time'] = substr($ad['end_time'], 0, 10);
 		$post_hits_arr = explode(',',$ad['post_hits']);
 		$ad['post_hits_num'] = strlen($ad['post_hits'])>0? count($post_hits_arr): 0;
 		if (strlen($ad['post_hits'])>0) {

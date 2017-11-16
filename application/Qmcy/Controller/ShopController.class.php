@@ -9,7 +9,6 @@ class ShopController extends BaseController {
 	
 	public function _initialize() {
 		$this->shop_m = M('Shop');
-		$this->member_id = 1;
 	}
 
 	// shop detail
