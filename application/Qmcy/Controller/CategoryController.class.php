@@ -8,6 +8,7 @@ class CategoryController extends BaseController {
 	protected $cg_m;
 	
 	public function _initialize() {
+		parent::_initialize();
 		$this->cg_m = M('Categorys');
 	}
 

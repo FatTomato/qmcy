@@ -8,6 +8,7 @@ class InfoController extends BaseController {
 	protected $info_m;
 	
 	public function _initialize() {
+		parent::_initialize();
 		$this->info_m = M('Infos');
 	}
 

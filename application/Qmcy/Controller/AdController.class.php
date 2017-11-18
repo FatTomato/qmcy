@@ -15,6 +15,7 @@ class AdController extends BaseController {
 	protected $ad_m;
 	
 	public function _initialize() {
+		parent::_initialize();
 		$this->ad_m = M('Ads');
 	}
 

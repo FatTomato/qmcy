@@ -62,6 +62,8 @@ abstract class BaseController extends Controller {
         if (isset($_SESSION[$session3rd.'login_endtime']) && $_SESSION[$session3rd.'login_endtime']>time()) {
             $_SESSION[$session3rd.'login_endtime'] = time()+86400*7;
             $user_id = $_SESSION [$session3rd];
+        }else {
+            $this->jerror("The session3rd is expire!");
         }
        
         return $user_id;
