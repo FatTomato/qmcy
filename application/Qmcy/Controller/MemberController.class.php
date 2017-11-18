@@ -155,28 +155,28 @@ class MemberController extends BaseController {
 	// 授权登陆
 	public function onLogin(){
 		$qm_code = I('request.code');
-		$signature = I('request.signature');
-		$rawData = I('request.rawData');
+		// $signature = I('request.signature');
+		// $rawData = I('request.rawData');
 		$encryptedData = I('request.encryptedData');
 		$iv = I('request.iv');
 
-		if (isset($qm_code) && !empty($qm_code) && isset($signature) && !empty($signature) && isset($encryptedData) && !empty($encryptedData) && isset($iv) && !empty($iv)) {
+		if (isset($qm_code) && !empty($qm_code) && isset($encryptedData) && !empty($encryptedData) && isset($iv) && !empty($iv)) {
 			$appid = C('APPID');
 			$secret = C('SECRET');
 			$url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$qm_code.'&grant_type=authorization_code';
 
 			$re = http_get($url);
-			
+
 			if(!isset($re['session_key'])) {
 				$this->jerror('curl error');
 			}
 
 			$sessionKey = $re['session_key'];
 
-			$signature2 = sha1($rawData . $sessionKey);
-    		if ($signature2 !== $signature) {
-		        $this->jerror("sign Not Match");
-		    }
+			// $signature2 = sha1($rawData . $sessionKey);
+   //  		if ($signature2 !== $signature) {
+		 //        $this->jerror("sign Not Match");
+		 //    }
 
 			$pc = new WXBizDataCrypt($appid, $sessionKey);
 		    $errCode = $pc->decryptData($encryptedData, $iv, $data);
@@ -214,7 +214,7 @@ class MemberController extends BaseController {
 
 		    $session3rd = md5(time());//randomFromDev(16);
 
-		    $_SESSION [$session3rd.'login_endtime'] = time()+3600;
+		    $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
 		    $_SESSION [$session3rd] = $user_id;
 
 		    // $data['session3rd'] = $session3rd;
@@ -232,6 +232,7 @@ class MemberController extends BaseController {
 	// 手机验证
 	public function checkPhone(){
 		// todo
+		echo strlen('4MAC8sLvTQgWtgaG1ZD7Iw==');
 	}
 
 }
