@@ -59,13 +59,11 @@ abstract class BaseController extends Controller {
 
     protected function getSessionUserId(){
         $session3rd = I('request.session3rd');
-        if (isset($_SESSION[$session3rd.'login_endtime']) && $_SESSION[$session3rd.'login_endtime']>time()) {
-            $_SESSION[$session3rd.'login_endtime'] = time()+86400*7;
-            $user_id = $_SESSION [$session3rd];
-        }else {
-            $this->jerror("The session3rd is expire!");
+        if (S($session3rd)) {
+            $user_id = M('Member')->where(array('openId'=>S($session3rd)))->getField('user_id');
+        }else{
+            $this->jerror('session3rd is expire');
         }
-       
         return $user_id;
     }
 

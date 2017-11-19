@@ -171,7 +171,7 @@ class MemberController extends BaseController {
 			}
 
 			$sessionKey = $re['session_key'];
-			$openId = $re['openId'];
+			$openId = $re['openid'];
 		}else{
 			$this->jerror('参数缺失');
 		}
@@ -217,8 +217,9 @@ class MemberController extends BaseController {
 
 	    $session3rd = md5(time());//randomFromDev(16);
 
-	    $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
-	    $_SESSION [$session3rd] = $re['openId'];
+	    // $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
+	    // $_SESSION [$session3rd] = $re['openId'];
+	    S($session3rd, $openId, 86400*7);
 
 	    $this->jret['flag'] = 1;
 	    $this->jret['reset']['session3rd'] = $session3rd;
@@ -230,7 +231,7 @@ class MemberController extends BaseController {
 	// 手机验证
 	public function checkPhone(){
 		// todo
-		echo strlen('4MAC8sLvTQgWtgaG1ZD7Iw==');
+		
 	}
 
 }
