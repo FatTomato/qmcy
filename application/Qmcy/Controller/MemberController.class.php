@@ -158,10 +158,8 @@ class MemberController extends BaseController {
 		$qm_code = I('request.code');
 		// $signature = I('request.signature');
 		// $rawData = I('request.rawData');
-		$encryptedData = I('request.encryptedData');
-		$iv = I('request.iv');
 
-		if (isset($qm_code) && !empty($qm_code) && isset($encryptedData) && !empty($encryptedData) && isset($iv) && !empty($iv)) {
+		if (isset($qm_code) && !empty($qm_code)) {
 			$appid = C('APPID');
 			$secret = C('SECRET');
 			$url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$qm_code.'&grant_type=authorization_code';
@@ -173,12 +171,21 @@ class MemberController extends BaseController {
 			}
 
 			$sessionKey = $re['session_key'];
+			$openId = $re['openId'];
+		}else{
+			$this->jerror('参数缺失');
+		}
+
+		$member = $this->m_m->where( array('openId'=>$openId) )->find();
+
+		if (empty($member)) {
+			$encryptedData = I('request.encryptedData');
+			$iv = I('request.iv');
 
 			// $signature2 = sha1($rawData . $sessionKey);
-   //  		if ($signature2 !== $signature) {
-		 //        $this->jerror("sign Not Match");
-		 //    }
-
+			//  		if ($signature2 !== $signature) {
+			//        $this->jerror("sign Not Match");
+			//    }
 			$pc = new WXBizDataCrypt($appid, $sessionKey);
 		    $errCode = $pc->decryptData($encryptedData, $iv, $data);
 
@@ -187,47 +194,37 @@ class MemberController extends BaseController {
 		    }
 
 		    $data = json_decode($data, true);
-
-		    $member = $this->m_m->where( array('unionId'=>$data['unionId']) )->find();
-		    if (!isset($member)) {
-		    	$memberinfo['username'] = $data['nickName'];
-			    $memberinfo['userphoto'] = $data['avatarUrl'];
-			    $memberinfo['sex'] = $data['gender'];
-			    $memberinfo['openId'] = $data['openId'];
-			    $memberinfo['language'] = $data['language'];
-			    $memberinfo['unionId'] = $data['unionId'];
-			    $memberinfo['city'] = $data['city'];
-			    $memberinfo['province'] = $data['province'];
-			    $memberinfo['country'] = $data['country'];
-			    // todo   邀请人
-			    // $memberinfo['invite_userid'] = $data['nickName'];
-			    $memberinfo['addtime'] = date('Y-m-d h:i:s');
-			    $user_id = $this->m_m->add($memberinfo);
-		    }else{
-		    	$user_id = $member['user_id'];
-		    }
-
-		    $save_data = array(
-	            'logintime' => $u['logintime']+1,
-	            'last_login_time' => date("Y-m-d H:i:s", time())
-	        );
-	        $this->m_m->where(array('user_id'=>$user_id) )->save($save_data);
-
-		    $session3rd = md5(time());//randomFromDev(16);
-
-		    $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
-		    $_SESSION [$session3rd] = $user_id;
-
-		    // $data['session3rd'] = $session3rd;
-		    // cache($session3rd, $data['openId'] . $sessionKey);
-
-		    $this->jret['flag'] = 1;
-		    $this->jret['reset']['session3rd'] = $session3rd;
-		    $this->ajaxReturn($this->jret);
-			
-		}else{
-			$this->jerror('参数缺失');
+		    $memberinfo['username'] = $data['nickName'];
+		    $memberinfo['userphoto'] = $data['avatarUrl'];
+		    $memberinfo['sex'] = $data['gender'];
+		    $memberinfo['openId'] = $data['openId'];
+		    $memberinfo['language'] = $data['language'];
+		    $memberinfo['unionId'] = $data['unionId'];
+		    $memberinfo['city'] = $data['city'];
+		    $memberinfo['province'] = $data['province'];
+		    $memberinfo['country'] = $data['country'];
+		    // todo   邀请人
+		    // $memberinfo['invite_userid'] = $data['nickName'];
+		    $memberinfo['addtime'] = date('Y-m-d h:i:s');
+		    $user_id = $this->m_m->add($memberinfo);
 		}
+
+	    $save_data = array(
+            'logintime' => $u['logintime']+1,
+            'last_login_time' => date("Y-m-d H:i:s", time())
+        );
+        $this->m_m->where(array('user_id'=>$user_id) )->save($save_data);
+
+	    $session3rd = md5(time());//randomFromDev(16);
+
+	    $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
+	    $_SESSION [$session3rd] = $re['openId'];
+
+	    $this->jret['flag'] = 1;
+	    $this->jret['reset']['session3rd'] = $session3rd;
+	    $this->ajaxReturn($this->jret);
+			
+		
 	}
 	
 	// 手机验证

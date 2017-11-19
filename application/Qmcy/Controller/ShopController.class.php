@@ -8,6 +8,7 @@ class ShopController extends BaseController {
 	protected $shop_m;
 	
 	public function _initialize() {
+		parent::_initialize();
 		$this->shop_m = M('Shop');
 	}
 
