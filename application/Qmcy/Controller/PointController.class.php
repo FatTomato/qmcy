@@ -5,9 +5,9 @@ use Qmcy\Lib\BaseController;
 
 class PointController extends BaseController {
 	
-	// public function _initialize() {
-		
-	// }
+	public function _initialize() {
+		parent::_initialize();
+	}
 
 	// 更新积分
 	public function setPoint($param=[]){
