@@ -128,15 +128,6 @@ class MemberController extends BaseController {
 	public function getMemberInfo(){
 
 		if (isset($this->user_result['user_id']) && !empty($this->user_result['user_id'])) {
-			$info = $this->m_m->field('username,userphoto,exp')->where(array('user_id'=>$this->user_result['user_id']))->find();
-			$memberinfo['name'] = $info['username'];
-			$memberinfo['photo'] = $info['userphoto'];
-			$memberinfo['point'] = $info['exp'];
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
-			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$this->user_result['user_id']))->find();
-			$memberinfo['is_follow'] = $re? true: false;
-		}else{
 			$memberinfo['id'] = $this->user_result['user_id'];
 			$memberinfo['name'] = $this->user_result['username'];
 			$memberinfo['photo'] = $this->user_result['userphoto'];
@@ -145,6 +136,15 @@ class MemberController extends BaseController {
 			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
 			$memberinfo['cicles'] = M('CiclesRelationships')->where(array('member_id'=>$this->user_result['user_id'], 'status'=>1))->select();
+		}else{
+			$info = $this->m_m->field('username,userphoto,exp')->where(array('user_id'=>$this->user_result['user_id']))->find();
+			$memberinfo['name'] = $info['username'];
+			$memberinfo['photo'] = $info['userphoto'];
+			$memberinfo['point'] = $info['exp'];
+			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
+			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
+			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$this->user_result['user_id']))->find();
+			$memberinfo['is_follow'] = $re? true: false;
 		}
 		if ($memberinfo) {
 			$jret['flag'] = 1;
