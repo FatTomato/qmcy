@@ -56,13 +56,19 @@ class AdController extends BaseController {
 	
 	// 广告列表
 	public function getAdsList(){
-		$cg_id = (int)I('request.cg_id');
-		$istop = (int)I('request.istop');
+		$cg_id = 5;//(int)I('request.cg_id');
+		$istop = 1;//(int)I('request.istop');
 		$recommended = (int)I('request.recommended');
 		$pagination = (array)I('request.pagination');
 		// 各分类
 		if (isset($cg_id) && !empty($cg_id) && isset($istop) && !empty($istop)) {
-			$where['b.cg_id'] = $cg_id;
+			$son_cg = M('Categorys')->where(array('parent'=>$cg_id))->getField('cg_id', true);
+			if (isset($son_cg)) {
+				$where['b.cg_id'] = array('in', implode(',', array_merge(array($cg_id),$son_cg)));
+			}else{
+				$where['b.cg_id'] = $cg_id;
+			}
+			
 			$where['a.istop'] = $istop;
 		}
 		// 首页

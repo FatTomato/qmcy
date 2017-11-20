@@ -152,10 +152,10 @@ class MemberController extends BaseController {
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
 			$memberinfo['cicles'] = M('CiclesRelationships')->where(array('member_id'=>$this->user_result['user_id'], 'status'=>1))->select();
 		}else{
-			$info = $this->m_m->field('username,userphoto,exp')->where(array('user_id'=>$memberid))->find();
+			$info = $this->m_m->field('username,userphoto,point')->where(array('user_id'=>$memberid))->find();
 			$memberinfo['name'] = $info['username'];
 			$memberinfo['photo'] = $info['userphoto'];
-			$memberinfo['point'] = $info['exp'];
+			// $memberinfo['point'] = $info['exp'];
 			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
 			if (!empty($this->user_result['user_id'])) {

@@ -27,7 +27,7 @@ class PointController extends BaseController {
 		$weekly_re = self::analysis($param=['date'=>$weekly_date, 'm'=>$weekly_m, 'point'=>$point, 'member_id'=>$member_id]);
 
 		// member直接update字段exp
-		$total_re = M('member')->where(array('user_id'=>$member_id))->setInc('exp',$point);
+		$total_re = M('member')->where(array('user_id'=>$member_id))->setInc('point',$point);
 		
 	}
 
