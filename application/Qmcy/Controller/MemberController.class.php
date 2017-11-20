@@ -17,6 +17,9 @@ class MemberController extends BaseController {
 
 	// 我的粉丝列表
 	public function getFans(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$fans = $this->mr_m->field('fan_id, fan_name, fan_photo')->where(array('follow_id'=>$this->user_result['user_id']))->select();
 
 		foreach ($fans as &$value) {
@@ -38,6 +41,9 @@ class MemberController extends BaseController {
 
 	// 我的关注列表
 	public function getFollows(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['user_id']))->select();
 
 		foreach ($follows as &$value) {
@@ -57,6 +63,9 @@ class MemberController extends BaseController {
 
 	// 关注&&取关
 	public function setRelationship(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$action = I('request.action');
 		$member_id = (int)I('request.member_id');
 		$name = (string)I('request.name');
@@ -95,6 +104,9 @@ class MemberController extends BaseController {
 
 	// 进圈&&退圈
 	public function setCicleStatus(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$status = I('request.status');
 		$cg_id = (int)I('request.cg_id');
 
@@ -126,8 +138,11 @@ class MemberController extends BaseController {
 
 	// 基本信息
 	public function getMemberInfo(){
-
-		if (isset($this->user_result['user_id']) && !empty($this->user_result['user_id'])) {
+		$memberid = I('request.memberid');
+		if (empty($memberid)) {
+			if (empty($this->user_result['user_id'])) {
+				$this->jerror('u have to auth!');
+			}
 			$memberinfo['id'] = $this->user_result['user_id'];
 			$memberinfo['name'] = $this->user_result['username'];
 			$memberinfo['photo'] = $this->user_result['userphoto'];
@@ -137,14 +152,17 @@ class MemberController extends BaseController {
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
 			$memberinfo['cicles'] = M('CiclesRelationships')->where(array('member_id'=>$this->user_result['user_id'], 'status'=>1))->select();
 		}else{
-			$info = $this->m_m->field('username,userphoto,exp')->where(array('user_id'=>$this->user_result['user_id']))->find();
+			$info = $this->m_m->field('username,userphoto,exp')->where(array('user_id'=>$memberid))->find();
 			$memberinfo['name'] = $info['username'];
 			$memberinfo['photo'] = $info['userphoto'];
 			$memberinfo['point'] = $info['exp'];
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
-			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$this->user_result['user_id']))->find();
-			$memberinfo['is_follow'] = $re? true: false;
+			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
+			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
+			if (!empty($this->user_result['user_id'])) {
+				$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$memberid))->find();
+				$memberinfo['is_follow'] = $re? true: false;
+			}
+			
 		}
 		if ($memberinfo) {
 			$jret['flag'] = 1;

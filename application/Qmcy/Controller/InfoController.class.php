@@ -26,11 +26,14 @@ class InfoController extends BaseController {
 		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.user_id';
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
-		$info['id_del'] = $this->user_result['user_id'] == $info['user_id']? true: false;
-		$post_like = explode(',', $info['post_like']);
-		$stars = explode(',', $info['stars']);
-		$info['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
-		$info['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
+		if(!empty($this->user_result['user_id'])){
+			$post_like = explode(',', $info['post_like']);
+			$stars = explode(',', $info['stars']);
+			$info['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
+			$info['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
+			$info['id_del'] = $this->user_result['user_id'] == $info['user_id']? true: false;
+		}
+		
 		$info['post_like'] = count($post_like);
 		$info['stars'] = count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
@@ -69,6 +72,9 @@ class InfoController extends BaseController {
 		}
 		// 我的发布
 		if ($post == 'true') {
+			if (empty($this->user_result['user_id'])) {
+				$this->jerror('u have to auth!');
+			}
 			if ($member_id == $this->user_result['user_id']) {
 				unset($where['b.status']);
 			}
@@ -76,6 +82,9 @@ class InfoController extends BaseController {
 		}
 		// 我的收藏
 		if ($star == 'true') {
+			if (empty($this->user_result['user_id'])) {
+				$this->jerror('u have to auth!');
+			}
 			$where['a.stars']=array('like',"%$this->user_result['user_id']%");
 		}
 		// 
@@ -97,16 +106,19 @@ class InfoController extends BaseController {
 		$list = $this->info_m->alias('a')->join($join1)->join($join2)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as $key => &$value) {
-			$post_like = explode(',', $value['post_like']);
-			$stars = explode(',', $value['stars']);
-			$value['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
-			$value['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
+			if(!empty($this->user_result['user_id'])){
+				$post_like = explode(',', $value['post_like']);
+				$stars = explode(',', $value['stars']);
+				$value['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
+				$value['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
+				$value['id_del'] = $this->user_result['user_id'] == $value['user_id']? true: false;
+			}
+			
 			$value['post_like'] = count($post_like);
 			$value['stars'] = count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
 			$value['smeta'] = json_decode($value['smeta'],true);
-			$value['id_del'] = $this->user_result['user_id'] == $value['user_id']? true: false;
 		}
 
 		if ($list !== false) {
@@ -120,6 +132,9 @@ class InfoController extends BaseController {
 
 	// 信息发布
 	public function addInfo(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$cg_id = (int)I('request.cg_id');
 		$post_content = (string)I('request.post_content');
 		$post_addr = (string)I('request.post_addr');
@@ -170,6 +185,9 @@ class InfoController extends BaseController {
 
 	// 评论
 	public function setComment(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$id = (int)I('request.id');
 		$to_mid = (int)I('request.to_mid');
 		$to_name = (string)I('request.to_name');
@@ -224,6 +242,9 @@ class InfoController extends BaseController {
 
 	// 点赞&&取消点赞
 	public function setLikeStatus(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$action = I('request.action');
 		$id = (int)I('request.id');
 		if (isset($id) && !empty($id)) {
@@ -277,6 +298,9 @@ class InfoController extends BaseController {
 
 	// 收藏&&取消收藏
 	public function setStarStatus(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$action = I('request.action');
 		$id = (int)I('request.id');
 		if (isset($id) && !empty($id)) {
@@ -318,18 +342,22 @@ class InfoController extends BaseController {
 
 	// 信息删除
 	public function delInfo(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$id = (int)I('request.id');
-		if (isset($id) && !empty($id)) {
+		$post_author = $this->info_m->where(array('id'=>$id))->getField('post_author');
+		if ($post_author == $this->user_result['user_id']) {
 			$re1 = $this->info_m->where(array('id'=>$id))->delete();
 			$re2 = M('InfosRelationships')->where(array('object_id'=>$id))->delete();
 		}else{
-			$this->jerror("参数缺失");
+			$this->jerror("只可以删除自己发布的信息");
 		}
 		if ($re1 !== false && $re2 !== false) {
 			$jret['flag'] = 1;
 	        $this->ajaxreturn($jret);
 		}else{
-			$this->jerror('收藏失败');
+			$this->jerror('删除失败');
 		}
 	}
 

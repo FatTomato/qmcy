@@ -61,6 +61,9 @@ class PointController extends BaseController {
 
 	// 日积分详情
 	public function getDailyDetail(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$where['member_id'] = $this->user_result['user_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
 		$field = 'addtime,point,action';
@@ -106,6 +109,9 @@ class PointController extends BaseController {
 
 	// 周积分详情
 	public function getWeeklyDetail(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
 		$where['member_id'] = $this->user_result['user_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d'));
 		$field = 'addtime,point';

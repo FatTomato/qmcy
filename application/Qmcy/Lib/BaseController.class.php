@@ -46,25 +46,18 @@ abstract class BaseController extends Controller {
         $this->user_result = null;
 
         // login status
-        $userM = M('Member');
-        $user_id = $this->getSessionUserId();
-        if ($user_id) {
-            $this->user_result = $userM->where(array('user_id'=>$user_id))->find();
+        $session3rd = I('request.session3rd');
+        if (!empty($session3rd)) {
+            if (S($session3rd)) {
+                $user_result = M('Member')->where(array('openId'=>S($session3rd)))->find();
+            }else{
+                $this->jerror('session3rd is expire');
+            }
         }
 
         if($this->user_result){
             $this->jret['islocked'] = $this->user_result['islock'];
         }
-    }
-
-    protected function getSessionUserId(){
-        $session3rd = I('request.session3rd');
-        if (S($session3rd)) {
-            $user_id = M('Member')->where(array('openId'=>S($session3rd)))->getField('user_id');
-        }else{
-            $this->jerror('session3rd is expire');
-        }
-        return $user_id;
     }
 
 }

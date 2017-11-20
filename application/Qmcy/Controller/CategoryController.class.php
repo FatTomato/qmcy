@@ -14,6 +14,7 @@ class CategoryController extends BaseController {
 
 	//圈子详情 
 	public function getCicleInfo(){
+
 		$cg_id = I("request.cg_id");
 		if (isset($cg_id) && !empty($cg_id)) {
 			$where['cg_id'] = $cg_id;
@@ -24,8 +25,9 @@ class CategoryController extends BaseController {
 		$field = 'cg_id,name,icon,description';
 
 		$cicle_info = $this->cg_m->where($where)->field($field)->find();
-
-		$this->getCicleMemberRelationship($cicle_info,$this->user_result['user_id']);
+		if(!empty($this->user_result['user_id'])){
+			$this->getCicleMemberRelationship($cicle_info,$this->user_result['user_id']);
+		}
 
 		$cicle_info['icon'] = sp_get_image_preview_url($cicle_info['icon']);
 
@@ -52,9 +54,12 @@ class CategoryController extends BaseController {
 
 		$cg_list = $this->cg_m->where($where)->field($field)->order($order)->limit($limit)->select();
 
-		if ($type == 1) {			
+		if ($type == 1) {
 			foreach ($cg_list as &$value) {
-				$this->getCicleMemberRelationship($value,$this->user_result['user_id']);
+				if (!empty($this->user_result['user_id'])) {
+					$this->getCicleMemberRelationship($value,$this->user_result['user_id']);
+				}
+				
 				$value['icon'] = sp_get_image_preview_url($value['icon']);
 				$son_num = $this->cg_m->where(array('parent'=>$value['cg_id']))->count();
 				$value['is_parent'] = $son_num>0? 1: 0;
