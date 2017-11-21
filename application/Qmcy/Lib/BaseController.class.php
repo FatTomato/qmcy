@@ -47,7 +47,7 @@ abstract class BaseController extends Controller {
 
         // login status
         $session3rd = I('request.session3rd');
-        if (!empty($session3rd)) {
+        if (!empty($session3rd) && $session3rd !== 'null') {
             if (S($session3rd)) {
                 $this->user_result = M('Member')->where(array('openId'=>S($session3rd)))->find();
             }else{

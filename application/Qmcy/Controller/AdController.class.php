@@ -28,7 +28,7 @@ class AdController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 
-		$field = 'id,shop_id,post_content,post_title,post_excerpt,post_discount,start_time,end_time,post_expire,smeta,store_name,store_addr,store_contact,store_phone,store_time,post_hits';
+		$field = 'id,shop_id,post_content,post_title,post_excerpt,post_discount,start_time,end_time,post_expire,smeta,store_name,store_addr,store_contact,store_phone,store_time,post_hits,store_lat,store_lng';
 
 		$ad = $this->ad_m->field($field)->where($where)->find();
 
@@ -89,7 +89,7 @@ class AdController extends BaseController {
 
 		$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
 
-		$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire';
+		$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
 
 		$list = $this->ad_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
