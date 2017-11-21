@@ -25,8 +25,13 @@ class CategoryController extends BaseController {
 		$field = 'cg_id,name,icon,description';
 
 		$cicle_info = $this->cg_m->where($where)->field($field)->find();
+
+		$cicle_info['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$cg_id))->count();
+		$cicle_info['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$cg_id))->count();
+		
 		if(!empty($this->user_result['user_id'])){
-			$this->getCicleMemberRelationship($cicle_info,$this->user_result['user_id']);
+			$status = M('CiclesRelationships')->where(array('cg_id'=>$cg_id,'member_id'=>$this->user_result['user_id']))->find();
+			$cicle_info['status'] = isset($status)? true: false;
 		}
 
 		$cicle_info['icon'] = sp_get_image_preview_url($cicle_info['icon']);
@@ -56,8 +61,11 @@ class CategoryController extends BaseController {
 
 		if ($type == 1) {
 			foreach ($cg_list as &$value) {
+				$value['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$value['cg_id']))->count();
+				$value['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$value['cg_id']))->count();
 				if (!empty($this->user_result['user_id'])) {
-					$this->getCicleMemberRelationship($value,$this->user_result['user_id']);
+					$status = M('CiclesRelationships')->where(array('cg_id'=>$value['cg_id'],'member_id'=>$this->user_result['user_id']))->find();
+					$value['status'] = isset($status)? true: false;
 				}
 				
 				$value['icon'] = sp_get_image_preview_url($value['icon']);
@@ -79,13 +87,5 @@ class CategoryController extends BaseController {
 		}else {
 			$this->jerror("查询失败");
 		}
-	}
-
-	// 圈子发布条数、人数、是否加入
-	protected function getCicleMemberRelationship(&$param=[],$member_id){
-		$param['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$param['cg_id']))->count();
-		$param['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id']))->count();
-		$status = M('CiclesRelationships')->where(array('cg_id'=>$param['cg_id'],'member_id'=>$member_id))->find();
-		$param['status'] = isset($status)? true: false;
 	}
 }

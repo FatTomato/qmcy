@@ -155,7 +155,7 @@ class MemberController extends BaseController {
 			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['user_id'], 'a.status'=>1))->select();
 			if (count($cicles) > 0) {
 				foreach ($cicles as &$value) {
-					$value['icon'] = sp_get_image_preview_url($value['icon'])；
+					$value['icon'] = sp_get_image_preview_url($value['icon']);
 				}
 			}
 			
