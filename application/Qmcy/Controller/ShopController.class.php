@@ -72,4 +72,48 @@ class ShopController extends BaseController {
 			$this->jerror("查询失败");
 		}
 	}
+
+	// shop search
+	public function searchShopList(){
+		$kword = I('request.kword');
+		$pagination = I('request.pagination');
+
+		if (isset($kword) && !empty($kword)) {
+			$map['shop_name']  = array('like', '%'.$kword.'%');
+			$map['shop_major']  = array('like','%'.$kword.'%');
+			$map['_logic'] = 'or';
+			$where['_complex'] = $map;
+		}else{
+			$this->jerror('kword can`t be null!');
+		}
+
+		$where['a.status'] = 1;
+
+		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
+
+		if (isset($pagination) && !empty($pagination)) {
+			$where['a.id'] = array('GT',(int)$pagination['id']);
+			$limit = (int)$pagination['epage'];
+		}else{
+			$limit = 10;
+		}
+
+		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
+
+		$field = 'a.id,a.shop_name,a.shop_addr,a.shop_major,a.shop_time,a.is_shiti,a.is_new,a.shop_pic';
+
+		$list = $this->shop_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
+
+		foreach ($list as &$value) {
+			$value['shop_pic'] = sp_get_image_preview_url($value['shop_pic']);
+		}
+
+		if ($list !== false) {
+			$jret['flag'] = 1;
+			$jret['result'] = $list;
+	        $this->ajaxreturn($jret);
+		}else {
+			$this->jerror("查询失败");
+		}
+	}
 }

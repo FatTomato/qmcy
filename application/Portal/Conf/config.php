@@ -7,7 +7,8 @@ $configs = array(
         'article:index' => array('portal/article/{id}',600),
         'index:index' => array('portal/index',600),
         'list:index' => array('portal/list/{id}_{p}',60)
-    )
+    ),
+    'TXMAP' => 'X7EBZ-CQNCX-K4O4C-7PUPI-PBK7F-3BF53'
 );
 
 return array_merge($configs);

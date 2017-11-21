@@ -47,6 +47,15 @@ class AdminShopController extends AdminbaseController {
 			$shop['member_id'] = isset($member_id)? $member_id: 0;
 			$shop['shop_pic'] = sp_asset_relative_url($_POST['shop_pic']);
 			$shop['shop_detail'] = htmlspecialchars_decode($shop['shop_detail']);
+			$key = C('TXMAP');
+			$addr = $shop['shop_addr'];
+			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			$lat_lng = http_get($url);
+			if($lat_lng['status'] !== 0){
+				$this->error("位置解析失败！");
+			}
+			$shop['lat'] = $lat_lng['result']['location']['lat'];
+			$shop['lng'] = $lat_lng['result']['location']['lng'];
 			$shop['add_time'] = date('Y-m-d h:i:s');
 			$shop['post_status']=0;
 			$result=$this->shop_model->add($shop);
@@ -82,10 +91,19 @@ class AdminShopController extends AdminbaseController {
 	public function edit_post(){
 		if (IS_POST) {
 
-			$article=I("post.post");
-			$article['shop_pic'] = sp_asset_relative_url($_POST['shop_pic']);
-			$article['shop_detail']=htmlspecialchars_decode($article['shop_detail']);
-			$result=$this->shop_model->save($article);
+			$shop=I("post.post");
+			$shop['shop_pic'] = sp_asset_relative_url($_POST['shop_pic']);
+			$shop['shop_detail']=htmlspecialchars_decode($shop['shop_detail']);
+			$key = C('TXMAP');
+			$addr = $shop['shop_addr'];
+			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			$lat_lng = http_get($url);
+			if($lat_lng['status'] !== 0){
+				$this->error("位置解析失败！");
+			}
+			$shop['lat'] = $lat_lng['result']['location']['lat'];
+			$shop['lng'] = $lat_lng['result']['location']['lng'];
+			$result=$this->shop_model->save($shop);
 			if ($result!==false) {
 				$re = $this->shop_relationships_model->where(array('shop_id'=>$_POST['post']['id']))->save(array('cg_id'=>$_POST['cg_id']));
 				if($re !== false){

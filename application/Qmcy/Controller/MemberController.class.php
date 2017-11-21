@@ -146,7 +146,7 @@ class MemberController extends BaseController {
 			$memberinfo['id'] = $this->user_result['user_id'];
 			$memberinfo['name'] = $this->user_result['username'];
 			$memberinfo['photo'] = $this->user_result['userphoto'];
-			$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->user_result['user_id']))->getField('exp');
+			$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->user_result['user_id']))->getField('point');
 			$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['user_id']))->count();
 			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();

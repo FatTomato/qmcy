@@ -56,8 +56,8 @@ class AdController extends BaseController {
 	
 	// 广告列表
 	public function getAdsList(){
-		$cg_id = 5;//(int)I('request.cg_id');
-		$istop = 1;//(int)I('request.istop');
+		$cg_id = (int)I('request.cg_id');
+		$istop = (int)I('request.istop');
 		$recommended = (int)I('request.recommended');
 		$pagination = (array)I('request.pagination');
 		// 各分类

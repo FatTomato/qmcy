@@ -49,7 +49,7 @@ abstract class BaseController extends Controller {
         $session3rd = I('request.session3rd');
         if (!empty($session3rd)) {
             if (S($session3rd)) {
-                $user_result = M('Member')->where(array('openId'=>S($session3rd)))->find();
+                $this->user_result = M('Member')->where(array('openId'=>S($session3rd)))->find();
             }else{
                 $this->jerror('session3rd is expire');
             }
