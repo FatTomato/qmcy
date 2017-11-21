@@ -254,6 +254,35 @@ class MemberController extends BaseController {
 			
 		
 	}
+
+	// update session3rd
+	public function updateSession3rd(){
+		$qm_code = I('request.code');
+
+		if (isset($qm_code) && !empty($qm_code)) {
+			$appid = C('APPID');
+			$secret = C('SECRET');
+			$url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$qm_code.'&grant_type=authorization_code';
+
+			$re = http_get($url);
+
+			if(!isset($re['session_key'])) {
+				$this->jerror('curl error');
+			}
+
+			$sessionKey = $re['session_key'];
+			$openId = $re['openid'];
+		}else{
+			$this->jerror('参数缺失');
+		}
+
+		$session3rd = md5(time());//randomFromDev(16);
+		S($session3rd, $openId, 86400*7);
+
+	    $this->jret['flag'] = 1;
+	    $this->jret['reset']['session3rd'] = $session3rd;
+	    $this->ajaxReturn($this->jret);
+	}
 	
 	// 手机验证
 	public function checkPhone(){
