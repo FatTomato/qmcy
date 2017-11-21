@@ -47,6 +47,15 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
+			$key = C('TXMAP');
+			$addr = $article['store_addr'];
+			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			$lat_lng = http_get($url);
+			if($lat_lng['status'] !== 0){
+				$this->error("位置解析失败！");
+			}
+			$article['store_lat'] = $lat_lng['result']['location']['lat'];
+			$article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$article['post_status']=0;
 			$result=$this->ads_model->add($article);
 			if ($result) {
@@ -85,6 +94,15 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
+			$key = C('TXMAP');
+			$addr = $article['store_addr'];
+			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			$lat_lng = http_get($url);
+			if($lat_lng['status'] !== 0){
+				$this->error("位置解析失败！");
+			}
+			$article['store_lat'] = $lat_lng['result']['location']['lat'];
+			$article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$result=$this->ads_model->save($article);
 			if ($result!==false) {
 				$re = $this->ads_relationships_model->where(array('object_id'=>$_POST['post']['id']))->save(array('cg_id'=>$_POST['cg_id']));

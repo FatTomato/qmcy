@@ -183,6 +183,28 @@ class InfoController extends BaseController {
 		}
 	}
 
+	protected function upPic(){
+	    $savepath='qmcy/'.date('Ymd').'/';
+	    $config=array(
+        		'rootPath' => './'.C("UPLOADPATH"),
+        		'savePath' => $savepath,
+        		'maxSize' => 2097152,
+        		'saveName'   =>    array('uniqid',''),
+        		'exts'       =>    array('jpg', 'gif', 'png', 'jpeg'),
+        		'autoSub'    =>    false,
+        );
+		$upload = new \Think\Upload($config);// 
+		$info=$upload->upload();
+		if ($info) {
+			$first=array_shift($info);
+			$filepath = $savepath.$first['savename'];
+			$this->jret['result'] = $filepath;
+			$this->jret['falg'] = 1;
+        } else {
+            $this->jerror($upload->getError());
+        }
+	}
+
 	// 评论
 	public function setComment(){
 		if (empty($this->user_result['user_id'])) {
