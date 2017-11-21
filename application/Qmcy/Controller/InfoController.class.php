@@ -143,6 +143,13 @@ class InfoController extends BaseController {
 		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
 			$this->jerror("参数缺失");
 		}
+		// 判断发布频率，圈子发布需大于30min
+		$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['user_id']))->order('post_date desc')->getField('post_date');
+		$d = time()-strtotime($post_date);
+		if ($d < 1800) {
+			$minute = ceil((1800-$d)/60);
+			$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
+		}
 
 		$info['post_author'] = $this->user_result['user_id'];
 		$info['post_date'] = date('Y-m-d h:i:s');
@@ -183,7 +190,7 @@ class InfoController extends BaseController {
 		}
 	}
 
-	protected function upPic(){
+	public function upPic(){
 	    $savepath='qmcy/'.date('Ymd').'/';
 	    $config=array(
         		'rootPath' => './'.C("UPLOADPATH"),
@@ -227,7 +234,7 @@ class InfoController extends BaseController {
 		}
 
 		$data['post_id'] = $id;
-		// todo
+
 		$data['from_mid'] = $this->user_result['user_id'];
 		$data['from_name'] = $this->user_result['username'];
 		$data['from_userphoto'] = $this->from_userphoto;
