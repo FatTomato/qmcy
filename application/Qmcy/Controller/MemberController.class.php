@@ -152,7 +152,7 @@ class MemberController extends BaseController {
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
 			$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
 			$field = 'b.cg_id,b.name,b.icon';
-			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('member_id'=>$this->user_result['user_id'], 'status'=>1))->select();
+			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['user_id'], 'a.status'=>1))->select();
 			if (count($cicles) > 0) {
 				foreach ($cicles as &$value) {
 					$value['icon'] = sp_get_image_preview_url($value['icon'])；
