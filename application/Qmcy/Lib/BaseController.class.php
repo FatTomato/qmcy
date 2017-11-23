@@ -54,12 +54,12 @@ abstract class BaseController extends Controller {
                     $this->user_result = $member;
                 }else{
                     $this->jret['reset']['status'] = 0;
-                    $this->jret['reset']['msg'] = 'u have to reg!';
+                    $this->jret['msg'] = 'u have to reg!';
                     $this->ajaxReturn($this->jret);
                 }
             }else{
                 $this->jret['reset']['status'] = 1;
-                $this->jret['reset']['msg'] = 'session3rd is expire!';
+                $this->jret['msg'] = 'session3rd is expire!';
                 $this->ajaxReturn($this->jret);
             }
         }

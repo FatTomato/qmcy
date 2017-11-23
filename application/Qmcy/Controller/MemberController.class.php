@@ -278,6 +278,9 @@ class MemberController extends BaseController {
 			$this->jerror('参数缺失');
 		}
 
+		$member = M('Member')->where(array('openId'=>$openId))->find();
+        $this->jret['reset']['is_reg'] = empty($member)? 0: 1;
+
 		$session3rd = md5(time());//randomFromDev(16);
 		S($session3rd, $openId, 86400*7);
 
