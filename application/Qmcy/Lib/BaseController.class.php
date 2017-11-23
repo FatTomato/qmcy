@@ -49,9 +49,18 @@ abstract class BaseController extends Controller {
         $session3rd = I('request.session3rd');
         if (!empty($session3rd) && $session3rd !== 'null') {
             if (S($session3rd)) {
-                $this->user_result = M('Member')->where(array('openId'=>S($session3rd)))->find();
+                $member = M('Member')->where(array('openId'=>S($session3rd)))->find();
+                if (!empty($member)) {
+                    $this->user_result = $member;
+                }else{
+                    $this->jret['reset']['status'] = 0;
+                    $this->jret['reset']['msg'] = 'u have to reg!';
+                    $this->ajaxReturn($this->jret);
+                }
             }else{
-                $this->jerror('session3rd is expire');
+                $this->jret['reset']['status'] = 1;
+                $this->jret['reset']['msg'] = 'session3rd is expire!';
+                $this->ajaxReturn($this->jret);
             }
         }
 

@@ -375,6 +375,9 @@ class InfoController extends BaseController {
 			$this->jerror('u have to auth!');
 		}
 		$id = (int)I('request.id');
+		if(empty($id)){
+			$this->jerror('参数缺失');
+		}
 		$post_author = $this->info_m->where(array('id'=>$id))->getField('post_author');
 		if ($post_author == $this->user_result['user_id']) {
 			$re1 = $this->info_m->where(array('id'=>$id))->delete();
@@ -387,6 +390,33 @@ class InfoController extends BaseController {
 	        $this->ajaxreturn($jret);
 		}else{
 			$this->jerror('删除失败');
+		}
+	}
+
+	// 信息举报
+	public function tipOff(){
+		if (empty($this->user_result['user_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$post_id = (int)I('request.post_id');
+		$type = (int)I('request.type');
+		$content = (int)I('request.content');
+
+		if (isset($post_id) && !empty($post_id) && isset($type) && !empty($type) && isset($content) && !empty($content)) {
+			$data['user_id'] = $this->user_result['user_id'];
+			$data['content'] = $content;
+			$data['type'] = $type;
+			$data['post_id'] = $post_id;
+			$data['createtime'] = date('Y-m-d h:i:s');
+			$re = M('InfoTipoff')->add($data);
+		}else{
+			$this->jerror('参数缺失');
+		}
+		if ($re !== false) {
+			$jret['flag'] = 1;
+	        $this->ajaxreturn($jret);
+		}else{
+			$this->jerror('举报失败');
 		}
 	}
 

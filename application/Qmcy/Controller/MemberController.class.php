@@ -181,7 +181,7 @@ class MemberController extends BaseController {
 	}
 
 	// 授权登陆
-	public function onLogin(){
+	public function onReg(){
 		$qm_code = I('request.code');
 		// $signature = I('request.signature');
 		// $rawData = I('request.rawData');
@@ -236,27 +236,29 @@ class MemberController extends BaseController {
 		    $user_id = $this->m_m->add($memberinfo);
 		}
 
+		if ($user_id) {
+	        $this->jerror("reg false!");
+	    }
+
 	    $save_data = array(
             'logintime' => $u['logintime']+1,
             'last_login_time' => date("Y-m-d H:i:s", time())
         );
         $this->m_m->where(array('user_id'=>$user_id) )->save($save_data);
 
-	    $session3rd = md5(time());//randomFromDev(16);
+	    // $session3rd = md5(time());//randomFromDev(16);
 
-	    // $_SESSION [$session3rd.'login_endtime'] = time()+86400*7;
-	    // $_SESSION [$session3rd] = $re['openId'];
-	    S($session3rd, $openId, 86400*7);
+	    // S($session3rd, $openId, 86400*7);
 
 	    $this->jret['flag'] = 1;
-	    $this->jret['reset']['session3rd'] = $session3rd;
+	    // $this->jret['reset']['session3rd'] = $session3rd;
 	    $this->ajaxReturn($this->jret);
 			
 		
 	}
 
 	// update session3rd
-	public function updateSession3rd(){
+	public function onLogin(){
 		$qm_code = I('request.code');
 
 		if (isset($qm_code) && !empty($qm_code)) {
