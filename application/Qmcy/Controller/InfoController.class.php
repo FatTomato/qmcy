@@ -35,7 +35,7 @@ class InfoController extends BaseController {
 		}
 		
 		$info['post_like'] = $post_like == ['']? 0: count($post_like);
-		$info['stars'] = count($stars);
+		$info['stars'] = $stars == ['']? 0: count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		$info['smeta'] = json_decode($info['smeta'],true);
 
@@ -115,7 +115,7 @@ class InfoController extends BaseController {
 			}
 			
 			$value['post_like'] = $post_like == ['']? 0: count($post_like);
-			$value['stars'] = count($stars);
+			$value['stars'] = $stars == ['']? 0: count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
 			$value['smeta'] = json_decode($value['smeta'],true);
