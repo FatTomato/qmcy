@@ -34,7 +34,7 @@ class InfoController extends BaseController {
 			$info['id_del'] = $this->user_result['user_id'] == $info['user_id']? true: false;
 		}
 		
-		$info['post_like'] = count($post_like);
+		$info['post_like'] = $post_like == ['']? 0: count($post_like);
 		$info['stars'] = count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		$info['smeta'] = json_decode($info['smeta'],true);
@@ -85,7 +85,7 @@ class InfoController extends BaseController {
 			if (empty($this->user_result['user_id'])) {
 				$this->jerror('u have to auth!');
 			}
-			$where['a.stars']=array('like',"%$this->user_result['user_id']%");
+			$where['a.stars']=array('like',"%".$this->user_result['user_id']."%");
 		}
 		// 
 		if ($type == 'false') {
@@ -114,7 +114,7 @@ class InfoController extends BaseController {
 				$value['id_del'] = $this->user_result['user_id'] == $value['user_id']? true: false;
 			}
 			
-			$value['post_like'] = count($post_like);
+			$value['post_like'] = $post_like == ['']? 0: count($post_like);
 			$value['stars'] = count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
@@ -158,6 +158,7 @@ class InfoController extends BaseController {
 		$cate = M('categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
+
 		$smeta = $this->upPic();
 		if( count($smeta)){
 			$info['smeta'] = json_encode($smeta);
