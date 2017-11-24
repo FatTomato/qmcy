@@ -164,7 +164,6 @@ class MemberController extends BaseController {
 			$info = $this->m_m->field('username,userphoto,point')->where(array('user_id'=>$memberid))->find();
 			$memberinfo['name'] = $info['username'];
 			$memberinfo['photo'] = $info['userphoto'];
-			// $memberinfo['point'] = $info['exp'];
 			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
 			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
 			if (!empty($this->user_result['user_id'])) {
@@ -236,7 +235,7 @@ class MemberController extends BaseController {
 		    $user_id = $this->m_m->add($memberinfo);
 		}
 
-		if ($user_id) {
+		if (!$user_id) {
 	        $this->jerror("reg false!");
 	    }
 
@@ -253,8 +252,6 @@ class MemberController extends BaseController {
 	    $this->jret['flag'] = 1;
 	    // $this->jret['reset']['session3rd'] = $session3rd;
 	    $this->ajaxReturn($this->jret);
-			
-		
 	}
 
 	// update session3rd

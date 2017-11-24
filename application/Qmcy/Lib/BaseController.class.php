@@ -47,15 +47,13 @@ abstract class BaseController extends Controller {
 
         // login status
         $session3rd = I('request.session3rd');
+        // 是否传入session3rd
         if (!empty($session3rd) && $session3rd !== 'null') {
+            // 是否过期
             if (S($session3rd)) {
                 $member = M('Member')->where(array('openId'=>S($session3rd)))->find();
                 if (!empty($member)) {
                     $this->user_result = $member;
-                }else{
-                    $this->jret['reset']['status'] = 0;
-                    $this->jret['msg'] = 'u have to reg!';
-                    $this->ajaxReturn($this->jret);
                 }
             }else{
                 $this->jret['reset']['status'] = 1;
