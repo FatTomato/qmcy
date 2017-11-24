@@ -158,6 +158,7 @@ class InfoController extends BaseController {
 		$cate = M('categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
+		$smeta = $this->upPic();
 		if( count($smeta)){
 			$info['smeta'] = json_encode($smeta);
 		}
@@ -190,7 +191,8 @@ class InfoController extends BaseController {
 		}
 	}
 
-	public function upPic(){
+	protected function upPic(){
+		
 	    $savepath='qmcy/'.date('Ymd').'/';
 	    $config=array(
         		'rootPath' => './'.C("UPLOADPATH"),
@@ -203,10 +205,10 @@ class InfoController extends BaseController {
 		$upload = new \Think\Upload($config);// 
 		$info=$upload->upload();
 		if ($info) {
-			$first=array_shift($info);
-			$filepath = $savepath.$first['savename'];
-			$this->jret['result'] = $filepath;
-			$this->jret['falg'] = 1;
+			foreach ($info as $key => $value) {
+				$filepath[$key] = $savepath.$value['savename'];
+			}
+			return $filepath;
         } else {
             $this->jerror($upload->getError());
         }
