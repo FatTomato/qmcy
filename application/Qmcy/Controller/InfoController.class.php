@@ -39,7 +39,14 @@ class InfoController extends BaseController {
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		$info['smeta'] = json_decode($info['smeta'],true);
 
-		$comments = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->order('createtime asc')->select();
+		$comments = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->order('createtime desc')->select();
+		foreach ($comments as  &$value) {
+			if ($value['to_mid'] ==0) {
+				unset($value['to_mid']);
+				unset($value['to_name']);
+				unset($value['to_userphoto']);
+			}
+		}
 		$info['comments'] = $comments;
 
 		if($info !== false){
@@ -245,6 +252,10 @@ class InfoController extends BaseController {
 		$post_author = $this->info_m->where($where)->getField('post_author');
 		if ($post_author == $this->user_result['member_id'] && empty($to_mid)) {
 			$this->jerror('不可以给自己评论');
+		}
+
+		if ($to_mid == $this->user_result['member_id']) {
+			$this->jerror('不可以给自己回复');
 		}
 
 		$data['post_id'] = $id;
