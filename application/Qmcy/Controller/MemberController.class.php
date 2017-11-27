@@ -66,7 +66,7 @@ class MemberController extends BaseController {
 		if (empty($this->user_result['user_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$action = I('request.action');
+		$action = I('request.is_follow');
 		$member_id = (int)I('request.member_id');
 		$name = (string)I('request.name');
 		$photo = (string)I('request.photo');
@@ -139,38 +139,38 @@ class MemberController extends BaseController {
 	// 基本信息
 	public function getMemberInfo(){
 		$memberid = I('request.memberid');
-		if (empty($memberid)) {
-			if (empty($this->user_result['user_id'])) {
-				$this->jerror('u have to auth!');
-			}
-			$memberinfo['id'] = $this->user_result['user_id'];
-			$memberinfo['name'] = $this->user_result['username'];
-			$memberinfo['photo'] = $this->user_result['userphoto'];
-			$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->user_result['user_id']))->getField('point');
-			$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['user_id']))->count();
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
-			$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
-			$field = 'b.cg_id,b.name,b.icon';
-			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['user_id'], 'a.status'=>1))->select();
-			if (count($cicles) > 0) {
-				foreach ($cicles as &$value) {
-					$value['icon'] = sp_get_image_preview_url($value['icon']);
+		if (isset($memberid) && !empty($memberid)) {
+			if ($this->user_result['user_id'] == $memberid) {
+				$memberinfo['id'] = $this->user_result['user_id'];
+				$memberinfo['name'] = $this->user_result['username'];
+				$memberinfo['photo'] = $this->user_result['userphoto'];
+				$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->user_result['user_id']))->getField('point');
+				$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['user_id']))->count();
+				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
+				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
+				$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
+				$field = 'b.cg_id,b.name,b.icon';
+				$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['user_id'], 'a.status'=>1))->select();
+				if (count($cicles) > 0) {
+					foreach ($cicles as &$value) {
+						$value['icon'] = sp_get_image_preview_url($value['icon']);
+					}
+				}
+				
+				$memberinfo['cicles'] = $cicles;
+			}else{
+				$info = $this->m_m->field('username,userphoto,point')->where(array('user_id'=>$memberid))->find();
+				$memberinfo['name'] = $info['username'];
+				$memberinfo['photo'] = $info['userphoto'];
+				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
+				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
+				if (!empty($this->user_result['user_id'])) {
+					$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$memberid))->find();
+					$memberinfo['is_follow'] = $re? true: false;
 				}
 			}
-			
-			$memberinfo['cicles'] = $cicles;
 		}else{
-			$info = $this->m_m->field('username,userphoto,point')->where(array('user_id'=>$memberid))->find();
-			$memberinfo['name'] = $info['username'];
-			$memberinfo['photo'] = $info['userphoto'];
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
-			if (!empty($this->user_result['user_id'])) {
-				$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$memberid))->find();
-				$memberinfo['is_follow'] = $re? true: false;
-			}
-			
+			$this->jerror('参数缺失');
 		}
 		if ($memberinfo) {
 			$jret['flag'] = 1;

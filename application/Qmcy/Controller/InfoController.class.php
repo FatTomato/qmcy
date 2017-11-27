@@ -159,7 +159,7 @@ class InfoController extends BaseController {
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 
-		$smeta = $this->upPic();
+		// $smeta = $this->upPic();
 		if( count($smeta)){
 			$info['smeta'] = json_encode($smeta);
 		}
@@ -192,7 +192,7 @@ class InfoController extends BaseController {
 		}
 	}
 
-	protected function upPic(){
+	public function upPic(){
 		
 	    $savepath='qmcy/'.date('Ymd').'/';
 	    $config=array(
@@ -209,7 +209,9 @@ class InfoController extends BaseController {
 			foreach ($info as $key => $value) {
 				$filepath[$key] = $savepath.$value['savename'];
 			}
-			return $filepath;
+			$jret['flag'] = 1;
+			$jret['result'] = $filepath;
+	        $this->ajaxreturn($jret);
         } else {
             $this->jerror($upload->getError());
         }
