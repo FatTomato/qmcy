@@ -139,38 +139,33 @@ class MemberController extends BaseController {
 	// 基本信息
 	public function getMemberInfo(){
 		$member_id = I('request.member_id');
-		if (isset($member_id) && !empty($member_id)) {
-			if ($this->user_result['member_id'] == $member_id) {
-				$memberinfo['id'] = $this->user_result['member_id'];
-				$memberinfo['name'] = $this->user_result['username'];
-				$memberinfo['photo'] = $this->user_result['userphoto'];
-				$memberinfo['point'] = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
-				$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['member_id']))->count();
-				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id']))->count();
-				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['member_id']))->count();
-				$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
-				$field = 'b.cg_id,b.name,b.icon';
-				$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['member_id'], 'a.status'=>1))->select();
-				if (count($cicles) > 0) {
-					foreach ($cicles as &$value) {
-						$value['icon'] = sp_get_image_preview_url($value['icon']);
-					}
-				}
-				
-				$memberinfo['cicles'] = $cicles;
-			}else{
-				$info = $this->m_m->field('username,userphoto,point')->where(array('member_id'=>$member_id))->find();
-				$memberinfo['name'] = $info['username'];
-				$memberinfo['photo'] = $info['userphoto'];
-				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$member_id))->count();
-				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$member_id))->count();
-				if (!empty($this->user_result['member_id'])) {
-					$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'],'follow_id'=>$member_id))->find();
-					$memberinfo['is_follow'] = $re? true: false;
+		if (empty($member_id) || $this->user_result['member_id'] == $member_id) {
+			$memberinfo['id'] = $this->user_result['member_id'];
+			$memberinfo['name'] = $this->user_result['username'];
+			$memberinfo['photo'] = $this->user_result['userphoto'];
+			$memberinfo['point'] = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+			$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['member_id']))->count();
+			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id']))->count();
+			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['member_id']))->count();
+			$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
+			$field = 'b.cg_id,b.name,b.icon';
+			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['member_id'], 'a.status'=>1))->select();
+			if (count($cicles) > 0) {
+				foreach ($cicles as &$value) {
+					$value['icon'] = sp_get_image_preview_url($value['icon']);
 				}
 			}
+			$memberinfo['cicles'] = $cicles;
 		}else{
-			$this->jerror('参数缺失');
+			$info = $this->m_m->field('username,userphoto,point')->where(array('member_id'=>$member_id))->find();
+			$memberinfo['name'] = $info['username'];
+			$memberinfo['photo'] = $info['userphoto'];
+			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$member_id))->count();
+			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$member_id))->count();
+			if (!empty($this->user_result['member_id'])) {
+				$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'],'follow_id'=>$member_id))->find();
+				$memberinfo['is_follow'] = $re? true: false;
+			}
 		}
 		if ($memberinfo) {
 			$jret['flag'] = 1;
