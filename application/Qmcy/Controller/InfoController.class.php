@@ -251,7 +251,7 @@ class InfoController extends BaseController {
 
 		$data['from_mid'] = $this->user_result['member_id'];
 		$data['from_name'] = $this->user_result['username'];
-		$data['from_userphoto'] = $this->from_userphoto;
+		$data['from_userphoto'] = $this->user_result['userphoto'];
 		$data['createtime'] = date('Y-m-d h:i:s');
 		$data['content'] = $content;
 		if (!empty($to_mid) && !empty($to_name) && !empty($to_userphoto)) {
