@@ -78,11 +78,17 @@ class CategoryController extends BaseController {
 				$son_num = $this->cg_m->where(array('parent'=>$value['cg_id']))->count();
 				$value['is_parent'] = $son_num>0? 1: 0;
 			}
+			if (!empty($this->user_result['member_id'])) {
+				$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+				$is_enough = $point > 100?true:false;
+				$jret['result']['point']['point'] = $point;
+				$jret['result']['point']['is_enough'] = $is_enough;
+			}
 		}
 
 		if ($cg_list !== false) {
 			$jret['flag'] = 1;
-			$jret['result'] = $cg_list;
+			$jret['result']['cg_list'] = $cg_list;
 	        $this->ajaxreturn($jret);
 		}else {
 			$this->jerror("查询失败");
