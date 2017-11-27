@@ -143,13 +143,22 @@ class InfoController extends BaseController {
 		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
 			$this->jerror("参数缺失");
 		}
-		// 判断发布频率，圈子发布需大于30min
-		$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
-		$d = time()-strtotime($post_date);
-		if ($d < 1800) {
-			$minute = ceil((1800-$d)/60);
-			$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
+		$type = M('Categorys')->where(array('cg_id'=>$cg_id))->getField('type');
+		if ($type == 1) {
+			// 判断发布频率，圈子发布需大于30min
+			$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
+			$d = time()-strtotime($post_date);
+			if ($d < 1800) {
+				$minute = ceil((1800-$d)/60);
+				$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
+			}
+		}elseif ($type == 0) {
+			$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+			if ($point < 100) {
+				$this->jerror("积分不足，请增加活跃度来获取积分！");
+			}
 		}
+		
 
 		$info['post_author'] = $this->user_result['member_id'];
 		$info['post_date'] = date('Y-m-d h:i:s');
