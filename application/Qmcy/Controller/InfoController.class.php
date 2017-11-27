@@ -46,6 +46,9 @@ class InfoController extends BaseController {
 				unset($value['to_name']);
 				unset($value['to_userphoto']);
 			}
+			if(!empty($this->user_result['member_id'])){
+				$info['id_del'] = $this->user_result['member_id'] == $value['from_mid']? true: false;
+			}
 		}
 		$info['comments'] = $comments;
 
@@ -241,7 +244,7 @@ class InfoController extends BaseController {
 		$id = (int)I('request.id');
 		$to_mid = (int)I('request.to_mid');
 		$to_name = (string)I('request.to_name');
-		$to_userphoto = (string)I('to_userphoto.to_mid');
+		$to_userphoto = (string)I('request.to_userphoto');
 		$content = (string)I('request.content');
 
 		if (empty($id) || empty($content)) {
