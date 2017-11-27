@@ -29,8 +29,8 @@ class CategoryController extends BaseController {
 		$cicle_info['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$cg_id))->count();
 		$cicle_info['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$cg_id))->count();
 		
-		if(!empty($this->user_result['user_id'])){
-			$status = M('CiclesRelationships')->where(array('cg_id'=>$cg_id,'member_id'=>$this->user_result['user_id']))->find();
+		if(!empty($this->user_result['member_id'])){
+			$status = M('CiclesRelationships')->where(array('cg_id'=>$cg_id,'member_id'=>$this->user_result['member_id']))->find();
 			$cicle_info['status'] = isset($status)? true: false;
 		}
 
@@ -63,8 +63,8 @@ class CategoryController extends BaseController {
 			foreach ($cg_list as &$value) {
 				$value['info_num'] = M('InfosRelationships')->where(array('cg_id'=>$value['cg_id']))->count();
 				$value['follow_num'] = M('CiclesRelationships')->where(array('cg_id'=>$value['cg_id']))->count();
-				if (!empty($this->user_result['user_id'])) {
-					$status = M('CiclesRelationships')->where(array('cg_id'=>$value['cg_id'],'member_id'=>$this->user_result['user_id']))->find();
+				if (!empty($this->user_result['member_id'])) {
+					$status = M('CiclesRelationships')->where(array('cg_id'=>$value['cg_id'],'member_id'=>$this->user_result['member_id']))->find();
 					$value['status'] = isset($status)? true: false;
 				}
 				

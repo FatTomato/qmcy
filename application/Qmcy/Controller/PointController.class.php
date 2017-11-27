@@ -27,7 +27,7 @@ class PointController extends BaseController {
 		$weekly_re = self::analysis($param=['date'=>$weekly_date, 'm'=>$weekly_m, 'point'=>$point, 'member_id'=>$member_id]);
 
 		// member直接update字段exp
-		$total_re = M('member')->where(array('user_id'=>$member_id))->setInc('point',$point);
+		$total_re = M('member')->where(array('member_id'=>$member_id))->setInc('point',$point);
 		
 	}
 
@@ -44,7 +44,7 @@ class PointController extends BaseController {
 
 	// 周榜排名
 	public function getWeeklySort(){
-		$join = '__MEMBER__ b ON a.member_id = b.user_id';
+		$join = '__MEMBER__ b ON a.member_id = b.member_id';
 		$where['a.addtime'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
 		$re = M('weekly_points')->alias('a')->join($join)->where($where)->field('a.member_id, a.addtime, a.point, b.userphoto, b.username')->order('a.point desc')->limit('50')->select();
 
@@ -61,10 +61,10 @@ class PointController extends BaseController {
 
 	// 日积分详情
 	public function getDailyDetail(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$where['member_id'] = $this->user_result['user_id'];
+		$where['member_id'] = $this->user_result['member_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
 		$field = 'addtime,point,action';
 		$re = M('detail_points')->field($field)->where($where)->order('addtime')->select();
@@ -109,10 +109,10 @@ class PointController extends BaseController {
 
 	// 周积分详情
 	public function getWeeklyDetail(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$where['member_id'] = $this->user_result['user_id'];
+		$where['member_id'] = $this->user_result['member_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d'));
 		$field = 'addtime,point';
 		$re = M('daily_points')->field($field)->where($where)->order('addtime')->select();

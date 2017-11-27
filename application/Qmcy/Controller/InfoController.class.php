@@ -21,17 +21,17 @@ class InfoController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 
-		$join = '__MEMBER__ b ON a.post_author = b.user_id';
+		$join = '__MEMBER__ b ON a.post_author = b.member_id';
 
-		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.user_id';
+		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.member_id';
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
-		if(!empty($this->user_result['user_id'])){
+		if(!empty($this->user_result['member_id'])){
 			$post_like = explode(',', $info['post_like']);
 			$stars = explode(',', $info['stars']);
-			$info['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
-			$info['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
-			$info['id_del'] = $this->user_result['user_id'] == $info['user_id']? true: false;
+			$info['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
+			$info['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
+			$info['id_del'] = $this->user_result['member_id'] == $info['member_id']? true: false;
 		}
 		
 		$info['post_like'] = $post_like == ['']? 0: count($post_like);
@@ -60,10 +60,10 @@ class InfoController extends BaseController {
 		$pagination = (array)I('request.pagination');
 		$type = I('request.type');
 
-		$join1 = '__MEMBER__ c ON a.post_author = c.user_id';
+		$join1 = '__MEMBER__ c ON a.post_author = c.member_id';
 		$join2 = '__INFOS_RELATIONSHIPS__ b ON a.id = b.object_id';
 
-		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.status,c.userphoto,c.username,c.user_id';
+		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.status,c.userphoto,c.username,c.member_id';
 		
 		$where['b.status'] = 1;
 		// 各分类下的信息列表
@@ -72,20 +72,20 @@ class InfoController extends BaseController {
 		}
 		// 我的发布
 		if ($post == 'true') {
-			if (empty($this->user_result['user_id'])) {
+			if (empty($this->user_result['member_id'])) {
 				$this->jerror('u have to auth!');
 			}
-			if ($member_id == $this->user_result['user_id']) {
+			if ($member_id == $this->user_result['member_id']) {
 				unset($where['b.status']);
 			}
 			$where['a.post_author']=$member_id;
 		}
 		// 我的收藏
 		if ($star == 'true') {
-			if (empty($this->user_result['user_id'])) {
+			if (empty($this->user_result['member_id'])) {
 				$this->jerror('u have to auth!');
 			}
-			$where['a.stars']=array('like',"%".$this->user_result['user_id']."%");
+			$where['a.stars']=array('like',"%".$this->user_result['member_id']."%");
 		}
 		// 
 		if ($type == 'false') {
@@ -106,12 +106,12 @@ class InfoController extends BaseController {
 		$list = $this->info_m->alias('a')->join($join1)->join($join2)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as $key => &$value) {
-			if(!empty($this->user_result['user_id'])){
+			if(!empty($this->user_result['member_id'])){
 				$post_like = explode(',', $value['post_like']);
 				$stars = explode(',', $value['stars']);
-				$value['is_like'] = in_array($this->user_result['user_id'], $post_like)? true: false;
-				$value['is_star'] = in_array($this->user_result['user_id'], $stars)? true: false;
-				$value['id_del'] = $this->user_result['user_id'] == $value['user_id']? true: false;
+				$value['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
+				$value['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
+				$value['id_del'] = $this->user_result['member_id'] == $value['member_id']? true: false;
 			}
 			
 			$value['post_like'] = $post_like == ['']? 0: count($post_like);
@@ -132,7 +132,7 @@ class InfoController extends BaseController {
 
 	// 信息发布
 	public function addInfo(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$cg_id = (int)I('request.cg_id');
@@ -144,14 +144,14 @@ class InfoController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 		// 判断发布频率，圈子发布需大于30min
-		$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['user_id']))->order('post_date desc')->getField('post_date');
+		$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
 		$d = time()-strtotime($post_date);
 		if ($d < 1800) {
 			$minute = ceil((1800-$d)/60);
 			$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
 		}
 
-		$info['post_author'] = $this->user_result['user_id'];
+		$info['post_author'] = $this->user_result['member_id'];
 		$info['post_date'] = date('Y-m-d h:i:s');
 		$info['post_content'] = $post_content;
 		$info['post_addr'] = $post_addr;
@@ -174,7 +174,7 @@ class InfoController extends BaseController {
 			if ($re) {
 				$point['action'] = $cate['type'] === true? '0': '4';
 				$point['point'] = $cate['type'] === true? '30': '-100';
-				$point['member_id'] = $this->user_result['user_id'];
+				$point['member_id'] = $this->user_result['member_id'];
 				$point['addtime'] = date('Y-m-d h:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
 				$point['daily_m'] = M('daily_points');
@@ -219,7 +219,7 @@ class InfoController extends BaseController {
 
 	// 评论
 	public function setComment(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$id = (int)I('request.id');
@@ -234,13 +234,13 @@ class InfoController extends BaseController {
 		
 		$where['id'] = $id;
 		$post_author = $this->info_m->where($where)->getField('post_author');
-		if ($post_author == $this->user_result['user_id'] && empty($to_mid)) {
+		if ($post_author == $this->user_result['member_id'] && empty($to_mid)) {
 			$this->jerror('不可以给自己评论');
 		}
 
 		$data['post_id'] = $id;
 
-		$data['from_mid'] = $this->user_result['user_id'];
+		$data['from_mid'] = $this->user_result['member_id'];
 		$data['from_name'] = $this->user_result['username'];
 		$data['from_userphoto'] = $this->from_userphoto;
 		$data['createtime'] = date('Y-m-d h:i:s');
@@ -250,14 +250,14 @@ class InfoController extends BaseController {
 			$data['to_name'] = $to_name;
 			$data['to_userphoto'] = $to_userphoto;
 		}
-		$comment_id = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['user_id']))->getField('id');
+		$comment_id = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->getField('id');
 		$re = M('info_comments')->add($data);
 
 		if ($re) {
-			if(!isset($comment_id) && ($post_author !== $this->user_result['user_id'])){
+			if(!isset($comment_id) && ($post_author !== $this->user_result['member_id'])){
 				$point['action'] = '2';
 				$point['point'] = '10';
-				$point['member_id'] = $this->user_result['user_id'];
+				$point['member_id'] = $this->user_result['member_id'];
 				$point['addtime'] = date('Y-m-d h:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
 				$point['daily_m'] = M('daily_points');
@@ -276,7 +276,7 @@ class InfoController extends BaseController {
 
 	// 点赞&&取消点赞
 	public function setLikeStatus(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$action = I('request.action');
@@ -291,13 +291,13 @@ class InfoController extends BaseController {
 		$post_like_arr = strlen($post_like['post_like'])>0? explode(',', $post_like['post_like']): [];
 
 		if ($action == 'true') {
-			if ($post_like['post_author'] == $this->user_result['user_id']) {
+			if ($post_like['post_author'] == $this->user_result['member_id']) {
 				$this->jerror('不可以给自己点赞');
 			}
-			if (in_array($this->user_result['user_id'], $post_like_arr)) {
+			if (in_array($this->user_result['member_id'], $post_like_arr)) {
 				$this->jerror("已点赞，不可重复点赞");
 			}else{
-				$post_like_arr[] = $this->user_result['user_id'];
+				$post_like_arr[] = $this->user_result['member_id'];
 				$data['post_like'] = implode(',', $post_like_arr);
 				$re = $this->info_m->where($where)->save($data);
 			}
@@ -313,10 +313,10 @@ class InfoController extends BaseController {
 			A('Point')->setPoint($point);
 
 		}elseif ($action == 'false') {
-			if (!in_array($this->user_result['user_id'], $post_like_arr)) {
+			if (!in_array($this->user_result['member_id'], $post_like_arr)) {
 				$this->jerror("未点赞，不可取消点赞");
 			}else{
-				array_splice($post_like_arr, array_search($this->user_result['user_id'], $post_like_arr), 1);
+				array_splice($post_like_arr, array_search($this->user_result['member_id'], $post_like_arr), 1);
 				$data['post_like'] = implode(',', $post_like_arr);
 				$re = $this->info_m->where($where)->save($data);
 			}
@@ -332,7 +332,7 @@ class InfoController extends BaseController {
 
 	// 收藏&&取消收藏
 	public function setStarStatus(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$action = I('request.action');
@@ -346,21 +346,21 @@ class InfoController extends BaseController {
 		$stars = $this->info_m->where($where)->field('post_author,stars')->find();
 		$stars_arr = strlen($stars['stars'])>0? explode(',', $stars['stars']): [];
 		if ($action == 'true') {
-			if ($stars['post_author'] == $this->user_result['user_id']) {
+			if ($stars['post_author'] == $this->user_result['member_id']) {
 				$this->jerror('不可以收藏自己的信息');
 			}
-			if (in_array($this->user_result['user_id'], $stars_arr)) {
+			if (in_array($this->user_result['member_id'], $stars_arr)) {
 				$this->jerror("已收藏，不可重复收藏");
 			}else{
-				$stars_arr[] = $this->user_result['user_id'];
+				$stars_arr[] = $this->user_result['member_id'];
 				$data['stars'] = implode(',', $stars_arr);
 				$re = $this->info_m->where($where)->save($data);
 			}
 		}elseif ($action == 'false') {
-			if (!in_array($this->user_result['user_id'], $stars_arr)) {
+			if (!in_array($this->user_result['member_id'], $stars_arr)) {
 				$this->jerror("未收藏，不可取消收藏");
 			}else{
-				array_splice($stars_arr, array_search($this->user_result['user_id'], $stars_arr), 1);
+				array_splice($stars_arr, array_search($this->user_result['member_id'], $stars_arr), 1);
 				$data['stars'] = implode(',', $stars_arr);
 				$re = $this->info_m->where($where)->save($data);
 			}
@@ -376,7 +376,7 @@ class InfoController extends BaseController {
 
 	// 信息删除
 	public function delInfo(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$id = (int)I('request.id');
@@ -384,7 +384,7 @@ class InfoController extends BaseController {
 			$this->jerror('参数缺失');
 		}
 		$post_author = $this->info_m->where(array('id'=>$id))->getField('post_author');
-		if ($post_author == $this->user_result['user_id']) {
+		if ($post_author == $this->user_result['member_id']) {
 			$re1 = $this->info_m->where(array('id'=>$id))->delete();
 			$re2 = M('InfosRelationships')->where(array('object_id'=>$id))->delete();
 		}else{
@@ -400,7 +400,7 @@ class InfoController extends BaseController {
 
 	// 信息举报
 	public function tipOff(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$post_id = (int)I('request.post_id');
@@ -408,7 +408,7 @@ class InfoController extends BaseController {
 		$content = (int)I('request.content');
 
 		if (isset($post_id) && !empty($post_id) && isset($type) && !empty($type) && isset($content) && !empty($content)) {
-			$data['user_id'] = $this->user_result['user_id'];
+			$data['member_id'] = $this->user_result['member_id'];
 			$data['content'] = $content;
 			$data['type'] = $type;
 			$data['post_id'] = $post_id;

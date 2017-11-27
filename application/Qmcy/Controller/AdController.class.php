@@ -39,9 +39,9 @@ class AdController extends BaseController {
 		$ad['post_hits_num'] = strlen($ad['post_hits'])>0? count($post_hits_arr): 0;
 		if (strlen($ad['post_hits'])>0) {
 			foreach ($post_hits_arr as $key => $value) {
-				$ad['hits_list'][$key]['user_id'] = $value;
-				$ad['hits_list'][$key]['username'] = M('member')->where(array('user_id'=>$value))->getField('username');
-				$ad['hits_list'][$key]['userphoto'] = M('member')->where(array('user_id'=>$value))->getField('userphoto');
+				$ad['hits_list'][$key]['member_id'] = $value;
+				$ad['hits_list'][$key]['username'] = M('member')->where(array('member_id'=>$value))->getField('username');
+				$ad['hits_list'][$key]['userphoto'] = M('member')->where(array('member_id'=>$value))->getField('userphoto');
 			}
 		}
 

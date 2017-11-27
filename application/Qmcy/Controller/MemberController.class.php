@@ -17,13 +17,13 @@ class MemberController extends BaseController {
 
 	// 我的粉丝列表
 	public function getFans(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$fans = $this->mr_m->field('fan_id, fan_name, fan_photo')->where(array('follow_id'=>$this->user_result['user_id']))->select();
+		$fans = $this->mr_m->field('fan_id, fan_name, fan_photo')->where(array('follow_id'=>$this->user_result['member_id']))->select();
 
 		foreach ($fans as &$value) {
-			$id = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'], 'follow_id'=>$value['fan_id']))->getField('id');
+			$id = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'], 'follow_id'=>$value['fan_id']))->getField('id');
 			$value['is_follow'] = isset($id)? 1: 0;
 			$value['id'] = $value['fan_id'];
 			$value['name'] = $value['fan_name'];
@@ -41,10 +41,10 @@ class MemberController extends BaseController {
 
 	// 我的关注列表
 	public function getFollows(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['user_id']))->select();
+		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['member_id']))->select();
 
 		foreach ($follows as &$value) {
 			$value['id'] = $value['follow_id'];
@@ -63,7 +63,7 @@ class MemberController extends BaseController {
 
 	// 关注&&取关
 	public function setRelationship(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$action = I('request.is_follow');
@@ -77,7 +77,7 @@ class MemberController extends BaseController {
 		
 		if ($action == 'false') {
 			// 取关
-			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'], 'follow_id'=>$member_id))->delete();
+			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'], 'follow_id'=>$member_id))->delete();
 		}elseif ($action == 'true') {
 			// 关注
 			if (empty($name) || empty($photo)) {
@@ -86,7 +86,7 @@ class MemberController extends BaseController {
 			$data['follow_id'] = $member_id;
 			$data['follow_name'] = $name;
 			$data['follow_photo'] = $photo;
-			$data['fan_id'] = $this->user_result['user_id'];
+			$data['fan_id'] = $this->user_result['member_id'];
 			$data['fan_name'] = $this->member_name;
 			$data['fan_photo'] = $this->member_photo;
 			$data['addtime'] = date('Y-m-d h:i:s');
@@ -104,7 +104,7 @@ class MemberController extends BaseController {
 
 	// 进圈&&退圈
 	public function setCicleStatus(){
-		if (empty($this->user_result['user_id'])) {
+		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 		$status = I('request.status');
@@ -116,11 +116,11 @@ class MemberController extends BaseController {
 		
 		if ($status == 'false') {
 			// 取关
-			$re = M('CiclesRelationships')->where(array('member_id'=>$this->user_result['user_id'], 'cg_id'=>$cg_id))->delete();
+			$re = M('CiclesRelationships')->where(array('member_id'=>$this->user_result['member_id'], 'cg_id'=>$cg_id))->delete();
 		}elseif ($status == 'true') {
 			// 关注
 			$cg_name = I('request.cg_name');
-			$data['member_id'] = $this->user_result['user_id'];
+			$data['member_id'] = $this->user_result['member_id'];
 			$data['cg_id'] = $cg_id;
 			$data['cg_name'] = $cg_name;
 			$data['addtime'] = date('Y-m-d h:i:s');
@@ -138,19 +138,19 @@ class MemberController extends BaseController {
 
 	// 基本信息
 	public function getMemberInfo(){
-		$memberid = I('request.memberid');
-		if (isset($memberid) && !empty($memberid)) {
-			if ($this->user_result['user_id'] == $memberid) {
-				$memberinfo['id'] = $this->user_result['user_id'];
+		$member_id = I('request.member_id');
+		if (isset($member_id) && !empty($member_id)) {
+			if ($this->user_result['member_id'] == $member_id) {
+				$memberinfo['id'] = $this->user_result['member_id'];
 				$memberinfo['name'] = $this->user_result['username'];
 				$memberinfo['photo'] = $this->user_result['userphoto'];
-				$memberinfo['point'] = $this->m_m->where(array('user_id'=>$this->user_result['user_id']))->getField('point');
-				$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['user_id']))->count();
-				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id']))->count();
-				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['user_id']))->count();
+				$memberinfo['point'] = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+				$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['member_id']))->count();
+				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id']))->count();
+				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['member_id']))->count();
 				$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
 				$field = 'b.cg_id,b.name,b.icon';
-				$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['user_id'], 'a.status'=>1))->select();
+				$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['member_id'], 'a.status'=>1))->select();
 				if (count($cicles) > 0) {
 					foreach ($cicles as &$value) {
 						$value['icon'] = sp_get_image_preview_url($value['icon']);
@@ -159,13 +159,13 @@ class MemberController extends BaseController {
 				
 				$memberinfo['cicles'] = $cicles;
 			}else{
-				$info = $this->m_m->field('username,userphoto,point')->where(array('user_id'=>$memberid))->find();
+				$info = $this->m_m->field('username,userphoto,point')->where(array('member_id'=>$member_id))->find();
 				$memberinfo['name'] = $info['username'];
 				$memberinfo['photo'] = $info['userphoto'];
-				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$memberid))->count();
-				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$memberid))->count();
-				if (!empty($this->user_result['user_id'])) {
-					$re = $this->mr_m->where(array('fan_id'=>$this->user_result['user_id'],'follow_id'=>$memberid))->find();
+				$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$member_id))->count();
+				$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$member_id))->count();
+				if (!empty($this->user_result['member_id'])) {
+					$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'],'follow_id'=>$member_id))->find();
 					$memberinfo['is_follow'] = $re? true: false;
 				}
 			}
@@ -232,10 +232,10 @@ class MemberController extends BaseController {
 		    // todo   邀请人
 		    // $memberinfo['invite_userid'] = $data['nickName'];
 		    $memberinfo['addtime'] = date('Y-m-d h:i:s');
-		    $user_id = $this->m_m->add($memberinfo);
+		    $member_id = $this->m_m->add($memberinfo);
 		}
 
-		if (!$user_id) {
+		if (!$member_id) {
 	        $this->jerror("reg false!");
 	    }
 
@@ -243,7 +243,7 @@ class MemberController extends BaseController {
             'logintime' => $u['logintime']+1,
             'last_login_time' => date("Y-m-d H:i:s", time())
         );
-        $this->m_m->where(array('user_id'=>$user_id) )->save($save_data);
+        $this->m_m->where(array('member_id'=>$member_id) )->save($save_data);
 
 	    // $session3rd = md5(time());//randomFromDev(16);
 
