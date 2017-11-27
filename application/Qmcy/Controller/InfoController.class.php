@@ -407,6 +407,29 @@ class InfoController extends BaseController {
 		}
 	}
 
+	// 评论删除
+	public function delComment(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$id = (int)I('request.id');
+		if(empty($id)){
+			$this->jerror('参数缺失');
+		}
+		$from_mid = M('InfoComments')->where(array('id'=>$id))->getField('from_mid');
+		if ($from_mid == $this->user_result['member_id']) {
+			$re = M('InfoComments')->where(array('id'=>$id))->delete();
+		}else{
+			$this->jerror("只可以删除自己发布的评论");
+		}
+		if ($re !== false) {
+			$jret['flag'] = 1;
+	        $this->ajaxreturn($jret);
+		}else{
+			$this->jerror('删除失败');
+		}
+	}
+
 	// 信息举报
 	public function tipOff(){
 		if (empty($this->user_result['member_id'])) {
