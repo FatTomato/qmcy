@@ -177,7 +177,6 @@ class InfoController extends BaseController {
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 
-		// $smeta = $this->upPic();
 		if( count($smeta)){
 			$info['smeta'] = json_encode($smeta);
 		}
@@ -190,6 +189,7 @@ class InfoController extends BaseController {
 			$data['cg_name'] = $cate['name'];
 			$re = M('InfosRelationships')->add($data);
 			if ($re) {
+				$point = [];
 				$point['action'] = $cate['type'] == 1? '0': '4';
 				$point['point'] = $cate['type'] == 1? '30': '-100';
 				$point['member_id'] = $this->user_result['member_id'];
