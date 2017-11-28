@@ -16,9 +16,9 @@ class PointController extends BaseController {
 		$member_id = $param['member_id'];
 		$addtime = $param['addtime'];
 		$daily_date = $param['daily_date'];
-		$daily_m = $param['daily_m'];
+		$daily_m = M('daily_points');
 		$weekly_date = $param['weekly_date'];
-		$weekly_m = $param['weekly_m'];
+		$weekly_m = M('weekly_points');
 		
 		// detail 直接插入
 		$detail_re = M('detail_points')->add(['member_id'=>$member_id, 'addtime'=>$addtime, 'point'=>$point, 'action'=>$action]);
