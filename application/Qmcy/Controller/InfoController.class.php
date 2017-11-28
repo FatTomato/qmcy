@@ -37,7 +37,12 @@ class InfoController extends BaseController {
 		$info['post_like'] = $post_like == ['']? 0: count($post_like);
 		$info['stars'] = $stars == ['']? 0: count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
-		$info['smeta'] = json_decode($info['smeta'],true);
+		if (strlen($info['smeta'])>0 ) {
+			$info['smeta'] = json_decode($info['smeta'],true);
+			foreach ($info['smeta'] as &$value) {
+				$value = sp_get_image_preview_url($value);
+			}
+		}
 
 		$comments = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->order('createtime desc')->select();
 		foreach ($comments as  &$value) {
@@ -123,12 +128,17 @@ class InfoController extends BaseController {
 				$value['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
 				$value['is_del'] = $this->user_result['member_id'] == $value['member_id']? true: false;
 			}
+			if (strlen($value['smeta'])>0 ) {
+				$value['smeta'] = json_decode($value['smeta'],true);
+				foreach ($value['smeta'] as &$v) {
+					$v = sp_get_image_preview_url($v);
+				}
+			}
 			
 			$value['post_like'] = $post_like == ['']? 0: count($post_like);
 			$value['stars'] = $stars == ['']? 0: count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
-			$value['smeta'] = json_decode($value['smeta'],true);
 		}
 
 		if ($list !== false) {
