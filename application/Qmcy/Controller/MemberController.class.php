@@ -47,6 +47,7 @@ class MemberController extends BaseController {
 		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['member_id']))->select();
 
 		foreach ($follows as &$value) {
+			$value['is_follow'] = 1;
 			$value['id'] = $value['follow_id'];
 			$value['name'] = $value['follow_name'];
 			$value['photo'] = $value['follow_photo'];
