@@ -137,24 +137,6 @@ class MemberController extends BaseController {
 		}
 	}
 
-	public function checkPoint(){
-		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
-		}
-		
-		$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
-
-		if($point !== false){
-			$jret['flag'] = 1;
-			$is_enough = $point > 100?true:false;
-			$jret['result']['point'] = $point;
-			$jret['result']['is_enough'] = $is_enough;
-	        $this->ajaxreturn($jret);
-	    }else {
-			$this->jerror("查询失败");
-		}
-	}
-
 	// 基本信息
 	public function getMemberInfo(){
 		$member_id = I('request.member_id');

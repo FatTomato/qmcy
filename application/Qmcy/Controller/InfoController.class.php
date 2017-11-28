@@ -153,8 +153,8 @@ class InfoController extends BaseController {
 		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
 			$this->jerror("参数缺失");
 		}
-		$type = M('Categorys')->where(array('cg_id'=>$cg_id))->getField('type');
-		if ($type == 1) {
+		$cate = M('Categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
+		if ($cate['type'] == 1) {
 			// 判断发布频率，圈子发布需大于30min
 			$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
 			$d = time()-strtotime($post_date);
@@ -162,7 +162,7 @@ class InfoController extends BaseController {
 				$minute = ceil((1800-$d)/60);
 				$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
 			}
-		}elseif ($type == 0) {
+		}elseif ($cate['type'] == 0) {
 			$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
 			if ($point < 100) {
 				$this->jerror("积分不足，请增加活跃度来获取积分！");
@@ -174,7 +174,7 @@ class InfoController extends BaseController {
 		$info['post_date'] = date('Y-m-d h:i:s');
 		$info['post_content'] = $post_content;
 		$info['post_addr'] = $post_addr;
-		$cate = M('categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
+		// $cate = M('categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 
@@ -191,8 +191,8 @@ class InfoController extends BaseController {
 			$data['cg_name'] = $cate['name'];
 			$re = M('InfosRelationships')->add($data);
 			if ($re) {
-				$point['action'] = $cate['type'] === true? '0': '4';
-				$point['point'] = $cate['type'] === true? '30': '-100';
+				$point['action'] = $cate['type'] == 1? '0': '4';
+				$point['point'] = $cate['type'] == 1? '30': '-100';
 				$point['member_id'] = $this->user_result['member_id'];
 				$point['addtime'] = date('Y-m-d h:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
