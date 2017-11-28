@@ -152,13 +152,16 @@ class PointController extends BaseController {
 		}
 		$jret['flag'] = 1;
 
-		$this->jret['result']['total_point'] = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+		$jret['result']['total_point'] = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+
 		$where1['member_id'] = $this->user_result['member_id'];
 		$where1['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
-		$this->jret['result']['daily_point'] = M('detail_points')->where($where1)->sum('point');
+		$jret['result']['daily_point'] = M('detail_points')->where($where1)->sum('point');
+
 		$where2['member_id'] = $this->user_result['member_id'];
 		$where2['addtime'] = array('EGT',date('Y-m-d'));
-		$this->jret['result']['weekly_point'] = M('daily_points')->where($where2)->sum('point');
+		$jret['result']['weekly_point'] = M('daily_points')->where($where2)->sum('point');
+		
 		$this->ajaxreturn($jret);
 	}
 }
