@@ -47,7 +47,7 @@ class InfoController extends BaseController {
 				unset($value['to_userphoto']);
 			}
 			if(!empty($this->user_result['member_id'])){
-				$value['id_del'] = $this->user_result['member_id'] == $value['from_mid']? true: false;
+				$value['is_del'] = $this->user_result['member_id'] == $value['from_mid']? true: false;
 			}
 		}
 		$info['comments'] = $comments;
