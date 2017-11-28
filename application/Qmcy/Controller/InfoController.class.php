@@ -171,10 +171,9 @@ class InfoController extends BaseController {
 		
 
 		$info['post_author'] = $this->user_result['member_id'];
-		$info['post_date'] = date('Y-m-d h:i:s');
+		$info['post_date'] = date('Y-m-d H:i:s');
 		$info['post_content'] = $post_content;
 		$info['post_addr'] = $post_addr;
-		// $cate = M('categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 
@@ -194,7 +193,7 @@ class InfoController extends BaseController {
 				$point['action'] = $cate['type'] == 1? '0': '4';
 				$point['point'] = $cate['type'] == 1? '30': '-100';
 				$point['member_id'] = $this->user_result['member_id'];
-				$point['addtime'] = date('Y-m-d h:i:s');
+				$point['addtime'] = date('Y-m-d H:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
 				$point['daily_m'] = M('daily_points');
 				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
@@ -266,7 +265,7 @@ class InfoController extends BaseController {
 		$data['from_mid'] = $this->user_result['member_id'];
 		$data['from_name'] = $this->user_result['username'];
 		$data['from_userphoto'] = $this->user_result['userphoto'];
-		$data['createtime'] = date('Y-m-d h:i:s');
+		$data['createtime'] = date('Y-m-d H:i:s');
 		$data['content'] = $content;
 		if (!empty($to_mid) && !empty($to_name) && !empty($to_userphoto)) {
 			$data['to_mid'] = $to_mid;
@@ -281,7 +280,7 @@ class InfoController extends BaseController {
 				$point['action'] = '2';
 				$point['point'] = '10';
 				$point['member_id'] = $this->user_result['member_id'];
-				$point['addtime'] = date('Y-m-d h:i:s');
+				$point['addtime'] = date('Y-m-d H:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
 				$point['daily_m'] = M('daily_points');
 				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
@@ -328,7 +327,7 @@ class InfoController extends BaseController {
 			$point['action'] = '1';
 			$point['point'] = '10';
 			$point['member_id'] = $post_like['post_author'];
-			$point['addtime'] = date('Y-m-d h:i:s');
+			$point['addtime'] = date('Y-m-d H:i:s');
 			$point['daily_date'] = date('Y-m-d 00:00:00');
 			$point['daily_m'] = M('daily_points');
 			$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
@@ -458,7 +457,7 @@ class InfoController extends BaseController {
 			$data['content'] = $content;
 			$data['type'] = $type;
 			$data['post_id'] = $post_id;
-			$data['createtime'] = date('Y-m-d h:i:s');
+			$data['createtime'] = date('Y-m-d H:i:s');
 			$re = M('InfoTipoff')->add($data);
 		}else{
 			$this->jerror('参数缺失');

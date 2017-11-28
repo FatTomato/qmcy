@@ -117,6 +117,10 @@ class PointController extends BaseController {
 		$field = 'addtime,point';
 		$re = M('daily_points')->field($field)->where($where)->order('addtime')->select();
 
+		foreach ($re as &$value) {
+			$value['addtime'] = substr($value['addtime'], 0, 10);
+		}
+
 		if (isset($re)) {
 			$jret['flag'] = 1;
 			$jret['result'] = $re;

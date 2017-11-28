@@ -47,7 +47,7 @@ class MemberController extends BaseController {
 		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['member_id']))->select();
 
 		foreach ($follows as &$value) {
-			$value['is_follow'] = 1;
+			$value['is_follow'] = 'true';
 			$value['id'] = $value['follow_id'];
 			$value['name'] = $value['follow_name'];
 			$value['photo'] = $value['follow_photo'];
@@ -90,7 +90,7 @@ class MemberController extends BaseController {
 			$data['fan_id'] = $this->user_result['member_id'];
 			$data['fan_name'] = $this->member_name;
 			$data['fan_photo'] = $this->member_photo;
-			$data['addtime'] = date('Y-m-d h:i:s');
+			$data['addtime'] = date('Y-m-d H:i:s');
 			$re = $this->mr_m->add($data);
 		}
 
@@ -124,7 +124,7 @@ class MemberController extends BaseController {
 			$data['member_id'] = $this->user_result['member_id'];
 			$data['cg_id'] = $cg_id;
 			$data['cg_name'] = $cg_name;
-			$data['addtime'] = date('Y-m-d h:i:s');
+			$data['addtime'] = date('Y-m-d H:i:s');
 			$re = M('CiclesRelationships')->add($data);
 		}
 
@@ -229,7 +229,7 @@ class MemberController extends BaseController {
 		    $memberinfo['country'] = $data['country'];
 		    // todo   邀请人
 		    // $memberinfo['invite_userid'] = $data['nickName'];
-		    $memberinfo['addtime'] = date('Y-m-d h:i:s');
+		    $memberinfo['addtime'] = date('Y-m-d H:i:s');
 		    $member_id = $this->m_m->add($memberinfo);
 		}
 
