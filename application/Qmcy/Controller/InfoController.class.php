@@ -38,7 +38,7 @@ class InfoController extends BaseController {
 		$info['stars'] = $stars == ['']? 0: count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		if (strlen($info['smeta'])>0 ) {
-			$info['smeta'] = json_decode($info['smeta'],true);
+			$info['smeta'] = explode(',',$info['smeta']);
 			foreach ($info['smeta'] as &$value) {
 				$value = sp_get_image_preview_url($value);
 			}
@@ -129,7 +129,7 @@ class InfoController extends BaseController {
 				$value['is_del'] = $this->user_result['member_id'] == $value['member_id']? true: false;
 			}
 			if (strlen($value['smeta'])>0 ) {
-				$value['smeta'] = json_decode($value['smeta'],true);
+				$value['smeta'] = explode(',',$value['smeta']);
 				foreach ($value['smeta'] as &$v) {
 					$v = sp_get_image_preview_url($v);
 				}
@@ -158,7 +158,7 @@ class InfoController extends BaseController {
 		$cg_id = (int)I('request.cg_id');
 		$post_content = (string)I('request.post_content');
 		$post_addr = (string)I('request.post_addr');
-		$smeta = (array)I('request.smeta');
+		$smeta = I('request.smeta');
 
 		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
 			$this->jerror("参数缺失");
@@ -186,10 +186,7 @@ class InfoController extends BaseController {
 		$info['post_addr'] = $post_addr;
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
-
-		if( count($smeta)){
-			$info['smeta'] = json_encode($smeta);
-		}
+		$info['smeta'] = $smeta;
 
 		$result = $this->info_m->add($info);
 
