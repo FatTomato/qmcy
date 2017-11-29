@@ -87,8 +87,8 @@ class InfoController extends BaseController {
 		}
 		// 我的发布
 		if ($post == 'true') {
-			if (empty($this->user_result['member_id'])) {
-				$this->jerror('u have to auth!');
+			if (empty($member_id)) {
+				$this->jerror('参数缺失!');
 			}
 			if ($member_id == $this->user_result['member_id']) {
 				unset($where['b.status']);
