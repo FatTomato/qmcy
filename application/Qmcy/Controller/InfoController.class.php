@@ -72,7 +72,9 @@ class InfoController extends BaseController {
 		$post = I('request.post');
 		$member_id = I('request.member_id');
 		$star = I('request.star');
-		$pagination = (array)I('request.pagination');
+		// $pagination = (array)I('request.pagination');
+		$lastid = (int)I('request.lastid');
+		$epage = (int)I('request.epage');
 		$type = I('request.type');
 
 		$join1 = '__MEMBER__ c ON a.post_author = c.member_id';
@@ -113,9 +115,9 @@ class InfoController extends BaseController {
 		$order = 'a.istop,a.post_date DESC';
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
-		if (count($pagination) == 2) {
-			$where['a.id'] = array('GT',(int)$pagination['id']);
-			$limit = (int)$pagination['epage'];
+		if (isset($lastid) && isset($epage)) {
+			$where['a.id'] = array('GT',$lastid);
+			$limit = $epage;
 		}
 
 		$list = $this->info_m->alias('a')->join($join1)->join($join2)->field($field)->where($where)->order($order)->limit($limit)->select();

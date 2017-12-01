@@ -39,7 +39,9 @@ class ShopController extends BaseController {
 	// shop list
 	public function getShopList(){
 		$cg_id = I('request.cg_id');
-		$pagination = I('request.pagination');
+		// $pagination = I('request.pagination');
+		$lastid = (int)I('request.lastid');
+		$epage = (int)I('request.epage');
 
 		if (isset($cg_id) && !empty($cg_id)) {
 			$where['b.cg_id'] = $cg_id;
@@ -49,9 +51,9 @@ class ShopController extends BaseController {
 
 		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
 
-		if (isset($pagination) && !empty($pagination)) {
-			$where['a.id'] = array('GT',(int)$pagination['id']);
-			$limit = (int)$pagination['epage'];
+		if (isset($lastid) && isset($epage)) {
+			$where['a.id'] = array('GT',$lastid);
+			$limit = $epage;
 		}
 
 		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
@@ -76,7 +78,9 @@ class ShopController extends BaseController {
 	// shop search
 	public function searchShopList(){
 		$kword = I('request.kword');
-		$pagination = I('request.pagination');
+		// $pagination = I('request.pagination');
+		$lastid = (int)I('request.lastid');
+		$epage = (int)I('request.epage');
 
 		if (isset($kword) && !empty($kword)) {
 			$map['shop_name']  = array('like', '%'.$kword.'%');
@@ -91,11 +95,9 @@ class ShopController extends BaseController {
 
 		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
 
-		if (isset($pagination) && !empty($pagination)) {
-			$where['a.id'] = array('GT',(int)$pagination['id']);
-			$limit = (int)$pagination['epage'];
-		}else{
-			$limit = 10;
+		if (isset($lastid) && isset($epage)) {
+			$where['a.id'] = array('GT',$lastid);
+			$limit = $epage;
 		}
 
 		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';

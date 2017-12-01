@@ -59,7 +59,9 @@ class AdController extends BaseController {
 		$cg_id = (int)I('request.cg_id');
 		$istop = (int)I('request.istop');
 		$recommended = (int)I('request.recommended');
-		$pagination = (array)I('request.pagination');
+		// $pagination = (array)I('request.pagination');
+		$lastid = (int)I('request.lastid');
+		$epage = (int)I('request.epage');
 		// 各分类
 		if (isset($cg_id) && !empty($cg_id) && isset($istop) && !empty($istop)) {
 			$son_cg = M('Categorys')->where(array('parent'=>$cg_id))->getField('cg_id', true);
@@ -82,9 +84,9 @@ class AdController extends BaseController {
 		$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
-		if (count($pagination) == 2) {
-			$where['a.id'] = array('GT',(int)$pagination['id']);
-			$limit = (int)$pagination['epage'];
+		if (isset($lastid) && isset($epage)) {
+			$where['a.id'] = array('GT',$lastid);
+			$limit = $epage;
 		}
 
 		$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
