@@ -30,7 +30,7 @@ class AdminMemberController extends AdminbaseController {
     public function edit(){
         $user_id=  I("get.id",0,'intval');
         
-        $member = $this->members_model->where("user_id=$user_id")->find();
+        $member = $this->members_model->where("member_id=$user_id")->find();
         $cicles = M('CiclesRelationships')->where(array('member_id'=>$user_id, 'status'=>1))->select();
         $follows = M('MembersRelationships')->where(array('fan_id'=>$user_id))->select();
         $fans = M('MembersRelationships')->where(array('follow_id'=>$user_id))->select();
@@ -81,11 +81,11 @@ class AdminMemberController extends AdminbaseController {
             
         $this->members_model
         // ->alias("a")
-        // ->join("__MEMBER__ c ON a.post_author = c.user_id")
+        // ->join("__MEMBER__ c ON a.post_author = c.member_id")
         ->where($where)
         ->limit($page->firstRow , $page->listRows)
         ->order("addtime DESC");
-        // $this->members_model->field('a.*,c.user_id,c.username,b.listorder,b.cg_id,b.cg_name,b.infosid');
+        // $this->members_model->field('a.*,c.member_id,c.username,b.listorder,b.cg_id,b.cg_name,b.infosid');
         // $this->members_model->join("__INFOS_RELATIONSHIPS__ b ON a.id = b.object_id");
         $members=$this->members_model->select();
         

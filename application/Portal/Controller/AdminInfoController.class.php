@@ -108,11 +108,11 @@ class AdminInfoController extends AdminbaseController {
             
         $this->infos_model
         ->alias("a")
-        ->join("__MEMBER__ c ON a.post_author = c.user_id")
+        ->join("__MEMBER__ c ON a.post_author = c.member_id")
         ->where($where)
         ->limit($page->firstRow , $page->listRows)
         ->order("a.post_date DESC");
-        $this->infos_model->field('a.*,c.user_id,c.username,b.listorder,b.cg_id,b.cg_name,b.infosid,b.status');
+        $this->infos_model->field('a.*,c.member_id,c.username,b.listorder,b.cg_id,b.cg_name,b.infosid,b.status');
         $this->infos_model->join("__INFOS_RELATIONSHIPS__ b ON a.id = b.object_id");
         $posts=$this->infos_model->select();
         foreach($posts as &$v){
@@ -198,6 +198,7 @@ class AdminInfoController extends AdminbaseController {
     public function check(){
         if(isset($_POST['ids']) && $_GET["check"]){
             $ids = I('post.ids/a');
+            // todo  point
             
             if ( $this->infos_relationships_model->where(array('object_id'=>array('in',$ids)))->save(array('status'=>0)) !== false ) {
                 $this->success("设置违规成功！");

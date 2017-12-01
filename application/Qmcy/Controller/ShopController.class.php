@@ -52,7 +52,9 @@ class ShopController extends BaseController {
 		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
 
 		if (isset($lastid) && isset($epage)) {
-			$where['a.id'] = array('GT',$lastid);
+			if($lastid != 0){
+				$where['a.id'] = array('GT',$lastid);
+			}
 			$limit = $epage;
 		}
 
@@ -96,7 +98,9 @@ class ShopController extends BaseController {
 		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
 
 		if (isset($lastid) && isset($epage)) {
-			$where['a.id'] = array('GT',$lastid);
+			if($lastid != 0){
+				$where['a.id'] = array('GT',$lastid);
+			}
 			$limit = $epage;
 		}
 

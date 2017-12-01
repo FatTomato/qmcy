@@ -243,12 +243,7 @@ class MemberController extends BaseController {
         );
         $this->m_m->where(array('member_id'=>$member_id) )->save($save_data);
 
-	    // $session3rd = md5(time());//randomFromDev(16);
-
-	    // S($session3rd, $openId, 86400*7);
-
 	    $this->jret['flag'] = 1;
-	    // $this->jret['reset']['session3rd'] = $session3rd;
 	    $this->ajaxReturn($this->jret);
 	}
 

@@ -43,7 +43,7 @@ class AdminShopController extends AdminbaseController {
 		if (IS_POST) {
 
 			$shop=I("post.post");
-			$member_id = M('Member')->where(array('phone'=>$shop['phone']))->getField('user_id');
+			$member_id = M('Member')->where(array('phone'=>$shop['phone']))->getField('member_id');
 			$shop['member_id'] = isset($member_id)? $member_id: 0;
 			$shop['shop_pic'] = sp_asset_relative_url($_POST['shop_pic']);
 			$shop['shop_detail'] = htmlspecialchars_decode($shop['shop_detail']);
@@ -56,7 +56,7 @@ class AdminShopController extends AdminbaseController {
 			}
 			$shop['lat'] = $lat_lng['result']['location']['lat'];
 			$shop['lng'] = $lat_lng['result']['location']['lng'];
-			$shop['add_time'] = date('Y-m-d h:i:s');
+			$shop['add_time'] = date('Y-m-d H:i:s');
 			$shop['post_status']=0;
 			$result=$this->shop_model->add($shop);
 			if ($result) {
@@ -82,7 +82,7 @@ class AdminShopController extends AdminbaseController {
 		$shop_relationship = M('ShopRelationships')->where(array("shop_id"=>$id,"status"=>1))->getField("cg_id",true);
 		$this->_getTermTree($shop_relationship);
 		$shop=$this->shop_model->where("id=$id")->find();
-		$shop['phone'] = M('Member')->where(array('user_id'=>$shop['member_id']))->getField('phone');
+		$shop['phone'] = M('Member')->where(array('member_id'=>$shop['member_id']))->getField('phone');
 		$this->assign("shop",$shop);
 		$this->display();
 	}
@@ -183,7 +183,7 @@ class AdminShopController extends AdminbaseController {
 		$shops=$this->shop_model->select();
 
 		foreach ($shops as &$value) {
-			$value['mamber_name'] = M('Member')->where(array('user_id'=>$value['member_id']))->getField('username');
+			$value['mamber_name'] = M('Member')->where(array('member_id'=>$value['member_id']))->getField('username');
 		}
 
 		$this->assign("page", $page->show('Admin'));

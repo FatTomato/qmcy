@@ -116,7 +116,9 @@ class InfoController extends BaseController {
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
 		if (isset($lastid) && isset($epage)) {
-			$where['a.id'] = array('GT',$lastid);
+			if($lastid != 0){
+				$where['a.id'] = array('LT',$lastid);
+			}
 			$limit = $epage;
 		}
 
