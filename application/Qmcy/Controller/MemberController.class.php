@@ -88,8 +88,8 @@ class MemberController extends BaseController {
 			$data['follow_name'] = $name;
 			$data['follow_photo'] = $photo;
 			$data['fan_id'] = $this->user_result['member_id'];
-			$data['fan_name'] = $this->user_result['member_name'];
-			$data['fan_photo'] = $this->user_result['member_photo'];
+			$data['fan_name'] = $this->user_result['username'];
+			$data['fan_photo'] = $this->user_result['userphoto'];
 			$data['addtime'] = date('Y-m-d H:i:s');
 			$re = $this->mr_m->add($data);
 		}
