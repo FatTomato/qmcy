@@ -124,17 +124,6 @@ class ShopController extends BaseController {
 		}
 	}
 
-	public function getShopCates(){
-		$cate = M('Categorys')->where(array('type'=>2))->select();
-		if ($cate !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $cate;
-	    	$this->ajaxreturn($jret);
-		}else{
-			$this->jerror('获取店铺分类失败！');
-		}
-	}
-
 	public function addShop(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -151,7 +140,10 @@ class ShopController extends BaseController {
 		$shop_phone = I('request.shop_phone');
 		$shop_property = I('request.shop_property');
 		$shop_detail = I('request.shop_detail');
-		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time) || empty($shop_phone) || empty($shop_property) || empty($shop_detail)) {
+		$cg_id = I('request.cg_id');
+		$start_time = I('request.start_time');
+		$end_time = I('request.end_time');
+		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time) || empty($shop_phone) || empty($shop_property) || empty($shop_detail) || empty($start_time) || empty($end_time)) {
 			$this->jerror('参数缺失');
 		}
 
