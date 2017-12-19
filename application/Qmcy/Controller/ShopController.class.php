@@ -122,4 +122,75 @@ class ShopController extends BaseController {
 			$this->jerror("查询失败");
 		}
 	}
+
+	// todo
+	public function addShop(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$shop_name = I('request.shop_name');
+		$shop_logo = I('request.shop_logo');
+		$shop_major = I('request.shop_major');
+		$is_shiti = I('request.is_shiti');
+		$is_brand = I('request.is_brand');
+		$shop_pic = I('request.shop_pic');
+		$is_new = I('request.is_new');
+		$shop_addr = I('request.shop_addr');
+		$shop_time = I('request.shop_time');
+		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time)) {
+			$this->jerror('参数缺失');
+		}
+
+		$shop['member_id'] = $this->user_result['member_id'];
+		$shop['add_time'] = date('Y-m-d H:i:s');
+		$shop['shop_name'] = $shop_name;
+		$shop['shop_logo'] = $shop_logo;
+		$shop['shop_major'] = $shop_major;
+		$shop['is_shiti'] = $is_shiti;
+		$shop['is_brand'] = $is_brand;
+		$shop['shop_pic'] = $shop_pic;
+		$shop['is_new'] = $is_new;
+		$shop['shop_addr'] = $shop_addr;
+		$shop['shop_time'] = $shop_time;
+
+		$result = $this->info_m->add($shop);
+
+		if ($result) {
+			$jret['flag'] = 1;
+	    	$this->ajaxreturn($jret);
+		}else{
+			$this->jerror('更新店铺失败！');
+		}
+	}
+
+	// setRelationship
+	public function setRelationship(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$action = I('request.action');
+		$shopid = (int)I('request.shopid');
+
+		if (empty($shopid)) {
+			$this->jerror('参数缺失');
+		}
+		
+		if ($action == 'false') {
+			// 取消喜欢
+			
+		}elseif ($action == 'true') {
+			// 设置喜欢
+			
+		}
+
+		if($re){
+			$jret['flag'] = 1;
+	        $this->ajaxreturn($jret);
+	    }else {
+	    	$msg = $action == 'false'? '店铺取消喜欢失败': '店铺设置喜欢失败';
+			$this->jerror($msg);
+		}
+	}
+
+	// todo 押金
 }
