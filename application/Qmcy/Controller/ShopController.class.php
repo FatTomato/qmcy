@@ -10,6 +10,7 @@ class ShopController extends BaseController {
 	public function _initialize() {
 		parent::_initialize();
 		$this->shop_m = M('Shop');
+		$this->shop_star_m = M('ShopStar');
 	}
 
 	// shop detail
@@ -123,7 +124,17 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// todo
+	public function getShopCates(){
+		$cate = M('Categorys')->where(array('type'=>2))->select();
+		if ($cate !== false) {
+			$jret['flag'] = 1;
+			$jret['result'] = $cate;
+	    	$this->ajaxreturn($jret);
+		}else{
+			$this->jerror('获取店铺分类失败！');
+		}
+	}
+
 	public function addShop(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -137,7 +148,10 @@ class ShopController extends BaseController {
 		$is_new = I('request.is_new');
 		$shop_addr = I('request.shop_addr');
 		$shop_time = I('request.shop_time');
-		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time)) {
+		$shop_phone = I('request.shop_phone');
+		$shop_property = I('request.shop_property');
+		$shop_detail = I('request.shop_detail');
+		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time) || empty($shop_phone) || empty($shop_property) || empty($shop_detail)) {
 			$this->jerror('参数缺失');
 		}
 
@@ -163,7 +177,6 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// setRelationship
 	public function setRelationship(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -174,13 +187,23 @@ class ShopController extends BaseController {
 		if (empty($shopid)) {
 			$this->jerror('参数缺失');
 		}
+
+		$id = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->getField('id');
 		
 		if ($action == 'false') {
 			// 取消喜欢
-			
+			if ($id) {
+				$this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->delete();
+			}else {
+				$re = $this->jerror('您未设置喜欢该店铺，不可取消设置！');
+			}
 		}elseif ($action == 'true') {
 			// 设置喜欢
-			
+			if ($id) {
+				$re = $this->jerror('您已设置喜欢该店铺，不可重复设置！');
+			}else {
+				$this->shop_star_m->add();
+			}
 		}
 
 		if($re){
