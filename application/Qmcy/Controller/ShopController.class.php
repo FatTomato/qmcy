@@ -130,21 +130,7 @@ class ShopController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		// $shop_name = I('request.shop_name');
-		// $shop_logo = I('request.shop_logo');
-		// $shop_major = I('request.shop_major');
-		// $is_shiti = I('request.is_shiti');
-		// $is_brand = I('request.is_brand');
-		// $shop_pic = I('request.shop_pic');
-		// $is_new = I('request.is_new');
-		// $shop_addr = I('request.shop_addr');
-		// // $shop_time = I('request.shop_time');
-		// $shop_phone = I('request.shop_phone');
-		// $shop_property = I('request.shop_property');
-		// $shop_detail = I('request.shop_detail');
-		// $cg_id = I('request.cg_id');
-		// $start_time = I('request.start_time');
-		// $end_time = I('request.end_time');
+		
 		$post_data = [
 			'shop_name'=>'店铺名称',
 			'shop_logo'=>'店铺logo',
@@ -167,22 +153,13 @@ class ShopController extends BaseController {
 				$this->jerror($value.'缺失');
 			}
 		}
-		// if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_phone) || empty($shop_property) || empty($shop_detail) || empty($start_time) || empty($end_time)) {
-		// 	$this->jerror('参数缺失');
-		// }
 
 		$shop['member_id'] = $this->user_result['member_id'];
 		$shop['add_time'] = date('Y-m-d H:i:s');
-		// $shop['shop_name'] = $shop_name;
-		// $shop['shop_logo'] = $shop_logo;
-		// $shop['shop_major'] = $shop_major;
-		// $shop['is_shiti'] = $is_shiti;
-		// $shop['is_brand'] = $is_brand;
-		// $shop['shop_pic'] = $shop_pic;
-		// $shop['is_new'] = $is_new;
-		// $shop['shop_addr'] = $shop_addr;
-		// $shop['shop_time'] = $shop_time;
-
+		$shop['is_new'] = $shop['is_new'] == 'true'? 1: 0;
+		$shop['is_brand'] = $shop['is_brand'] == 'true'? 1: 0;
+		$shop['shop_property'] = $shop['shop_property'] == 'true'? 1: 0;
+		
 		$result = $this->info_m->add($shop);
 
 		if ($result) {
