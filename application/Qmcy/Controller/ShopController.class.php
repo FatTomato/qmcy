@@ -138,14 +138,14 @@ class ShopController extends BaseController {
 		$shop_pic = I('request.shop_pic');
 		$is_new = I('request.is_new');
 		$shop_addr = I('request.shop_addr');
-		$shop_time = I('request.shop_time');
+		// $shop_time = I('request.shop_time');
 		$shop_phone = I('request.shop_phone');
 		$shop_property = I('request.shop_property');
 		$shop_detail = I('request.shop_detail');
 		$cg_id = I('request.cg_id');
 		$start_time = I('request.start_time');
 		$end_time = I('request.end_time');
-		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_time) || empty($shop_phone) || empty($shop_property) || empty($shop_detail) || empty($start_time) || empty($end_time)) {
+		if (empty($shop_name) || empty($shop_logo) || empty($shop_major) || empty($is_shiti) || empty($is_brand) || empty($shop_pic) || empty($is_new) || empty($shop_addr) || empty($shop_phone) || empty($shop_property) || empty($shop_detail) || empty($start_time) || empty($end_time)) {
 			$this->jerror('参数缺失');
 		}
 
