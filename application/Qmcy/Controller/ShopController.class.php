@@ -28,6 +28,7 @@ class ShopController extends BaseController {
 
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
+			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
 		}
 		
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
@@ -40,6 +41,7 @@ class ShopController extends BaseController {
 
 		if($shop !== false){
 			$jret['flag'] = 1;
+			$shop_m->where(array('id'=>$id))->setInc('hits',1);
 			$jret['result'] = $shop;
 	        $this->ajaxreturn($jret);
 	    }else {
