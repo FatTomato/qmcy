@@ -13,7 +13,7 @@ class ShopController extends BaseController {
 		$this->shop_star_m = M('ShopStar');
 	}
 
-	// shop detail
+	// 店铺详情
 	public function getShopDetail(){
 		$id = I('request.id');
 		if (isset($id) && !empty($id)) {
@@ -25,6 +25,10 @@ class ShopController extends BaseController {
 		$field = '*';
 
 		$shop = $this->shop_m->field($field)->where($where)->find();
+
+		if ($this->user_result['member_id'] == $shop['member_id']) {
+			$shop['is_owner'] = true;
+		}
 		
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
@@ -39,7 +43,7 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// shop list
+	// 店铺列表
 	public function getShopList(){
 		$cg_id = I('request.cg_id');
 		$lastid = (int)I('request.lastid');
@@ -81,7 +85,7 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// shop search
+	// 店铺搜索
 	public function searchShopList(){
 		$kword = I('request.kword');
 		$lastid = (int)I('request.lastid');
@@ -126,6 +130,7 @@ class ShopController extends BaseController {
 		}
 	}
 
+	// 添加店铺
 	public function addShop(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -170,6 +175,30 @@ class ShopController extends BaseController {
 		}
 	}
 
+	public function setLevel(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$id = I('request.id');
+		if (isset($id) && !empty($id)) {
+			$where['id'] = $id;
+		}else{
+			$this->jerror("参数缺失");
+		}
+		$data = [];
+		$data['level'] = 1;
+		$data['vip_time'] = date('Y-m-d H:i:s',time()+7*86400);
+		$re = $this->shop_m->where($where)->save($data);
+
+		if($re !== false){
+			$jret['flag'] = 1;
+	        $this->ajaxreturn($jret);
+	    }else {
+			$this->jerror("体验失败");
+		}
+	}
+
+	// 设置喜欢/不喜欢店铺
 	public function setRelationship(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
