@@ -22,10 +22,10 @@ class ShopController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 		
-		// $field = 'id,shop_name,shop_addr,shop_major,shop_time,shop_phone,shop_detail,is_shiti,is_new,shop_pic,shop_contact,shop_phone,lat,lng';
+		$field = '*';
 
 		$shop = $this->shop_m
-				// ->field($field)
+				->field($field)
 				->where($where)->find();
 
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
@@ -42,30 +42,29 @@ class ShopController extends BaseController {
 	// shop list
 	public function getShopList(){
 		$cg_id = I('request.cg_id');
-		// $pagination = I('request.pagination');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 
 		if (isset($cg_id) && !empty($cg_id)) {
-			$where['b.cg_id'] = $cg_id;
+			$where['cg_id'] = $cg_id;
 		}
 
-		$where['a.status'] = 1;
+		$where['status'] = 1;
 
-		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
+		$order = 'istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$where['a.id'] = array('GT',$lastid);
+				$where['id'] = array('GT',$lastid);
 			}
 			$limit = $epage;
 		}
 
 		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
 
-		$field = 'a.*';
+		$field = '*';
 
-		$list = $this->shop_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
+		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
@@ -83,7 +82,6 @@ class ShopController extends BaseController {
 	// shop search
 	public function searchShopList(){
 		$kword = I('request.kword');
-		// $pagination = I('request.pagination');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 
@@ -96,22 +94,20 @@ class ShopController extends BaseController {
 			$this->jerror('kword can`t be null!');
 		}
 
-		$where['a.status'] = 1;
+		$where['status'] = 1;
 
-		$order = 'a.istop desc,b.listorder desc,a.add_time asc';
+		$order = 'istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$where['a.id'] = array('GT',$lastid);
+				$where['id'] = array('GT',$lastid);
 			}
 			$limit = $epage;
 		}
 
-		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
+		$field = '*';
 
-		$field = 'a.id,a.shop_name,a.shop_addr,a.shop_major,a.shop_time,a.is_shiti,a.is_new,a.shop_pic,a.lng,a.lat';
-
-		$list = $this->shop_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
+		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
@@ -160,7 +156,7 @@ class ShopController extends BaseController {
 		$shop['is_brand'] = $shop['is_brand'] == 'true'? 1: 0;
 		$shop['shop_property'] = $shop['shop_property'] == 'true'? 1: 0;
 		
-		$result = $this->info_m->add($shop);
+		$result = $this->shop_m->add($shop);
 
 		if ($result) {
 			$jret['flag'] = 1;
