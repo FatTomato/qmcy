@@ -41,7 +41,7 @@ class ShopController extends BaseController {
 
 		if($shop !== false){
 			$jret['flag'] = 1;
-			$shop_m->where(array('id'=>$id))->setInc('hits',1);
+			$this->shop_m->where(array('id'=>$id))->setInc('hits',1);
 			$jret['result'] = $shop;
 	        $this->ajaxreturn($jret);
 	    }else {
@@ -65,7 +65,7 @@ class ShopController extends BaseController {
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$where['id'] = array('GT',$lastid);
+				$where['id'] = array('LT',$lastid);
 			}
 			$limit = $epage;
 		}
@@ -112,7 +112,7 @@ class ShopController extends BaseController {
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$where['id'] = array('GT',$lastid);
+				$where['id'] = array('LT',$lastid);
 			}
 			$limit = $epage;
 		}
