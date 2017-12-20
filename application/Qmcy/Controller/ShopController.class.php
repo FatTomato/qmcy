@@ -33,6 +33,10 @@ class ShopController extends BaseController {
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
+		$shop['shop_pic'] = explode(',', $shop['shop_pic']);
+		foreach ($shop['shop_pic'] as &$value) {
+			$value = sp_get_image_preview_url($value);
+		}
 
 		if($shop !== false){
 			$jret['flag'] = 1;
