@@ -134,8 +134,8 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// 添加店铺
-	public function addShop(){
+	// 编辑店铺
+	public function editShop(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
@@ -169,7 +169,12 @@ class ShopController extends BaseController {
 		$shop['is_brand'] = $shop['is_brand'] == 'true'? 1: 0;
 		$shop['shop_property'] = $shop['shop_property'] == 'true'? 1: 0;
 		
-		$result = $this->shop_m->add($shop);
+		$shop_id = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->getField('id');
+		if ($shop_id) {
+			$result = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->save($shop);
+		}else{
+			$result = $this->shop_m->add($shop);
+		}
 
 		if ($result) {
 			$jret['flag'] = 1;
@@ -179,6 +184,7 @@ class ShopController extends BaseController {
 		}
 	}
 
+	// 体验豪华版
 	public function setLevel(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -188,6 +194,10 @@ class ShopController extends BaseController {
 			$where['id'] = $id;
 		}else{
 			$this->jerror("参数缺失");
+		}
+		$member_id = $this->shop_m->where($where)->getField('member_id');
+		if ($this->user_result['member_id'] !== $member_id) {
+			$this->jerror('只可以操作自己的店铺！');
 		}
 		$data = [];
 		$data['level'] = 1;
@@ -219,16 +229,16 @@ class ShopController extends BaseController {
 		if ($action == 'false') {
 			// 取消喜欢
 			if ($id) {
-				$this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->delete();
+				$re = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->delete();
 			}else {
-				$re = $this->jerror('您未设置喜欢该店铺，不可取消设置！');
+				$this->jerror('您未设置喜欢该店铺，不可取消设置！');
 			}
 		}elseif ($action == 'true') {
 			// 设置喜欢
 			if ($id) {
-				$re = $this->jerror('您已设置喜欢该店铺，不可重复设置！');
+				$this->jerror('您已设置喜欢该店铺，不可重复设置！');
 			}else {
-				$this->shop_star_m->add();
+				$re = $this->shop_star_m->add();
 			}
 		}
 
