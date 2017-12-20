@@ -22,11 +22,13 @@ class ShopController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 		
-		$field = 'id,shop_name,shop_addr,shop_major,shop_time,shop_phone,shop_detail,is_shiti,is_new,shop_pic,shop_contact,shop_phone,lat,lng';
+		// $field = 'id,shop_name,shop_addr,shop_major,shop_time,shop_phone,shop_detail,is_shiti,is_new,shop_pic,shop_contact,shop_phone,lat,lng';
 
-		$shop = $this->shop_m->field($field)->where($where)->find();
+		$shop = $this->shop_m
+				// ->field($field)
+				->where($where)->find();
 
-		$shop['shop_pic'] = sp_get_image_preview_url($shop['shop_pic']);
+		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 
 		if($shop !== false){
 			$jret['flag'] = 1;
@@ -61,12 +63,12 @@ class ShopController extends BaseController {
 
 		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
 
-		$field = 'a.id,a.shop_name,a.shop_addr,a.shop_major,a.shop_time,a.is_shiti,a.is_new,a.shop_pic,a.lng,a.lat';
+		$field = 'a.*';
 
 		$list = $this->shop_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
-			$value['shop_pic'] = sp_get_image_preview_url($value['shop_pic']);
+			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
 		if ($list !== false) {
@@ -112,7 +114,7 @@ class ShopController extends BaseController {
 		$list = $this->shop_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
-			$value['shop_pic'] = sp_get_image_preview_url($value['shop_pic']);
+			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
 		if ($list !== false) {
