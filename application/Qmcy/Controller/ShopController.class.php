@@ -24,10 +24,10 @@ class ShopController extends BaseController {
 		
 		$field = '*';
 
-		$shop = $this->shop_m
-				->field($field)
-				->where($where)->find();
-
+		$shop = $this->shop_m->field($field)->where($where)->find();
+		
+		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
+		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 
 		if($shop !== false){
@@ -67,6 +67,8 @@ class ShopController extends BaseController {
 		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
+			if($value['is_new']==1 && $value['check']==0){unset($value['is_new']);}
+			if($value['is_brand']==1 && $value['check']==0){unset($value['is_brand']);}
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
@@ -110,6 +112,8 @@ class ShopController extends BaseController {
 		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
+			if($value['is_new']==1 && $value['check']==0){unset($value['is_new']);}
+			if($value['is_brand']==1 && $value['check']==0){unset($value['is_brand']);}
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
