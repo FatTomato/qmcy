@@ -32,15 +32,21 @@ class ShopController extends BaseController {
 			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
 		}
 		if($shop['is_sale'] == 1){
-			// todo
 			$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 			$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
 			$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
 			$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->select();
+			foreach ($shop['ad_list'] as &$value) {
+				$value['smeta'] = sp_get_image_preview_url($value['smeta']);
+				$value['start_time'] = substr($value['start_time'], 0, 10);
+				$value['end_time'] = substr($value['end_time'], 0, 10);
+			}
 		}
+		$shop['is_sale'] = (bool)$shop['is_sale'];
 		if($shop['is_recruit'] == 1){
 			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
 		}
+		$shop['is_recruit'] = (bool)$shop['is_recruit'];
 		
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
@@ -297,7 +303,13 @@ class ShopController extends BaseController {
 			}
 		}
 
+		$recruit_num = $this->recruit_m->where(array('shop_id'=>$recruit['shop_id']))->count();
+		if ($recruit_num > 9) {
+			$this->jerror('最多添加10条招聘信息');
+		}
+
 		$result = $this->recruit_m->add($recruit);
+		$this->shop_m->where(array('id'=>$recruit['shop_id']))->save(['is_recruit'=>1]);
 
 		if ($result) {
 			$jret['flag'] = 1;
@@ -349,6 +361,12 @@ class ShopController extends BaseController {
 			$this->jerror('参数缺失');
 		}
 		$re = $this->recruit_m->where(array('id'=>$recruit_id))->delete();
+
+		$recruit_num = $this->recruit_m->where(array('shop_id'=>$recruit['shop_id']))->count();
+		if ($recruit_num == 0) {
+			$this->shop_m->where(array('id'=>$recruit['shop_id']))->save(['is_recruit'=>0]);
+		}
+
 		if ($re) {
 			$jret['flag'] = 1;
 			$this->ajaxreturn($jret);
