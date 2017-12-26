@@ -47,6 +47,10 @@ class ShopController extends BaseController {
 			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
 		}
 		$shop['is_recruit'] = (bool)$shop['is_recruit'];
+		$shop['is_new'] = (bool)$shop['is_new'];
+		$shop['recommended'] = (bool)$shop['recommended'];
+		$shop['deposit'] = (bool)$shop['deposit'];
+		$shop['is_brand'] = (bool)$shop['is_brand'];
 		
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
