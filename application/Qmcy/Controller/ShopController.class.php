@@ -11,6 +11,7 @@ class ShopController extends BaseController {
 		parent::_initialize();
 		$this->shop_m = M('Shop');
 		$this->shop_star_m = M('ShopStar');
+		$this->recruit_m = M('ShopRecruit');
 	}
 
 	// 店铺详情
@@ -30,13 +31,27 @@ class ShopController extends BaseController {
 			$shop['is_owner'] = true;
 			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
 		}
+		if($shop['is_sale'] == 1){
+			// todo
+			$order = 'a.post_expire desc,b.listorder desc,a.end_time';
+			$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
+			$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
+			$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->select();
+		}
+		if($shop['is_recruit'] == 1){
+			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
+		}
 		
 		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
-		$shop['shop_pic'] = explode(',', $shop['shop_pic']);
-		foreach ($shop['shop_pic'] as &$value) {
-			$value = sp_get_image_preview_url($value);
+		if(strlen($shop['shop_pic']) > 0){
+			$shop['shop_pic'] = explode(',', $shop['shop_pic']);
+			foreach ($shop['shop_pic'] as &$value) {
+				$value = sp_get_image_preview_url($value);
+			}
+		}else{
+			unset($shop['shop_pic']);
 		}
 
 		if($shop !== false){
@@ -51,17 +66,25 @@ class ShopController extends BaseController {
 
 	// 店铺列表
 	public function getShopList(){
-		$cg_id = I('request.cg_id');
+		$cg_id = (int)I('request.cg_id');
+		$is_sale = I('request.is_sale');
+		$is_recruit = I('request.is_recruit');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 
 		if (isset($cg_id) && !empty($cg_id)) {
 			$where['cg_id'] = $cg_id;
 		}
+		if ($is_sale == 'true') {
+			$where['is_sale'] = 1;
+		}
+		if ($is_recruit == 'true') {
+			$where['is_recruit'] = 1;
+		}
 
 		$where['status'] = 1;
 
-		$order = 'istop desc,listorder desc,add_time desc';
+		$order = 'deposit desc,istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
@@ -108,7 +131,7 @@ class ShopController extends BaseController {
 
 		$where['status'] = 1;
 
-		$order = 'istop desc,listorder desc,add_time desc';
+		$order = 'deposit desc,istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
@@ -161,7 +184,7 @@ class ShopController extends BaseController {
 		foreach ($post_data as $key => $value) {
 			$shop[$key] = I('request.'.$key);
 			if (empty($shop[$key])) {
-				$this->jerror($value.'缺失');
+				$this->jerror($value.'不能为空');
 			}
 		}
 
@@ -250,6 +273,87 @@ class ShopController extends BaseController {
 	    }else {
 	    	$msg = $action == 'false'? '店铺取消喜欢失败': '店铺设置喜欢失败';
 			$this->jerror($msg);
+		}
+	}
+
+	// 添加单条招聘
+	public function addRecruit(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$post_data = [
+			'shop_id'=>'shop_id',
+			'jd'=>'职位',
+			'num'=>'人数',
+			'salary'=>'薪资',
+			'demand'=>'要求',
+			'benefits'=>'福利',
+		];
+		$recruit = [];
+		foreach ($post_data as $key => $value) {
+			$recruit[$key] = I('request.'.$key);
+			if (empty($recruit[$key])) {
+				$this->jerror($value.'不能为空');
+			}
+		}
+
+		$result = $this->recruit_m->add($recruit);
+
+		if ($result) {
+			$jret['flag'] = 1;
+	    	$this->ajaxreturn($jret);
+		}else{
+			$this->jerror('添加招聘失败！');
+		}
+	}
+
+	// 编辑单条招聘
+	public function editRecruit(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$post_data = [
+			'id'=>'recruit_id',
+			'jd'=>'职位',
+			'num'=>'人数',
+			'salary'=>'薪资',
+			'demand'=>'要求',
+			'benefits'=>'福利',
+		];
+		$recruit = [];
+		foreach ($post_data as $key => $value) {
+			$recruit[$key] = I('request.'.$key);
+			if (empty($recruit[$key])) {
+				$this->jerror($value.'不能为空');
+			}
+		}
+
+		$result = $this->recruit_m->save($recruit);
+
+		if ($result !== false) {
+			$jret['flag'] = 1;
+	    	$this->ajaxreturn($jret);
+		}else{
+			$this->jerror('修改招聘失败！');
+		}
+
+	}
+
+	// 删除单条招聘
+	public function delRecruit(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$recruit_id = I('request.recruit_id');
+		if (empty($recruit_id)) {
+			$this->jerror('参数缺失');
+		}
+		$re = $this->recruit_m->where(array('id'=>$recruit_id))->delete();
+		if ($re) {
+			$jret['flag'] = 1;
+			$this->ajaxreturn($jret);
+		}else{
+			$this->jerror('删除失败');
 		}
 	}
 
