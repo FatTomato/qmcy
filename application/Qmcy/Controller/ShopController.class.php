@@ -30,6 +30,10 @@ class ShopController extends BaseController {
 			$shop['is_owner'] = true;
 			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
 		}
+		if ($this->user_result['member_id']) {
+			$res = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'shop_id'=>$id))->getField('id');
+			$shop['is_star'] = $res? true: false;
+		}
 		if($shop['is_sale'] == 1){
 			$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 			$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
@@ -256,7 +260,7 @@ class ShopController extends BaseController {
 		$action = I('request.action');
 		$shop_id = (int)I('request.shop_id');
 
-		if (empty($shopid)) {
+		if (empty($shop_id)) {
 			$this->jerror('参数缺失');
 		}
 
