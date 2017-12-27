@@ -278,7 +278,7 @@ class ShopController extends BaseController {
 			if ($id) {
 				$this->jerror('您已设置喜欢该店铺，不可重复设置！');
 			}else {
-				$re = $this->shop_star_m->add();
+				$re = $this->shop_star_m->add(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']));
 			}
 		}
 
