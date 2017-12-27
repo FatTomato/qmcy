@@ -57,7 +57,12 @@ class AdminAdsController extends AdminbaseController {
 			$article['store_lat'] = $lat_lng['result']['location']['lat'];
 			$article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$article['post_status']=0;
+			$article['shop_id'] = M('Shop')->where(array('shop_name'=>$article['store_name']))->getField('id');
+			if (!$article['shop_id']) {
+				$this->error("店铺不存在！");
+			}
 			$result=$this->ads_model->add($article);
+			M('Shop')->where(array('shop_name'=>$article['store_name']))->save(array('is_sale'=>1));
 			if ($result) {
 				
 				$re = $this->ads_relationships_model->add(array("cg_id"=>intval($_POST['cg_id']),"object_id"=>$result));

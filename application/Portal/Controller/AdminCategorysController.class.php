@@ -13,7 +13,7 @@ use Common\Controller\AdminbaseController;
 class AdminCategorysController extends AdminbaseController {
 	
 	protected $categorys_model;
-	protected $types=array("0"=>"信息","1"=>"圈子");
+	protected $types=array("0"=>"信息","1"=>"圈子","2"=>"店铺");
 	
 	function _initialize() {
 		parent::_initialize();

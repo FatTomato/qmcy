@@ -360,7 +360,7 @@ class ShopController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$recruit_id = I('request.recruit_id');
+		$recruit_id = I('request.id');
 		if (empty($recruit_id)) {
 			$this->jerror('参数缺失');
 		}
