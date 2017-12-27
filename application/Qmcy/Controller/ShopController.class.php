@@ -24,7 +24,6 @@ class ShopController extends BaseController {
 		}
 		
 		$field = '*';
-
 		$shop = $this->shop_m->field($field)->where($where)->find();
 
 		if ($this->user_result['member_id'] == $shop['member_id']) {
@@ -63,6 +62,8 @@ class ShopController extends BaseController {
 		}else{
 			unset($shop['shop_pic']);
 		}
+
+		$shop['stars'] = $this->shop_star_m->where(array('shop_id'=>$shop['id']))->count();
 
 		if($shop !== false){
 			$jret['flag'] = 1;
@@ -253,7 +254,7 @@ class ShopController extends BaseController {
 			$this->jerror('u have to auth!');
 		}
 		$action = I('request.action');
-		$shopid = (int)I('request.shopid');
+		$shop_id = (int)I('request.shop_id');
 
 		if (empty($shopid)) {
 			$this->jerror('参数缺失');
