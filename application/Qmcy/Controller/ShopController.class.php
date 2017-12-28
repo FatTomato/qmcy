@@ -29,6 +29,11 @@ class ShopController extends BaseController {
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
 			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
+			$shop['is_new'] = (bool)$shop['is_new'];
+			$shop['is_brand'] = (bool)$shop['is_brand'];
+		}else{
+			if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
+			if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
 		}
 		if ($this->user_result['member_id']) {
 			$res = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'shop_id'=>$id))->getField('id');
@@ -54,9 +59,7 @@ class ShopController extends BaseController {
 		$shop['recommended'] = (bool)$shop['recommended'];
 		$shop['deposit'] = (bool)$shop['deposit'];
 		$shop['is_brand'] = (bool)$shop['is_brand'];
-		
-		if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
-		if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
+
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 		if(strlen($shop['shop_pic']) > 0){
 			$shop['shop_pic'] = explode(',', $shop['shop_pic']);
