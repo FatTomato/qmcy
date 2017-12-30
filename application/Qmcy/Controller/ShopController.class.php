@@ -52,7 +52,7 @@ class ShopController extends BaseController {
 		}
 		$shop['is_sale'] = (bool)$shop['is_sale'];
 		if($shop['is_recruit'] == 1){
-			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
+			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id,'status'=>1))->order('id asc')->select();
 		}
 		$shop['is_recruit'] = (bool)$shop['is_recruit'];
 		$shop['is_new'] = (bool)$shop['is_new'];
@@ -118,8 +118,25 @@ class ShopController extends BaseController {
 		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
-			if($value['is_new']==1 && $value['check']==0){unset($value['is_new']);}
-			if($value['is_brand']==1 && $value['check']==0){unset($value['is_brand']);}
+			if($value['check']==1){
+				$value['is_new'] = (bool)$value['is_new'];
+				$value['is_brand'] = (bool)$value['is_brand'];
+			}else{
+				$value['is_new'] = false;
+				$value['is_brand'] = false;
+			}
+			$value['is_recruit'] = (bool)$value['is_recruit'];
+			if($value['is_recruit']){
+				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id'],'status'=>1))->count();
+			}
+			$value['is_sale'] = (bool)$value['is_sale'];
+			if($shop['is_sale']){
+				$order = 'a.post_expire desc,b.listorder desc,a.end_time';
+				$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
+				$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
+				$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->limit('1')->select();
+			}
+			$value['deposit'] = (bool)$value['deposit'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
@@ -163,8 +180,25 @@ class ShopController extends BaseController {
 		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
-			if($value['is_new']==1 && $value['check']==0){unset($value['is_new']);}
-			if($value['is_brand']==1 && $value['check']==0){unset($value['is_brand']);}
+			if($value['check']==1){
+				$value['is_new'] = (bool)$value['is_new'];
+				$value['is_brand'] = (bool)$value['is_brand'];
+			}else{
+				$value['is_new'] = false;
+				$value['is_brand'] = false;
+			}
+			$value['is_recruit'] = (bool)$value['is_recruit'];
+			if($value['is_recruit']){
+				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id'],'status'=>1))->count();
+			}
+			$value['is_sale'] = (bool)$value['is_sale'];
+			if($shop['is_sale']){
+				$order = 'a.post_expire desc,b.listorder desc,a.end_time';
+				$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
+				$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
+				$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->limit('1')->select();
+			}
+			$value['deposit'] = (bool)$value['deposit'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
