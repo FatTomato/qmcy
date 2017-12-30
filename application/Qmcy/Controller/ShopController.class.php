@@ -129,6 +129,7 @@ class ShopController extends BaseController {
 			if($value['is_recruit']){
 				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id']))->count();
 			}
+			unset($value['is_recruit']);
 			$value['is_sale'] = (bool)$value['is_sale'];
 			if($shop['is_sale']){
 				$order = 'a.post_expire desc,b.listorder desc,a.end_time';
@@ -136,7 +137,9 @@ class ShopController extends BaseController {
 				$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
 				$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->limit('1')->select();
 			}
+			unset($value['is_sale']);
 			$value['deposit'] = (bool)$value['deposit'];
+			$value['shop_property'] = (bool)$value['shop_property'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
@@ -187,18 +190,19 @@ class ShopController extends BaseController {
 				$value['is_new'] = false;
 				$value['is_brand'] = false;
 			}
-			$value['is_recruit'] = (bool)$value['is_recruit'];
 			if($value['is_recruit']){
 				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id']))->count();
 			}
-			$value['is_sale'] = (bool)$value['is_sale'];
+			unset($value['is_recruit']);
 			if($shop['is_sale']){
 				$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 				$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
 				$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
 				$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->limit('1')->select();
 			}
+			unset($value['is_sale']);
 			$value['deposit'] = (bool)$value['deposit'];
+			$value['shop_property'] = (bool)$value['shop_property'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
 
