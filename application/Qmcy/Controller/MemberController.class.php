@@ -303,7 +303,7 @@ class MemberController extends BaseController {
 			$comments = M('info_comments')->where(array('id'=>array('in',$ids),'status'=>1))->order('createtime desc')->select();
 
 			foreach ($comments as  &$value) {
-				if (($value['post_id'] == $this->user_result['member_id'] == $value['post_id']) || ($value['post_id'] != $this->user_result['member_id'])) {
+				if ((($value['post_id'] == $this->user_result['member_id']) && ($this->user_result['member_id'] == $value['post_id'])) || ($value['post_id'] != $this->user_result['member_id'])) {
 					unset($value['to_mid']);
 					unset($value['to_name']);
 					unset($value['to_userphoto']);
