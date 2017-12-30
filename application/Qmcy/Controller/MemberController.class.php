@@ -67,7 +67,7 @@ class MemberController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
-		$action = I('request.is_follow');
+		$is_follow = I('request.is_follow');
 		$member_id = (int)I('request.member_id');
 		$name = (string)I('request.name');
 		$photo = (string)I('request.photo');
@@ -76,10 +76,10 @@ class MemberController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 		
-		if ($action == 'false') {
+		if ($is_follow == 'false') {
 			// 取关
 			$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'], 'follow_id'=>$member_id))->delete();
-		}elseif ($action == 'true') {
+		}elseif ($is_follow == 'true') {
 			// 关注
 			if (empty($name) || empty($photo)) {
 				$this->jerror("参数缺失");
@@ -140,7 +140,9 @@ class MemberController extends BaseController {
 	// 基本信息
 	public function getMemberInfo(){
 		$member_id = I('request.member_id');
+		
 		if (empty($member_id) || $this->user_result['member_id'] == $member_id) {
+			// 当前用户
 			$memberinfo['id'] = $this->user_result['member_id'];
 			$memberinfo['name'] = $this->user_result['username'];
 			$memberinfo['photo'] = $this->user_result['userphoto'];
@@ -159,6 +161,7 @@ class MemberController extends BaseController {
 			}
 			$memberinfo['cicles'] = $cicles;
 		}else{
+			// 别的用户
 			$info = $this->m_m->field('member_id,username,userphoto,point')->where(array('member_id'=>$member_id))->find();
 			$memberinfo['member_id'] = $info['member_id'];
 			$memberinfo['name'] = $info['username'];
@@ -284,6 +287,39 @@ class MemberController extends BaseController {
 	public function checkPhone(){
 		// todo
 		
+	}
+
+	// 我的消息
+	public function getMessages(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+
+		$jret['flag'] = 1;
+
+		$ids = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->getField('comment_id',true);
+
+		if ($ids !== false) {
+			$comments = M('info_comments')->where(array('id'=>array('in',$ids),'status'=>1))->order('createtime desc')->select();
+
+			foreach ($comments as  &$value) {
+				if (($value['post_id'] == $this->user_result['member_id'] == $value['post_id']) || ($value['post_id'] != $this->user_result['member_id'])) {
+					unset($value['to_mid']);
+					unset($value['to_name']);
+					unset($value['to_userphoto']);
+				}
+				$info = M('Infos')->where(array('id'=>$value['post_id']))->getField('post_content');
+				// todo 最多展示多少字
+				$value['info'] = $info;
+			}
+			$jret['result'] = $comments;
+		}elseif ($ids == null) {
+			$jret['result'] = [];
+		}else{
+			$this->jerror('获取消息失败');
+		}
+
+        $this->ajaxreturn($jret);
 	}
 
 }
