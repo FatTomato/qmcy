@@ -52,7 +52,7 @@ class ShopController extends BaseController {
 		}
 		$shop['is_sale'] = (bool)$shop['is_sale'];
 		if($shop['is_recruit'] == 1){
-			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id,'status'=>1))->order('id asc')->select();
+			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
 		}
 		$shop['is_recruit'] = (bool)$shop['is_recruit'];
 		$shop['is_new'] = (bool)$shop['is_new'];
@@ -127,7 +127,7 @@ class ShopController extends BaseController {
 			}
 			$value['is_recruit'] = (bool)$value['is_recruit'];
 			if($value['is_recruit']){
-				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id'],'status'=>1))->count();
+				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id']))->count();
 			}
 			$value['is_sale'] = (bool)$value['is_sale'];
 			if($shop['is_sale']){
@@ -189,7 +189,7 @@ class ShopController extends BaseController {
 			}
 			$value['is_recruit'] = (bool)$value['is_recruit'];
 			if($value['is_recruit']){
-				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id'],'status'=>1))->count();
+				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id']))->count();
 			}
 			$value['is_sale'] = (bool)$value['is_sale'];
 			if($shop['is_sale']){
