@@ -447,9 +447,19 @@ class ShopController extends BaseController {
 		if ($re) {
 			$jret['flag'] = 1;
 			$this->ajaxreturn($jret);
-		}else{
+		} else {
 			$this->jerror('删除失败');
 		}
+	}
+
+	// 是否有店铺
+	public function getShopId(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$jret['flag'] = 1;
+		$jret['result'] = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->getField('id');
+		$this->ajaxreturn($jret);
 	}
 
 	// todo 押金

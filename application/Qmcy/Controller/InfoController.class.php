@@ -27,8 +27,8 @@ class InfoController extends BaseController {
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
 		if(!empty($this->user_result['member_id'])){
-			$post_like = explode(',', $info['post_like']);
-			$stars = explode(',', $info['stars']);
+			$post_like = strlen($value['post_like'])>0? explode(',', $value['post_like']): [];
+			$stars = strlen($value['stars'])>0? explode(',', $value['stars']): [];
 			$info['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
 			$info['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
 			$info['id_del'] = $this->user_result['member_id'] == $info['member_id']? true: false;
@@ -126,8 +126,8 @@ class InfoController extends BaseController {
 
 		foreach ($list as $key => &$value) {
 			if(!empty($this->user_result['member_id'])){
-				$post_like = explode(',', $value['post_like']);
-				$stars = explode(',', $value['stars']);
+				$post_like = strlen($value['post_like'])>0? explode(',', $value['post_like']): [];
+				$stars = strlen($value['stars'])>0? explode(',', $value['stars']): [];
 				$value['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
 				$value['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
 				$value['is_del'] = $this->user_result['member_id'] == $value['member_id']? true: false;

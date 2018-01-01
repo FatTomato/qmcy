@@ -305,13 +305,18 @@ class MemberController extends BaseController {
 					unset($value['to_name']);
 					unset($value['to_userphoto']);
 				}
-				if (in_array($value['id'], $unread_ids)) {
-					$value['is_new'] = true;
+				if ($unread_ids) {
+					if (in_array($value['id'], $unread_ids)) {
+						$value['is_new'] = true;
+					}
 				}
+				
 				$info = M('Infos')->where(array('id'=>$value['post_id']))->getField('post_content');
 				$value['info'] = mb_substr($info, 0, 10);
 			}
 		}
+
+		M('Message')->where(array('member_id'=>$this->user_result['member_id']))->save(array('status'=>1));
 
 		if ($comments) {
 			$jret['flag'] = 1;
