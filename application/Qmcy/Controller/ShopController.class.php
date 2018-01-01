@@ -350,7 +350,7 @@ class ShopController extends BaseController {
 			$re = $this->shop_star_m->add(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id'], 'thumbup'=>1));
 		}
 
-		if($re !== false){
+		if($re){
 			$jret['flag'] = 1;
 			$this->shop_m->where(array('id'=>$shop_id))->setInc('star_num', 1);
 	        $this->ajaxreturn($jret);
