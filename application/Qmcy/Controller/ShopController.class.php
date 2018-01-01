@@ -30,9 +30,9 @@ class ShopController extends BaseController {
 		$shop['is_brand'] = (bool)$shop['is_brand'];//连锁
 		$shop['is_recruit'] = (bool)$shop['is_recruit'];//招聘
 		$shop['deposit'] = (bool)$shop['deposit'];//保证金
-		$shop['is_sale'] = (bool)$shop['is_sale'];
-		$shop['shop_property'] = (bool)$shop['shop_property'];
-		$shop['probation'] = (bool)$shop['probation'];
+		$shop['is_sale'] = (bool)$shop['is_sale'];//活动
+		$shop['shop_property'] = (bool)$shop['shop_property'];//店铺性质
+		$shop['probation'] = (bool)$shop['probation'];//是否体验豪华版
 
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
@@ -42,8 +42,8 @@ class ShopController extends BaseController {
 		}
 		if ($this->user_result['member_id']) {
 			$res = $this->shop_star_m->where(array('shop_id'=>$id, 'member_id'=>$this->user_result['member_id']))->find();
-			$shop['is_star'] = $res['status']? true: false;
-			$shop['is_like'] = $res['thumbup']? true: false;
+			$shop['is_star'] = $res['status']? true: false;//收藏
+			$shop['is_like'] = $res['thumbup']? true: false;//点赞
 		}
 		if($shop['is_sale'] == 1){
 			$order = 'a.post_expire desc,b.listorder desc,a.end_time';

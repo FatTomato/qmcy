@@ -140,40 +140,37 @@ class MemberController extends BaseController {
 	// 基本信息
 	public function getMemberInfo(){
 		$member_id = I('request.member_id');
-		
-		if (empty($member_id) || $this->user_result['member_id'] == $member_id) {
-			// 当前用户
-			$memberinfo['id'] = $this->user_result['member_id'];
-			$memberinfo['name'] = $this->user_result['username'];
-			$memberinfo['photo'] = $this->user_result['userphoto'];
-			$memberinfo['point'] = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
-			$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$this->user_result['member_id']))->count();
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id']))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$this->user_result['member_id']))->count();
-			$memberinfo['shop_id'] = M('Shop')->where(array('member_id'=>$this->user_result['member_id']))->getField('id');
+		$m_id = 0;
+
+		if ($member_id == $this->user_result['member_id'] || ($this->user_result['member_id']) && empty($member_id)) {
+			$memberinfo = $this->user_result;
+
 			$join = '__CATEGORYS__ b ON a.cg_id = b.cg_id';
 			$field = 'b.cg_id,b.name,b.icon';
-			$cicles = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['member_id'], 'a.status'=>1))->select();
-			if (count($cicles) > 0) {
-				foreach ($cicles as &$value) {
+			$memberinfo['cicles'] = M('CiclesRelationships')->alias('a')->join($join)->field($field)->where(array('a.member_id'=>$this->user_result['member_id'], 'a.status'=>1))->select();
+			if (count($memberinfo['cicles']) > 0) {
+				foreach ($memberinfo['cicles'] as &$value) {
 					$value['icon'] = sp_get_image_preview_url($value['icon']);
 				}
 			}
-			$memberinfo['cicles'] = $cicles;
-		}else{
-			// 别的用户
-			$info = $this->m_m->field('member_id,username,userphoto,point')->where(array('member_id'=>$member_id))->find();
-			$memberinfo['member_id'] = $info['member_id'];
-			$memberinfo['name'] = $info['username'];
-			$memberinfo['photo'] = $info['userphoto'];
-			$memberinfo['point'] = $info['point'];
-			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$member_id))->count();
-			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$member_id))->count();
+			$memberinfo['message_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
+			$m_id = $this->user_result['member_id'];
+		} elseif ($member_id !== $this->user_result['member_id']) {
+			$memberinfo = $this->m_m->field('member_id,username,userphoto,point')->where(array('member_id'=>$member_id))->find();
+
 			if (!empty($this->user_result['member_id'])) {
 				$re = $this->mr_m->where(array('fan_id'=>$this->user_result['member_id'],'follow_id'=>$member_id))->find();
 				$memberinfo['is_follow'] = $re? true: false;
 			}
+			$m_id = $member_id;
 		}
+		if ($m_id) {
+			$memberinfo['post_num'] = M('Infos')->where(array('post_author'=>$m_id))->count();
+			$memberinfo['follow_num'] = $this->mr_m->where(array('fan_id'=>$m_id))->count();
+			$memberinfo['fan_num'] = $this->mr_m->where(array('follow_id'=>$m_id))->count();
+			$memberinfo['shop_id'] = M('Shop')->where(array('member_id'=>$m_id))->getField('id');
+		}
+
 		if ($memberinfo) {
 			$jret['flag'] = 1;
 			$jret['result'] = $memberinfo;
@@ -231,6 +228,7 @@ class MemberController extends BaseController {
 		    $memberinfo['city'] = $data['city'];
 		    $memberinfo['province'] = $data['province'];
 		    $memberinfo['country'] = $data['country'];
+		    $memberinfo['point'] = 2000;
 		    // todo   邀请人
 		    // $memberinfo['invite_userid'] = $data['nickName'];
 		    $memberinfo['addtime'] = date('Y-m-d H:i:s');
@@ -290,33 +288,36 @@ class MemberController extends BaseController {
 	}
 
 	// 我的消息
-	public function getMessages(){
+	public function getMessages(){$
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
 
-		$jret['flag'] = 1;
+		$ids = M('Message')->where(array('member_id'=>$this->user_result['member_id']))->getField('comment_id', true);
+		$unread_ids = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->getField('comment_id', true);
 
-		$ids = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->getField('comment_id',true);
-
-		if ($ids !== false) {
+		if ($ids) {
 			$comments = M('info_comments')->where(array('id'=>array('in',$ids),'status'=>1))->order('createtime desc')->select();
 
 			foreach ($comments as  &$value) {
-				if ((($value['post_id'] == $this->user_result['member_id']) && ($this->user_result['member_id'] == $value['post_id'])) || ($value['post_id'] != $this->user_result['member_id'])) {
+				if (!($value['post_id'] == $this->user_result['member_id'] && $value['to_mid'] != $this->user_result['member_id'])) {
 					unset($value['to_mid']);
 					unset($value['to_name']);
 					unset($value['to_userphoto']);
 				}
+				if (in_array($value['id'], $unread_ids)) {
+					$value['is_new'] = true;
+				}
 				$info = M('Infos')->where(array('id'=>$value['post_id']))->getField('post_content');
-				// todo 最多展示多少字
-				$value['info'] = $info;
+				$value['info'] = mb_substr($info, 0, 10);
 			}
+		}
+
+		if ($comments) {
+			$jret['flag'] = 1;
 			$jret['result'] = $comments;
-		}elseif ($ids == null) {
-			$jret['result'] = [];
-		}else{
-			$this->jerror('获取消息失败');
+		} else {
+			$this->jerror('获取消息失败！');
 		}
 
         $this->ajaxreturn($jret);

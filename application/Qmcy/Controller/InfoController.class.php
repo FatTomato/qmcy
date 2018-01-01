@@ -283,10 +283,12 @@ class InfoController extends BaseController {
 			$data['to_name'] = $to_name;
 			$data['to_userphoto'] = $to_userphoto;
 		}
-		$comment_id = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->getField('id');
 		$re = M('info_comments')->add($data);
+		// 有没有评论过
+		$comment_id = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->getField('id');
 
 		if ($re) {
+			// 未评论过，且该信息不是自己发布的，有积分
 			if(!isset($comment_id) && ($post_author !== $this->user_result['member_id'])){
 				$point['action'] = '2';
 				$point['point'] = '10';
@@ -297,6 +299,22 @@ class InfoController extends BaseController {
 				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
 				$point['weekly_m'] = M('weekly_points');
 				A('Point')->setPoint($point);
+			}
+
+			// 我的消息
+			if (($post_author != $from_mid) && ($post_author != $to_mid) && !empty($to_mid)) {
+				$message[0]['member_id'] = $post_author;
+				$message[0]['comment_id'] = $re;
+				$message[0]['addtime'] = $data['createtime'];
+				$message[1]['member_id'] = $to_mid;
+				$message[1]['comment_id'] = $re;
+				$message[1]['addtime'] = $data['createtime'];
+				M('Message')->addAll($message);
+			} else {
+				$message['member_id'] = (!empty($to_mid) && $to_mid != $post_author)? $to_mid: $post_author;
+				$message['comment_id'] = $re;
+				$message['addtime'] = $data['createtime'];
+				M('Message')->add($message);
 			}
 
 			$jret['flag'] = 1;
