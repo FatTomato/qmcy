@@ -32,6 +32,7 @@ class ShopController extends BaseController {
 		$shop['deposit'] = (bool)$shop['deposit'];//保证金
 		$shop['is_sale'] = (bool)$shop['is_sale'];
 		$shop['shop_property'] = (bool)$shop['shop_property'];
+		$shop['probation'] = (bool)$shop['probation'];
 
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
