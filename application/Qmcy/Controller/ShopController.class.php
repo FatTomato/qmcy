@@ -26,18 +26,23 @@ class ShopController extends BaseController {
 		$field = '*';
 		$shop = $this->shop_m->field($field)->where($where)->find();
 
+		$shop['is_new'] = (bool)$shop['is_new'];//新店
+		$shop['is_brand'] = (bool)$shop['is_brand'];//连锁
+		$shop['is_recruit'] = (bool)$shop['is_recruit'];//招聘
+		$shop['deposit'] = (bool)$shop['deposit'];//保证金
+		$shop['is_sale'] = (bool)$shop['is_sale'];
+		$shop['shop_property'] = (bool)$shop['shop_property'];
+
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
-			$shop['is_get_vip'] = $shop['vip_time'] == '1000-01-01 00:00:00'? false: true;
-			$shop['is_new'] = (bool)$shop['is_new'];
-			$shop['is_brand'] = (bool)$shop['is_brand'];
 		}else{
 			if($shop['is_new']==1 && $shop['check']==0){unset($shop['is_new']);}
 			if($shop['is_brand']==1 && $shop['check']==0){unset($shop['is_brand']);}
 		}
 		if ($this->user_result['member_id']) {
-			$res = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'shop_id'=>$id))->getField('id');
-			$shop['is_star'] = $res? true: false;
+			$res = $this->shop_star_m->where(array('shop_id'=>$id, 'member_id'=>$this->user_result['member_id']))->find();
+			$shop['is_star'] = $res['status']? true: false;
+			$shop['is_like'] = $res['thumbup']? true: false;
 		}
 		if($shop['is_sale'] == 1){
 			$order = 'a.post_expire desc,b.listorder desc,a.end_time';
@@ -50,15 +55,11 @@ class ShopController extends BaseController {
 				$value['end_time'] = substr($value['end_time'], 0, 10);
 			}
 		}
-		$shop['is_sale'] = (bool)$shop['is_sale'];
+		
 		if($shop['is_recruit'] == 1){
 			$shop['recruit_list'] = $this->recruit_m->where(array('shop_id'=>$id))->order('id asc')->select();
 		}
-		$shop['is_recruit'] = (bool)$shop['is_recruit'];
-		$shop['is_new'] = (bool)$shop['is_new'];
-		$shop['recommended'] = (bool)$shop['recommended'];
-		$shop['deposit'] = (bool)$shop['deposit'];
-		$shop['is_brand'] = (bool)$shop['is_brand'];
+		
 
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 		if(strlen($shop['shop_pic']) > 0){
@@ -69,8 +70,6 @@ class ShopController extends BaseController {
 		}else{
 			unset($shop['shop_pic']);
 		}
-
-		$shop['stars'] = $this->shop_star_m->where(array('shop_id'=>$shop['id']))->count();
 
 		if($shop !== false){
 			$jret['flag'] = 1;
@@ -102,7 +101,7 @@ class ShopController extends BaseController {
 
 		$where['status'] = 1;
 
-		$order = 'deposit desc,istop desc,listorder desc,add_time desc';
+		$order = 'is_sale desc,vip_type desc,deposit desc,level desc,istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
@@ -125,11 +124,12 @@ class ShopController extends BaseController {
 				$value['is_new'] = false;
 				$value['is_brand'] = false;
 			}
-			$value['is_recruit'] = (bool)$value['is_recruit'];
+
 			if($value['is_recruit']){
 				$value['recruit_num'] = $this->recruit_m->where(array('shop_id'=>$value['id']))->count();
 			}
 			unset($value['is_recruit']);
+
 			if($value['is_sale']){
 				$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 				$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
@@ -137,6 +137,7 @@ class ShopController extends BaseController {
 				$value['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$value['id']))->order($order)->limit('1')->select();
 			}
 			unset($value['is_sale']);
+
 			$value['deposit'] = (bool)$value['deposit'];
 			$value['shop_property'] = (bool)$value['shop_property'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
@@ -168,7 +169,7 @@ class ShopController extends BaseController {
 
 		$where['status'] = 1;
 
-		$order = 'deposit desc,istop desc,listorder desc,add_time desc';
+		$order = 'is_sale desc,vip_type desc,deposit desc,level desc,istop desc,listorder desc,add_time desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
@@ -281,7 +282,8 @@ class ShopController extends BaseController {
 		}
 		$data = [];
 		$data['level'] = 1;
-		$data['vip_time'] = date('Y-m-d H:i:s',time()+7*86400);
+		$data['vip_time'] = date('Y-m-d H:i:s',time()+15*86400);
+		$data['probation'] = 1;
 		$re = $this->shop_m->where($where)->save($data);
 
 		if($re !== false){
@@ -292,7 +294,7 @@ class ShopController extends BaseController {
 		}
 	}
 
-	// 设置喜欢/不喜欢店铺
+	// 收藏/取消收藏店铺
 	public function setRelationship(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
@@ -300,34 +302,59 @@ class ShopController extends BaseController {
 		$action = I('request.action');
 		$shop_id = (int)I('request.shop_id');
 
+		if (empty($shop_id) || empty($action)) {
+			$this->jerror('参数缺失');
+		}
+
+		$star = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->find();
+		
+		if ($action == 'false') {
+			// 取消收藏
+			if (isset($star) && $star['status'] == 1) {
+				$re = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->save(array('status'=>0));
+			}
+		}elseif ($action == 'true') {
+			// 设置收藏
+			if (isset($star) && $star['status'] == 0) {
+				$re = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->save(array('status'=>1));
+			}elseif (is_null($star)) {
+				$re = $this->shop_star_m->add(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id'], 'status'=>1));
+			}
+		}
+		if($re !== false){
+			$jret['flag'] = 1;
+	        $this->ajaxreturn($jret);
+	    }else {
+	    	$msg = $action == 'false'? '店铺取消收藏失败': '店铺设置收藏失败';
+			$this->jerror($msg);
+		}
+	}
+
+	// 给店铺点赞
+	public function thumbUp(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('u have to auth!');
+		}
+		$shop_id = (int)I('request.shop_id');
+
 		if (empty($shop_id)) {
 			$this->jerror('参数缺失');
 		}
 
-		$id = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->getField('id');
-		
-		if ($action == 'false') {
-			// 取消喜欢
-			if ($id) {
-				$re = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->delete();
-			}else {
-				$this->jerror('您未设置喜欢该店铺，不可取消设置！');
-			}
-		}elseif ($action == 'true') {
-			// 设置喜欢
-			if ($id) {
-				$this->jerror('您已设置喜欢该店铺，不可重复设置！');
-			}else {
-				$re = $this->shop_star_m->add(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']));
-			}
+		$star = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->find();
+
+		if (isset($star) && $star['thumbup'] == 0) {
+			$re = $this->shop_star_m->where(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id']))->save(array('thumbup'=>1));
+		}elseif (is_null($star)) {
+			$re = $this->shop_star_m->add(array('shop_id'=>$shop_id, 'member_id'=>$this->user_result['member_id'], 'thumbup'=>1));
 		}
 
-		if($re){
+		if($re !== false){
 			$jret['flag'] = 1;
+			$this->shop_m->where(array('id'=>$shop_id))->setInc('star_num', 1);
 	        $this->ajaxreturn($jret);
 	    }else {
-	    	$msg = $action == 'false'? '店铺取消喜欢失败': '店铺设置喜欢失败';
-			$this->jerror($msg);
+			$this->jerror('店铺设置喜欢失败');
 		}
 	}
 
