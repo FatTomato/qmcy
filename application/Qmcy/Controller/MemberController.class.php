@@ -288,7 +288,7 @@ class MemberController extends BaseController {
 	}
 
 	// 我的消息
-	public function getMessages(){$
+	public function getMessages(){
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('u have to auth!');
 		}
