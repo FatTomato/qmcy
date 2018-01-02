@@ -76,7 +76,7 @@ class ShopController extends BaseController {
 			$jret['flag'] = 1;
 			$this->shop_m->where(array('id'=>$id))->setInc('hits',1);
 			$jret['result'] = $shop;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -87,6 +87,7 @@ class ShopController extends BaseController {
 		$cg_id = (int)I('request.cg_id');
 		$is_sale = I('request.is_sale');
 		$is_recruit = I('request.is_recruit');
+		$star = I('request.star');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 
@@ -99,6 +100,20 @@ class ShopController extends BaseController {
 		if ($is_recruit == 'true') {
 			$where['is_recruit'] = 1;
 		}
+		// 我的收藏
+		if ($star == 'true') {
+			if (empty($this->user_result['member_id'])) {
+				$this->jerror('u have to auth!');
+			}
+			$star_ids = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'status'=>1))->getField('shop_id', true);
+			if ($star_ids) {
+				$where['id'] = array('in', $star_ids);
+			} else {
+				$jret['flag'] = 1;
+				$jret['result'] = [];
+		        $this->ajaxReturn($jret);
+			}
+		}
 
 		$where['status'] = 1;
 
@@ -110,8 +125,6 @@ class ShopController extends BaseController {
 			}
 			$limit = $epage;
 		}
-
-		$join = '__SHOP_RELATIONSHIPS__ b ON a.id = b.shop_id';
 
 		$field = '*';
 
@@ -147,7 +160,7 @@ class ShopController extends BaseController {
 		if ($list !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $list;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -210,7 +223,7 @@ class ShopController extends BaseController {
 		if ($list !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $list;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -260,7 +273,7 @@ class ShopController extends BaseController {
 
 		if ($result) {
 			$jret['flag'] = 1;
-	    	$this->ajaxreturn($jret);
+	    	$this->ajaxReturn($jret);
 		}else{
 			$this->jerror('更新店铺失败！');
 		}
@@ -289,7 +302,7 @@ class ShopController extends BaseController {
 
 		if($re !== false){
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("体验失败");
 		}
@@ -324,7 +337,7 @@ class ShopController extends BaseController {
 		}
 		if($re !== false){
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 	    	$msg = $action == 'false'? '店铺取消收藏失败': '店铺设置收藏失败';
 			$this->jerror($msg);
@@ -353,7 +366,7 @@ class ShopController extends BaseController {
 		if($re){
 			$jret['flag'] = 1;
 			$this->shop_m->where(array('id'=>$shop_id))->setInc('star_num', 1);
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror('店铺设置喜欢失败');
 		}
@@ -390,7 +403,7 @@ class ShopController extends BaseController {
 
 		if ($result) {
 			$jret['flag'] = 1;
-	    	$this->ajaxreturn($jret);
+	    	$this->ajaxReturn($jret);
 		}else{
 			$this->jerror('添加招聘失败！');
 		}
@@ -421,7 +434,7 @@ class ShopController extends BaseController {
 
 		if ($result !== false) {
 			$jret['flag'] = 1;
-	    	$this->ajaxreturn($jret);
+	    	$this->ajaxReturn($jret);
 		}else{
 			$this->jerror('修改招聘失败！');
 		}
@@ -446,7 +459,7 @@ class ShopController extends BaseController {
 
 		if ($re) {
 			$jret['flag'] = 1;
-			$this->ajaxreturn($jret);
+			$this->ajaxReturn($jret);
 		} else {
 			$this->jerror('删除失败');
 		}
@@ -459,7 +472,7 @@ class ShopController extends BaseController {
 		}
 		$jret['flag'] = 1;
 		$jret['result'] = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->getField('id');
-		$this->ajaxreturn($jret);
+		$this->ajaxReturn($jret);
 	}
 
 	// todo 押金

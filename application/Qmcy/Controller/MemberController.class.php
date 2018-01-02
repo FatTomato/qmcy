@@ -33,7 +33,7 @@ class MemberController extends BaseController {
 		if($fans !== false){
 			$jret['flag'] = 1;
 			$jret['result'] = $fans;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -56,7 +56,7 @@ class MemberController extends BaseController {
 		if($follows !== false){
 			$jret['flag'] = 1;
 			$jret['result'] = $follows;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -96,7 +96,7 @@ class MemberController extends BaseController {
 
 		if($re){
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 	    	$msg = $action == 'false'? '取关失败': '关注失败';
 			$this->jerror($msg);
@@ -130,7 +130,7 @@ class MemberController extends BaseController {
 
 		if($re){
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 	    	$msg = $action == 'false'? '退出圈子失败': '加入圈子失败';
 			$this->jerror($msg);
@@ -174,7 +174,7 @@ class MemberController extends BaseController {
 		if ($memberinfo) {
 			$jret['flag'] = 1;
 			$jret['result'] = $memberinfo;
-		    $this->ajaxreturn($jret);
+		    $this->ajaxReturn($jret);
 		}
 	}
 
@@ -325,7 +325,16 @@ class MemberController extends BaseController {
 			$this->jerror('获取消息失败！');
 		}
 
-        $this->ajaxreturn($jret);
+        $this->ajaxReturn($jret);
+	}
+
+	// 首页获取是否有新消息
+	public function isUnread(){
+		if ($this->user_result['member_id']) {
+			$jret['unread_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
+		}
+		$jret['falg'] = 1;
+		$this->ajaxReturn($jret);
 	}
 
 }

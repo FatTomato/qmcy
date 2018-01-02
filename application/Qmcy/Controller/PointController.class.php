@@ -53,7 +53,7 @@ class PointController extends BaseController {
 			$jret['result']['list'] = $re;
 			$jret['result']['start_time'] = $re['0']['addtime'];
 			$jret['result']['end_time'] = date('Y-m-d 23:59:59',strtotime($re['0']['addtime']." +6 days"));
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -101,7 +101,7 @@ class PointController extends BaseController {
 		if (isset($re)) {
 			$jret['flag'] = 1;
 			$jret['result'] = $re;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -124,7 +124,7 @@ class PointController extends BaseController {
 		if (isset($re)) {
 			$jret['flag'] = 1;
 			$jret['result'] = $re;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -143,7 +143,7 @@ class PointController extends BaseController {
 			$is_enough = $point > 100?true:false;
 			$jret['result']['point'] = $point;
 			$jret['result']['is_enough'] = $is_enough;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -166,6 +166,6 @@ class PointController extends BaseController {
 		$where2['addtime'] = array('EGT',date('Y-m-d'));
 		$jret['result']['weekly_point'] = M('daily_points')->where($where2)->sum('point');
 		
-		$this->ajaxreturn($jret);
+		$this->ajaxReturn($jret);
 	}
 }

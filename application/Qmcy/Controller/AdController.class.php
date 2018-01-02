@@ -48,7 +48,7 @@ class AdController extends BaseController {
 		if($ad !== false){
 			$jret['flag'] = 1;
 			$jret['result'] = $ad;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -106,7 +106,7 @@ class AdController extends BaseController {
 		if ($list !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $list;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}

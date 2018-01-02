@@ -60,7 +60,7 @@ class InfoController extends BaseController {
 		if($info !== false){
 			$jret['flag'] = 1;
 			$jret['result'] = $info;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -148,7 +148,7 @@ class InfoController extends BaseController {
 		if ($list !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $list;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -215,7 +215,7 @@ class InfoController extends BaseController {
 				A('Point')->setPoint($point);
 				
 				$jret['flag'] = 1;
-	        	$this->ajaxreturn($jret);
+	        	$this->ajaxReturn($jret);
 			}else{
 				$this->jerror('发布失败');
 			}
@@ -243,7 +243,7 @@ class InfoController extends BaseController {
 			}
 			$jret['flag'] = 1;
 			$jret['result'] = $filepath;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
         } else {
             $this->jerror($upload->getError());
         }
@@ -330,7 +330,7 @@ class InfoController extends BaseController {
 			}
 
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$msg = isset($to_mid)? '回复失败': '评论失败';
 			$this->jerror($msg);
@@ -387,7 +387,7 @@ class InfoController extends BaseController {
 
 		if ($re !== false) {
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('点赞失败');
 		}
@@ -431,7 +431,7 @@ class InfoController extends BaseController {
 		
 		if ($re !== false) {
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('收藏失败');
 		}
@@ -455,7 +455,7 @@ class InfoController extends BaseController {
 		}
 		if ($re1 !== false && $re2 !== false) {
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('删除失败');
 		}
@@ -478,7 +478,7 @@ class InfoController extends BaseController {
 		}
 		if ($re !== false) {
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('删除失败');
 		}
@@ -505,7 +505,7 @@ class InfoController extends BaseController {
 		}
 		if ($re !== false) {
 			$jret['flag'] = 1;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('举报失败');
 		}

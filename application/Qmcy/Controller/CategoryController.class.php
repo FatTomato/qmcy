@@ -39,7 +39,7 @@ class CategoryController extends BaseController {
 		if ($cicle_info !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $cicle_info;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -83,7 +83,7 @@ class CategoryController extends BaseController {
 		if ($cg_list !== false) {
 			$jret['flag'] = 1;
 			$jret['result'] = $cg_list;
-	        $this->ajaxreturn($jret);
+	        $this->ajaxReturn($jret);
 		}else {
 			$this->jerror("查询失败");
 		}
