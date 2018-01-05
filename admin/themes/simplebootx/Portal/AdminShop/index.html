@@ -4,14 +4,13 @@
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="javascript:;">店铺管理</a></li>
-			<!-- <li><a href="{:U('AdminShop/add')}" target="_self">添加店铺</a></li> -->
 		</ul>
 		<form class="well form-search" method="post" action="{:U('AdminShop/index')}">
 			分类
 			<select name="cg_id" style="width: 65px;">
 				<option value='0' <if condition = "$formget.cg_id eq 0">selected="selected"</if>>全部</option>
 				<foreach name="cg_id" item="vo"  key="k">
-				<option value="{$k}" <if condition = "$formget.cg_id eq $k">selected="selected"</if>>{$vo.name}</option>
+				<option value="{$k}" <if condition = "$formget.cg_id eq $k">selected="selected"</if>>{$vo}</option>
 				</foreach>
 			</select> &nbsp;&nbsp;
 			豪华版

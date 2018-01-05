@@ -1,126 +1,35 @@
 <admintpl file="header" />
-<style type="text/css">
-.pic-list li {
-	margin-bottom: 5px;
-}
-</style>
-<script type="text/html" id="photos-item-wrapper">
-	<li id="savedimage{id}">
-		<input id="photo-{id}" type="hidden" name="photos_url[]" value="{filepath}"> 
-		<!-- <input id="photo-{id}-name" type="text" name="photos_alt[]" value="{name}" style="width: 160px;" title="图片名称"> -->
-		<img id="photo-{id}-preview" src="{url}" style="height:90px;width: 90px;" onclick="parent.image_preview_dialog(this.src);">
-		<a href="javascript:upload_one_image('图片上传','#photo-{id}');">替换</a>
-		<a href="javascript:(function(){$('#savedimage{id}').remove();})();">移除</a>
-	</li>
-</script>
 </head>
 <body>
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
-			<li><a href="{:U('AdminAds/index')}">广告管理</a></li>
-			<li class="active"><a href="{:U('AdminAds/add')}" target="_self">添加广告</a></li>
+			<li><a href="{:U('AdminIllustrate/index')}">说明管理</a></li>
+			<li class="active"><a href="{:U('AdminIllustrate/add')}" target="_self">添加说明</a></li>
 		</ul>
-		<form action="{:U('AdminAds/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
+		<form action="{:U('AdminIllustrate/add_post')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
 			<div class="row-fluid">
 				<div class="span9">
 					<table class="table table-bordered">
 						<tr>
-							<th width="100">广告分类</th>
+							<th width="90">说明name</th>
 							<td>
-								<select style="max-height: 100px;" name="cg_id">{$taxonomys}</select>
-							</td>
-						</tr>
-						<tr>
-							<th>广告标题</th>
-							<td>
-								<input type="text" style="width:400px;" name="post[post_title]" id="title" required value="" placeholder="请输入标题"/>
+								<input type="text" style="width:400px;" name="post[name]" id="title" required value="" placeholder="请输入标题"/>
 								<span class="form-required">*</span>
 							</td>
 						</tr>
 						<tr>
-							<th>关键词</th>
-							<td><input type="text" name="post[post_keywords]" id="keywords" value="" style="width: 400px" placeholder="请输入关键字"> 多关键词之间用空格或者英文逗号隔开</td>
-						</tr>
-						<tr>
-							<th>摘要</th>
+							<th width="90">内容</th>
 							<td>
-								<textarea name="post[post_excerpt]" id="description" style="width: 98%; height: 50px;" placeholder="请填写摘要"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<th>折扣</th>
-							<td><input type="text" name="post[post_discount]" id="post_discount" value="" style="width: 400px" placeholder="请输入折扣信息"></td>
-						</tr>
-						<tr>
-							<th>活动起止时间</th>
-							<td>
-								<input type="text" name="post[start_time]" class="js-datetime" value="" style="width: 120px;" autocomplete="off">-
-								<input type="text" class="js-datetime" name="post[end_time]" value="" style="width: 120px;" autocomplete="off">
-							</td>
-						</tr>
-						<tr>
-							<th>商家名称</th>
-							<td><input type="text" name="post[store_name]" id="store_name" value="" style="width: 400px" placeholder="请输入商家名称"></td>
-						</tr>
-						<!-- <tr>
-							<th>商家地址</th>
-							<td><input type="text" name="post[store_addr]" id="store_addr" value="" style="width: 400px" placeholder="请输入商家联系人"></td>
-						</tr>
-						<tr>
-							<th>商家营业时间</th>
-							<td><input type="text" name="post[store_time]" id="store_time" value="" style="width: 400px" placeholder="请输入商家营业时间"></td>
-						</tr> -->
-						<tr>
-							<th>商家联系人</th>
-							<td><input type="text" name="post[store_contact]" id="store_contact" value="" style="width: 400px" placeholder="请输入商家联系人"></td>
-						</tr>
-						<!-- <tr>
-							<th>商家联系电话</th>
-							<td><input type="text" name="post[store_phone]" id="store_phone" value="" style="width: 400px" placeholder="请输入商家联系电话"></td>
-						</tr> -->
-						<tr>
-							<th>广告内容</th>
-							<td>
-								<script type="text/plain" id="content" name="post[post_content]"></script>
-							</td>
-						</tr>
-						<tr>
-							<th>相册图集</th>
-							<td>
-								<ul id="photos" class="pic-list unstyled"></ul>
-								<a href="javascript:upload_multi_image('图片上传','#photos','photos-item-wrapper');" class="btn btn-small">选择图片</a>
+								<script type="text/plain" id="content" name="post[content]"></script>
 							</td>
 						</tr>
 					</table>
 				</div>
-				<div class="span3">
-					<table class="table table-bordered">
-						<tr>
-							<th><b>Banner图</b></th>
-						</tr>
-						<tr>
-							<td>
-								<div style="text-align: center;">
-									<input type="hidden" name="smeta" id="thumb" value="">
-									<a href="javascript:upload_one_image('图片上传','#thumb');">
-										<img src="__TMPL__Public/assets/images/default-thumbnail.png" id="thumb-preview" width="135" style="cursor: hand" />
-									</a>
-									<input type="button" class="btn btn-small" onclick="$('#thumb-preview').attr('src','__TMPL__Public/assets/images/default-thumbnail.png');$('#thumb').val('');return false;" value="取消图片">
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th><b>发布时间</b></th>
-						</tr>
-						<tr>
-							<td><input type="text" name="post[post_date]" value="{:date('Y-m-d H:i:s',time())}" class="js-datetime" style="width: 160px;"></td>
-						</tr>
-					</table>
-				</div>
+				
 			</div>
 			<div class="form-actions">
 				<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
-				<a class="btn" href="{:U('AdminAds/index')}">返回</a>
+				<a class="btn" href="{:U('AdminIllustrate/index')}">返回</a>
 			</div>
 		</form>
 	</div>
@@ -269,7 +178,7 @@
 											}, {
 												name : '返回列表页',
 												callback : function() {
-													location = "{:U('AdminAds/index')}";
+													location = "{:U('AdminIllustrate/index')}";
 													return true;
 												}
 											} ]

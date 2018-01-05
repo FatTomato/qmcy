@@ -20,7 +20,7 @@
 							<td>
 								<select style="max-height: 100px;" name="post[cg_id]">
 									<foreach name="cg_id" item="vo"  key="k">
-									<option value="{$k}" <if condition = "$shop.cg_id eq $k">selected="selected"</if>>{$vo.name}</option>
+									<option value="{$k}" <if condition = "$shop.cg_id eq $k">selected="selected"</if>>{$vo}</option>
 									</foreach>
 								</select>
 							</td>
