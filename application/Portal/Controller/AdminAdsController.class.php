@@ -47,19 +47,27 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			$key = C('TXMAP');
-			$addr = $article['store_addr'];
-			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
-			$lat_lng = http_get($url);
-			if($lat_lng['status'] !== 0){
-				$this->error("位置解析失败！");
-			}
-			$article['store_lat'] = $lat_lng['result']['location']['lat'];
-			$article['store_lng'] = $lat_lng['result']['location']['lng'];
+			// $key = C('TXMAP');
+			// $addr = $article['store_addr'];
+			// $url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			// $lat_lng = http_get($url);
+			// if($lat_lng['status'] !== 0){
+			// 	$this->error("位置解析失败！");
+			// }
+			// $article['store_lat'] = $lat_lng['result']['location']['lat'];
+			// $article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$article['post_status']=0;
 			$article['shop_id'] = M('Shop')->where(array('shop_name'=>$article['store_name']))->getField('id');
 			if (!$article['shop_id']) {
 				$this->error("店铺不存在！");
+			}
+			// 相册图集
+			if(!empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=sp_asset_relative_url($url);
+					$_POST['altas'][]=$photourl;
+				}
+				$article['altas']=json_encode($_POST['altas']);
 			}
 			$result=$this->ads_model->add($article);
 			M('Shop')->where(array('shop_name'=>$article['store_name']))->save(array('is_sale'=>1));
@@ -74,7 +82,7 @@ class AdminAdsController extends AdminbaseController {
 				}
 			}else {
 					$this->error("添加失败！");
-				}
+			}
 			 
 		}
 	}
@@ -87,6 +95,7 @@ class AdminAdsController extends AdminbaseController {
 		$this->_getTermTree($ads_relationship);
 		$post=$this->ads_model->where("id=$id")->find();
 		$this->assign("post",$post);
+		$this->assign("altas",json_decode($post['altas'],true));
 		$this->display();
 	}
 	
@@ -99,15 +108,22 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			$key = C('TXMAP');
-			$addr = $article['store_addr'];
-			$url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
-			$lat_lng = http_get($url);
-			if($lat_lng['status'] !== 0){
-				$this->error("位置解析失败！");
+			// $key = C('TXMAP');
+			// $addr = $article['store_addr'];
+			// $url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
+			// $lat_lng = http_get($url);
+			// if($lat_lng['status'] !== 0){
+			// 	$this->error("位置解析失败！");
+			// }
+			// $article['store_lat'] = $lat_lng['result']['location']['lat'];
+			// $article['store_lng'] = $lat_lng['result']['location']['lng'];
+			if(!empty($_POST['photos_url'])){
+				foreach ($_POST['photos_url'] as $key=>$url){
+					$photourl=sp_asset_relative_url($url);
+					$_POST['altas'][]=$photourl;
+				}
+				$article['altas']=json_encode($_POST['altas']);
 			}
-			$article['store_lat'] = $lat_lng['result']['location']['lat'];
-			$article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$result=$this->ads_model->save($article);
 			if ($result!==false) {
 				$re = $this->ads_relationships_model->where(array('object_id'=>$_POST['post']['id']))->save(array('cg_id'=>$_POST['cg_id']));

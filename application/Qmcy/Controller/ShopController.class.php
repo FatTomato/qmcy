@@ -45,13 +45,17 @@ class ShopController extends BaseController {
 			$shop['is_star'] = $res['status']? true: false;//收藏
 			$shop['is_like'] = $res['thumbup']? true: false;//点赞
 		}
+		// 活动列表
 		if($shop['is_sale'] == 1){
 			$order = 'a.post_expire desc,b.listorder desc,a.end_time';
 			$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
-			$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
+			$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.altas,a.post_expire,a.store_lng,a.store_lat';
 			$shop['ad_list'] = M('Ads')->alias('a')->join($join)->field($field)->where(array('shop_id'=>$id))->order($order)->select();
 			foreach ($shop['ad_list'] as &$value) {
-				$value['smeta'] = sp_get_image_preview_url($value['smeta']);
+				if ($value['altas']) {
+					$value['altas'] = json_decode($value['altas'],true);
+					$value['smeta'] = sp_get_image_preview_url($value['altas'][0]);
+				}
 				$value['start_time'] = substr($value['start_time'], 0, 10);
 				$value['end_time'] = substr($value['end_time'], 0, 10);
 			}
@@ -65,8 +69,8 @@ class ShopController extends BaseController {
 		$shop['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 		if(strlen($shop['shop_pic']) > 0){
 			$shop['shop_pic'] = explode(',', $shop['shop_pic']);
-			foreach ($shop['shop_pic'] as &$value) {
-				$value = sp_get_image_preview_url($value);
+			foreach ($shop['shop_pic'] as $value) {
+				$shop['shop_pic_show'][] = sp_get_image_preview_url($value);
 			}
 		}else{
 			unset($shop['shop_pic']);
@@ -103,7 +107,7 @@ class ShopController extends BaseController {
 		// 我的收藏
 		if ($star == 'true') {
 			if (empty($this->user_result['member_id'])) {
-				$this->jerror('u have to auth!');
+				$this->jerror('您还没有登录！');
 			}
 			$star_ids = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'status'=>1))->getField('shop_id', true);
 			if ($star_ids) {
@@ -232,7 +236,7 @@ class ShopController extends BaseController {
 	// 编辑店铺
 	public function editShop(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		
 		$post_data = [
@@ -282,7 +286,7 @@ class ShopController extends BaseController {
 	// 体验豪华版
 	public function setLevel(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$id = I('request.id');
 		if (isset($id) && !empty($id)) {
@@ -311,7 +315,7 @@ class ShopController extends BaseController {
 	// 收藏/取消收藏店铺
 	public function setRelationship(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$action = I('request.action');
 		$shop_id = (int)I('request.shop_id');
@@ -347,7 +351,7 @@ class ShopController extends BaseController {
 	// 给店铺点赞
 	public function thumbUp(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$shop_id = (int)I('request.shop_id');
 
@@ -375,7 +379,7 @@ class ShopController extends BaseController {
 	// 添加单条招聘
 	public function addRecruit(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$post_data = [
 			'shop_id'=>'shop_id',
@@ -412,7 +416,7 @@ class ShopController extends BaseController {
 	// 编辑单条招聘
 	public function editRecruit(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$post_data = [
 			'id'=>'recruit_id',
@@ -444,7 +448,7 @@ class ShopController extends BaseController {
 	// 删除单条招聘
 	public function delRecruit(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$recruit_id = I('request.id');
 		if (empty($recruit_id)) {
@@ -468,7 +472,7 @@ class ShopController extends BaseController {
 	// 是否有店铺
 	public function getShopId(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$jret['flag'] = 1;
 		$jret['result'] = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->getField('id');

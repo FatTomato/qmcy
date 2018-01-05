@@ -100,7 +100,7 @@ class InfoController extends BaseController {
 		// 我的收藏
 		if ($star == 'true') {
 			if (empty($this->user_result['member_id'])) {
-				$this->jerror('u have to auth!');
+				$this->jerror('您还没有登录！');
 			}
 			$where['a.stars']=array('like',"%".$this->user_result['member_id']."%");
 		}
@@ -157,7 +157,7 @@ class InfoController extends BaseController {
 	// 信息发布
 	public function addInfo(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$cg_id = (int)I('request.cg_id');
 		$post_content = (string)I('request.post_content');
@@ -252,7 +252,7 @@ class InfoController extends BaseController {
 	// 评论
 	public function setComment(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$id = (int)I('request.id');
 		$to_mid = (int)I('request.to_mid');
@@ -340,7 +340,7 @@ class InfoController extends BaseController {
 	// 点赞&&取消点赞
 	public function setLikeStatus(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$action = I('request.action');
 		$id = (int)I('request.id');
@@ -396,7 +396,7 @@ class InfoController extends BaseController {
 	// 收藏&&取消收藏
 	public function setStarStatus(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$action = I('request.action');
 		$id = (int)I('request.id');
@@ -440,7 +440,7 @@ class InfoController extends BaseController {
 	// 信息删除
 	public function delInfo(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$id = (int)I('request.id');
 		if(empty($id)){
@@ -464,7 +464,7 @@ class InfoController extends BaseController {
 	// 评论删除
 	public function delComment(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$id = (int)I('request.id');
 		if(empty($id)){
@@ -487,7 +487,7 @@ class InfoController extends BaseController {
 	// 信息举报
 	public function tipOff(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$post_id = (int)I('request.post_id');
 		$type = (int)I('request.type');

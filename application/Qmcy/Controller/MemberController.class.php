@@ -18,7 +18,7 @@ class MemberController extends BaseController {
 	// 我的粉丝列表
 	public function getFans(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$fans = $this->mr_m->field('fan_id, fan_name, fan_photo')->where(array('follow_id'=>$this->user_result['member_id']))->select();
 
@@ -42,7 +42,7 @@ class MemberController extends BaseController {
 	// 我的关注列表
 	public function getFollows(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$follows = $this->mr_m->field('follow_id, follow_name, follow_photo')->where(array('fan_id'=>$this->user_result['member_id']))->select();
 
@@ -65,7 +65,7 @@ class MemberController extends BaseController {
 	// 关注&&取关
 	public function setRelationship(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$is_follow = I('request.is_follow');
 		$member_id = (int)I('request.member_id');
@@ -106,7 +106,7 @@ class MemberController extends BaseController {
 	// 进圈&&退圈
 	public function setCicleStatus(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$status = I('request.status');
 		$cg_id = (int)I('request.cg_id');
@@ -290,7 +290,7 @@ class MemberController extends BaseController {
 	// 我的消息
 	public function getMessages(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 
 		$ids = M('Message')->where(array('member_id'=>$this->user_result['member_id']))->getField('comment_id', true);
@@ -333,7 +333,7 @@ class MemberController extends BaseController {
 		if ($this->user_result['member_id']) {
 			$jret['unread_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
 		}
-		$jret['falg'] = 1;
+		$jret['flag'] = 1;
 		$this->ajaxReturn($jret);
 	}
 

@@ -62,7 +62,7 @@ class PointController extends BaseController {
 	// 日积分详情
 	public function getDailyDetail(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$where['member_id'] = $this->user_result['member_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
@@ -110,7 +110,7 @@ class PointController extends BaseController {
 	// 周积分详情
 	public function getWeeklyDetail(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$where['member_id'] = $this->user_result['member_id'];
 		$where['addtime'] = array('EGT',date('Y-m-d'));
@@ -133,7 +133,7 @@ class PointController extends BaseController {
 	// 发布便民信息判断积分是否满足
 	public function checkPoint(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		
 		$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
@@ -152,7 +152,7 @@ class PointController extends BaseController {
 	// 获取总积分、今日积分、本周积分
 	public function getPointsOverview(){
 		if (empty($this->user_result['member_id'])) {
-			$this->jerror('u have to auth!');
+			$this->jerror('您还没有登录！');
 		}
 		$jret['flag'] = 1;
 

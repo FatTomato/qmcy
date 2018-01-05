@@ -28,11 +28,22 @@ class AdController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 
-		$field = 'id,shop_id,post_content,post_title,post_excerpt,post_discount,start_time,end_time,post_expire,smeta,store_name,store_addr,store_contact,store_phone,store_time,post_hits,store_lat,store_lng';
+		$field = 'id,shop_id,post_content,post_title,post_excerpt,post_discount,start_time,end_time,post_expire,smeta,store_name,store_addr,store_contact,store_phone,store_time,post_hits,store_lat,store_lng,altas';
 
 		$ad = $this->ad_m->field($field)->where($where)->find();
 
-		$ad['smeta'] = sp_get_image_preview_url($ad['smeta']);
+		if ($ad['smeta']) {
+			$ad['smeta'] = sp_get_image_preview_url($ad['smeta']);
+		}
+		if ($ad['altas']) {
+			$ad['altas'] = json_decode($ad['altas'],true);
+			foreach ($ad['altas'] as $key => &$value) {
+				$value = sp_get_image_preview_url($value);
+			}
+		}
+		$shop = M('Shop')->field('shop_name,shop_logo')->where(array('id'=>$ad['shop_id']))->find();
+		$ad['shop_name'] = $shop['shop_name'];
+		$ad['shop_logo'] = $shop['shop_logo'];
 		$ad['start_time'] = substr($ad['start_time'], 0, 10);
 		$ad['end_time'] = substr($ad['end_time'], 0, 10);
 		$post_hits_arr = explode(',',$ad['post_hits']);
@@ -93,14 +104,25 @@ class AdController extends BaseController {
 
 		$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
 
-		$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat';
+		$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat,a.altas,a.shop_id';
 
 		$list = $this->ad_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
-			$value['smeta'] = sp_get_image_preview_url($value['smeta']);
+			if ($value['smeta']) {
+				$value['smeta'] = sp_get_image_preview_url($value['smeta']);
+			}
+			if ($value['altas']) {
+				$value['altas'] = json_decode($value['altas'],true);
+				foreach ($value['altas'] as $key => &$v) {
+					$v = sp_get_image_preview_url($v);
+				}
+			}
 			$value['start_time'] = substr($value['start_time'], 0, 10);
 			$value['end_time'] = substr($value['end_time'], 0, 10);
+			$shop = M('Shop')->field('shop_name,shop_logo')->where(array('id'=>$value['shop_id']))->find();
+			$value['shop_name'] = $shop['shop_name'];
+			$value['shop_logo'] = $shop['shop_logo'];
 		}
 
 		if ($list !== false) {
@@ -111,5 +133,22 @@ class AdController extends BaseController {
 			$this->jerror("查询失败");
 		}
 		
+	}
+
+	// 官方说明
+	public function getIll(){
+		$name = I('request.name');
+		if (empty($name)) {
+			$this->jerror('参数缺失');
+		}
+
+		$content = M('Illustrate')->field('content')->where(array('name'=>$name))->find();
+		if ($content) {
+			$jret['flag'] = 1;
+			$jret['result'] = $content;
+			$this->ajaxReturn($jret);
+		} else {
+			$this->jerror('请求失败');
+		}
 	}
 }
