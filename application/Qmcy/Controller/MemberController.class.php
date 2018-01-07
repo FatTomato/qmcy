@@ -3,6 +3,7 @@ namespace Qmcy\Controller;
 
 use Qmcy\Lib\BaseController;
 use Qmcy\Lib\WXBizDataCrypt;
+use Qmcy\Lib\Sms\SmsSingleSender;
 
 class MemberController extends BaseController {
 
@@ -225,12 +226,18 @@ class MemberController extends BaseController {
 		    $memberinfo['openId'] = $data['openId'];
 		    $memberinfo['language'] = $data['language'];
 		    $memberinfo['unionId'] = $data['unionId'];
-		    $memberinfo['city'] = $data['city'];
-		    $memberinfo['province'] = $data['province'];
 		    $memberinfo['country'] = $data['country'];
-		    $memberinfo['point'] = 2000;
-		    // todo   邀请人
-		    // $memberinfo['invite_userid'] = $data['nickName'];
+		    // 邀请人
+		    $invite_sign = I('request.token');
+		    if ($invite_sign) {
+		    	if (S($invite_sign)) {
+	                $invite_userid = $this->m_m->where(array('openId'=>S($invite_sign)))->getField('member_id');
+	                if ($invite_userid) {
+	                    $memberinfo['invite_userid'] = $invite_userid;
+	                }
+	            }
+		    }
+		    
 		    $memberinfo['addtime'] = date('Y-m-d H:i:s');
 		    $member_id = $this->m_m->add($memberinfo);
 		}
@@ -281,10 +288,89 @@ class MemberController extends BaseController {
 	    $this->ajaxReturn($this->jret);
 	}
 	
-	// 手机验证
-	public function checkPhone(){
-		// todo
-		
+	// 发送验证码
+	public function sendSms(){
+		if (empty($this->user_result['member_id'])) {
+			// $this->jerror('您还没有登录！');
+		}
+		$phone = I('request.phone');
+		if(empty($phone)){
+			$this->jerror('请输入手机号！');
+		}
+		// 发送频率限制
+		$last_addtime = M('Validcode')->where(array('phone'=>$phone))->order('addtime desc')->getField('addtime');
+		if ( time() - strtotime($last_addtime) < 600) {
+			$this->jerror('不可频繁操作，请稍后再试！');
+		}
+		// 判断手机号正确性、是否已验证
+		if(preg_match("/^1[34578]\d{9}$/", $phone)){
+			$id = $this->m_m->where(array('phone'=>$phone))->getField('member_id');
+			if($id){
+				$this->jerror('手机号已存在，请勿重复验证！');
+			}
+		}else{
+			$this->jerror('手机号有误！');
+		}
+		$appid = C('SMSAPPID');
+		$appkey = C('SMSAPPKEY');
+		$sms = new SmsSingleSender($appid, $appkey);
+		$random = rand(100000, 999999);
+		$params = [$random, 10];
+		$result = $sms->sendWithParam("86", $phone, 74042, $params, "", "", "");
+		$rsp = json_decode($result, true);
+		if ($rsp['result'] == 0) {
+			// 缓存在服务器
+			S($this->user_result['member_id'].'pvalid', $random, 600);
+			M('Validcode')->add(array('phone'=>$phone, 'addtime'=>date('Y-m-d H:i:s')));
+			$this->jret['flag'] = 1;
+			$this->ajaxReturn($this->jret);
+		}else{
+			$this->jerror('发送失败，请稍后再试！');
+		}
+	}
+
+	// 检测验证码
+	public function checkVaild(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('您还没有登录！');
+		}
+		$validcode = I('request.validcode');
+		$phone = I('request.phone');
+		if (empty($validcode)) {
+			$this->jerror('请输入验证码！');
+		}
+		if (S($this->user_result['member_id'].'pvalid')) {
+			if (S($this->user_result['member_id'].'pvalid') == $validcode) {
+				$re = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('phone'=>$phone));
+			} else {
+				$this->jerror('验证码不正确！');
+			}
+		} else {
+			$this->jerror('验证码已过期，请重新发送！');
+		}
+
+		if ($re) {
+			$this->jret['flag'] = 1;
+
+			// 归属地gsd_  todo
+			$gsd_host = "https://api04.aliyun.venuscn.com";
+		    $gsd_path = "/mobile";
+		    $gsd_method = "GET";
+		    $gsd_appcode = C('APPCODE');
+		    $gsd_headers = array();
+		    array_push($gsd_headers, "Authorization:APPCODE " . $gsd_appcode);
+		    $gsd_querys = "mobile=".$phone;
+		    $gsd_bodys = "";
+		    $url = $gsd_host . $gsd_path . "?" . $gsd_querys;
+		    $re = http_get($url);
+		    if ($re['status'] == 0) {
+		    	$this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('city'=>$re['result']['city'], 'province'=>$re['result']['province'], 'company'=>$re['result']['company']));
+		    }
+
+			$this->ajaxReturn($this->jret);
+		} else {
+			$this->jerror('验证失败！');
+		}
 	}
 
 	// 我的消息
