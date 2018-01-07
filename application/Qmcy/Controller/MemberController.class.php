@@ -353,19 +353,17 @@ class MemberController extends BaseController {
 			$this->jret['flag'] = 1;
 
 			// 归属地gsd_  todo
-			$gsd_host = "https://api04.aliyun.venuscn.com";
-		    $gsd_path = "/mobile";
-		    $gsd_method = "GET";
-		    $gsd_appcode = C('APPCODE');
-		    $gsd_headers = array();
-		    array_push($gsd_headers, "Authorization:APPCODE " . $gsd_appcode);
-		    $gsd_querys = "mobile=".$phone;
-		    $gsd_bodys = "";
-		    $url = $gsd_host . $gsd_path . "?" . $gsd_querys;
-		    $re = http_get($url);
-		    if ($re['status'] == 0) {
-		    	$this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('city'=>$re['result']['city'], 'province'=>$re['result']['province'], 'company'=>$re['result']['company']));
-		    }
+		// $phone = '15732804546';
+		// 	$gsd_host = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?cb=jQuery1102023396538315909576_1515295291546&resource_name=guishudi&query=".$phone."&_=1515295291553";
+		   
+		//     $re = file_get_contents($gsd_host);
+		//     $arr = explode(',', substr($re,335));exit; 
+		 	// 0 => string 'prov":"�ӱ�"' (length=12)
+			// 1 => string ' "city":"��ˮ"' (length=14)
+			// 2 => string ' "type":"�й��ƶ�"' (length=18)
+		//     if ($re['status'] == 0) {
+		    	// $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('city'=>$re['result']['city'], 'province'=>$re['result']['province'], 'company'=>$re['result']['company']));
+		//     }
 
 			$this->ajaxReturn($this->jret);
 		} else {
@@ -421,6 +419,38 @@ class MemberController extends BaseController {
 		}
 		$jret['flag'] = 1;
 		$this->ajaxReturn($jret);
+	}
+
+	// 信息&&店铺举报
+	public function tipOff(){
+		if (empty($this->user_result['member_id'])) {
+			$this->jerror('您还没有登录！');
+		}
+		$id = (int)I('request.id');
+		$type = I('request.type');
+		$content = I('request.content');
+
+		if (empty($id) || empty($type) || empty($content)) {
+			$this->jerror('参数缺失');
+		}else{
+			$last_time = M('Tipoff')->where(array('member_id'=>$this->user_result['member_id']))->getField('addtime');
+			if ( time()-strtotime($last_time) < 600 ) {
+				$this->jerror('操作过于频繁，稍后再试！');
+			} else {
+				$data['member_id'] = $this->user_result['member_id'];
+				$data['content'] = $content;
+				$data['type'] = $type;
+				$data['id'] = $id;
+				$data['addtime'] = date('Y-m-d H:i:s');
+				$re = M('Tipoff')->add($data);
+			}
+		}
+		if ($re !== false) {
+			$jret['flag'] = 1;
+	        $this->ajaxReturn($jret);
+		}else{
+			$this->jerror('举报失败');
+		}
 	}
 
 }
