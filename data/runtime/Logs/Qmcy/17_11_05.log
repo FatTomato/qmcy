@@ -1,4 +1,0 @@
-[ 2017-11-05T14:57:12+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=member&a=getFans
-ERR: 1054:Unknown column 'b.userphoto' in 'field list'
- [ SQL语句 ] : SELECT a.fan_id,a.fan_name,b.userphoto FROM xcx_members_relationships a INNER JOIN xcx_member c ON a.fan_id = c.user_id  WHERE a.follow_id = 1 
-

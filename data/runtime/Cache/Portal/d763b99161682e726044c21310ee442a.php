@@ -89,13 +89,13 @@
 				<?php if(is_array($members)): foreach($members as $key=>$vo): ?><tr>
 					<!-- <td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="<?php echo ($vo["id"]); ?>" title="ID:<?php echo ($vo["id"]); ?>"></td> -->
 					<!-- <td><input name="listorders[<?php echo ($vo["infosid"]); ?>]" class="input input-order" type="text" size="5" value="<?php echo ($vo["listorder"]); ?>"></td> -->
-					<td><?php echo ($vo["user_id"]); ?></td>
+					<td><?php echo ($vo["member_id"]); ?></td>
                     <td><?php echo ($vo["username"]); ?></td>
                     <td><?php echo ($vo["realname"]); ?></td>
                     <td><?php echo ($vo["phone"]); ?></td>
                     <td><?php echo ($vo["main_business"]); ?></td>
 					<td><?php echo ($vo["invite_userid"]); ?></td>
-					<td><?php echo ($vo["exp"]); ?>/<?php echo ($vo["level"]); ?></td>
+					<td><?php echo ($vo["point"]); ?>/<?php echo ($vo["level"]); ?></td>
 					<td><?php echo ($vo["gold"]); ?></td>
 					<td><?php echo ($vo["addtime"]); ?></td>
 					<td><?php echo ($post_status[$vo['post_status']]); ?><br><?php echo ($top_status[$vo['istop']]); ?></td>

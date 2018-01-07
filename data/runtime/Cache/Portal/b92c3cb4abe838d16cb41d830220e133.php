@@ -51,18 +51,42 @@
 	<div class="wrap js-check-wrap">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="javascript:;">店铺管理</a></li>
-			<li><a href="<?php echo U('AdminShop/add');?>" target="_self">添加店铺</a></li>
 		</ul>
 		<form class="well form-search" method="post" action="<?php echo U('AdminShop/index');?>">
-			分类： 
-			<select name="cg_id" style="width: 120px;">
-				<option value='0'>全部</option><?php echo ($taxonomys); ?>
+			分类
+			<select name="cg_id" style="width: 65px;">
+				<option value='0' <?php if($formget["cg_id"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($cg_id)): foreach($cg_id as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["cg_id"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
 			</select> &nbsp;&nbsp;
-			截止时间：
-			<input type="text" name="start_time" class="js-datetime" value="<?php echo ((isset($formget["start_time"]) && ($formget["start_time"] !== ""))?($formget["start_time"]):''); ?>" style="width: 120px;" autocomplete="off">-
-			<input type="text" class="js-datetime" name="end_time" value="<?php echo ((isset($formget["end_time"]) && ($formget["end_time"] !== ""))?($formget["end_time"]):''); ?>" style="width: 120px;" autocomplete="off"> &nbsp; &nbsp;
-			关键字： 
-			<input type="text" name="keyword" style="width: 200px;" value="<?php echo ((isset($formget["keyword"]) && ($formget["keyword"] !== ""))?($formget["keyword"]):''); ?>" placeholder="请输入关键字...">
+			豪华版
+			<select name="level" style="width: 65px;">
+				<option value='0' <?php if($formget["level"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($level)): foreach($level as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["level"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+			</select> &nbsp;&nbsp;
+			活动
+			<select name="is_sale" style="width: 65px;">
+				<option value='0' <?php if($formget["is_sale"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($is_sale)): foreach($is_sale as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["is_sale"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+			</select> &nbsp;&nbsp;
+			招聘
+			<select name="is_recruit" style="width: 65px;">
+				<option value='0' <?php if($formget["is_recruit"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($is_recruit)): foreach($is_recruit as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["is_recruit"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+			</select> &nbsp;&nbsp;
+			押金
+			<select name="deposit" style="width: 65px;">
+				<option value='0' <?php if($formget["deposit"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($deposit)): foreach($deposit as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["deposit"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+			</select> &nbsp;&nbsp;
+			审核
+			<select name="check" style="width: 65px;">
+				<option value='0' <?php if($formget["check"] == 0): ?>selected="selected"<?php endif; ?>>全部</option>
+				<?php if(is_array($check)): foreach($check as $k=>$vo): ?><option value="<?php echo ($k); ?>" <?php if($formget["check"] == $k): ?>selected="selected"<?php endif; ?>><?php echo ($vo); ?></option><?php endforeach; endif; ?>
+			</select> &nbsp;&nbsp;
+			截止时间
+			<input type="text" name="vip_time" class="js-datetime" value="<?php echo ((isset($formget["vip_time"]) && ($formget["vip_time"] !== ""))?($formget["vip_time"]):''); ?>" style="width: 120px;" autocomplete="off"> &nbsp; &nbsp;
+			关键字:
+			<input type="text" name="keyword" style="width: 100px;" value="<?php echo ((isset($formget["keyword"]) && ($formget["keyword"] !== ""))?($formget["keyword"]):''); ?>" placeholder="请输入关键字...">
 			<input type="submit" class="btn btn-primary" value="搜索" />
 			<a class="btn btn-danger" href="<?php echo U('AdminShop/index');?>">清空</a>
 		</form>
@@ -72,37 +96,44 @@
 				<thead>
 					<tr>
 						<th width="15"><label><input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x"></label></th>
-						<th width="30">排序</th>
-						<th width="30">ID</th>
+						<th width="20">排序</th>
+						<th width="20">ID</th>
 						<th width="70">店铺名</th>
-						<th width="70">主营业务</th>
-						<th width="70">商家联系人</th>
-						<th width="90">商家联系电话</th>
-						<th width="90">营业时间</th>
-						<th width="100">地址</th>
-						<th width="60">关联用户</th>
-						<th width="100">duetime</th>
-						<th width="50">状态</th>
-						<th width="70">操作</th>
+						<th width="80">主营业务</th>
+						<th width="30">联系人</th>
+						<th width="60">商家联系电话</th>
+						<th width="40">店铺性质</th>
+						<th width="40">是否连锁</th>
+						<th width="40">是否新店</th>
+						<th width="20">押金</th>
+						<th width="20">等级</th>
+						<th width="80">豪华版期限</th>
+						<th width="40">是否推荐</th>
+						<th width="40">是否展示</th>
+						<th width="40">是否审核</th>
+						<th width="20">操作</th>
 					</tr>
 				</thead>
-				<?php $status=array("1"=>"展示","0"=>"不展示"); $is_shiti=array("1"=>"实体","0"=>"非实体"); $is_new=array("1"=>"新店","0"=>"非新店"); $istop=array("1"=>"置顶","0"=>"不置顶"); ?>
+				<?php $status=array("1"=>"展示","0"=>"不展示"); $is_shiti=array("1"=>"实体","0"=>"非实体"); $shop_property=array("1"=>"自营","0"=>"实体"); $is_brand=array("1"=>"连锁","0"=>"非连锁"); $is_new=array("1"=>"新店","0"=>"非新店"); $istop=array("1"=>"置顶","0"=>"不置顶"); $deposit=array("1"=>"已缴纳","0"=>"未缴纳","2"=>"已退款"); $level=array("0"=>"初级","1"=>"豪华"); $check=array("0"=>"未审核","1"=>"已审核"); $recomended=array("0"=>"未推荐","1"=>"推荐"); ?>
 				<?php if(is_array($shops)): foreach($shops as $key=>$vo): ?><tr>
 					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="<?php echo ($vo["id"]); ?>" title="ID:<?php echo ($vo["id"]); ?>"></td>
-					<td><input name="listorders[<?php echo ($vo["sid"]); ?>]" class="input input-order" type="text" size="5" value="<?php echo ($vo["listorder"]); ?>"></td>
+					<td><input name="listorders[<?php echo ($vo["id"]); ?>]" class="input input-order" type="text" size="5" value="<?php echo ($vo["listorder"]); ?>"></td>
                     <td><b><?php echo ($vo["id"]); ?></b></td>
 					<td><?php echo ($vo["shop_name"]); ?></td>
 					<td><?php echo ($vo["shop_major"]); ?></td>
-					<td><?php echo ($vo["shop_contact"]); ?></td>
+					<td><a href="<?php echo U('AdminMember/edit',array('id'=>$vo['member_id']));?>"  target="_blank"><?php echo ($vo["member_id"]); ?></a></td>
 					<td><?php echo ($vo["shop_phone"]); ?></td>
-					<td><?php echo ($vo["shop_time"]); ?></td>					
-					<td><?php echo ($vo["shop_addr"]); ?></td>
-					<td><a href="<?php echo U('AdminMember/edit',array('id'=>$vo['member_id']));?>"  target="_blank"><?php echo ($vo["mamber_name"]); ?></a></td>
-					<td><?php echo ($vo["end_time"]); ?></td>
-					<td><?php echo ($status[$vo['status']]); ?><br><?php echo ($is_shiti[$vo['is_shiti']]); ?><br><?php echo ($is_new[$vo['is_new']]); ?><br><?php echo ($istop[$vo['istop']]); ?></td>
+					<td><?php echo ($shop_property[$vo['shop_property']]); ?></td>					
+					<td><?php echo ($is_brand[$vo['is_brand']]); ?></td>
+					<td><?php echo ($is_new[$vo['is_new']]); ?></td>
+					<td><?php echo ($deposit[$vo['deposit']]); ?></td>
+					<td><?php echo ($level[$vo['level']]); ?></td>
+					<td><?php echo ($vo["vip_time"]); ?></td>
+					<td><?php echo ($recomended[$vo['recommended']]); ?></td>
+					<td><?php echo ($status[$vo['status']]); ?></td>
+					<td><?php echo ($check[$vo['check']]); ?></td>
 					<td>
-						<a href="<?php echo U('AdminShop/edit',array('id'=>$vo['id']));?>">编辑</a> | 
-						<a href="<?php echo U('AdminShop/delete',array('id'=>$vo['id']));?>" class="js-ajax-delete">删除</a>
+						<a href="<?php echo U('AdminShop/edit',array('id'=>$vo['id']));?>">查看</a>
 					</td>
 				</tr><?php endforeach; endif; ?>
 				
@@ -113,9 +144,11 @@
 				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/check',array('uncheck'=>1));?>" data-subcheck="true">取消审核</button>
 				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/top',array('top'=>1));?>" data-subcheck="true">置顶</button>
 				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/top',array('untop'=>1));?>" data-subcheck="true">取消置顶</button>
-<!-- 				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/recommend',array('recommend'=>1));?>" data-subcheck="true">推荐</button>
-				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/recommend',array('unrecommend'=>1));?>" data-subcheck="true">取消推荐</button> -->
-				<button class="btn btn-danger btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/delete');?>" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+ 				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/recommend',array('recommend'=>1));?>" data-subcheck="true">推荐</button>
+				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/recommend',array('unrecommend'=>1));?>" data-subcheck="true">取消推荐</button>
+				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/setstatus',array('status'=>1));?>" data-subcheck="true">上架</button>
+				<button class="btn btn-primary btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/setstatus',array('unstatus'=>1));?>" data-subcheck="true">下架</button>
+				<!-- <button class="btn btn-danger btn-small js-ajax-submit" type="submit" data-action="<?php echo U('AdminShop/delete');?>" data-subcheck="true" data-msg="你确定删除吗？">删除</button> -->
 			</div>
 			<div class="pagination"><?php echo ($page); ?></div>
 		</form>

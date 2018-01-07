@@ -1,9 +1,0 @@
-[ 2017-11-09T20:16:30+08:00 ] 127.0.0.1 /statics/js/common.js?
-ERR: 无法加载控制器:Statics
-
-[ 2017-11-09T20:30:55+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
-NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
-
-[ 2017-11-09T20:49:00+08:00 ] 127.0.0.1 /index.php?g=Portal&m=AdminShop&a=index
-NOTIC: D方法实例化没找到模型类Portal\Model\ShopModel
-

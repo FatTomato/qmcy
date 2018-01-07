@@ -1,0 +1,6 @@
+[ 2018-01-03T17:07:32+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-03T17:07:38+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=197&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+

@@ -59,20 +59,14 @@ li {
 </head>
 <body>
 	<div class="wrap">
-		<div id="home_toptip"></div>
-		<h4 class="well"><?php echo L('SYSTEM_NOTIFICATIONS');?></h4>
-		<div class="home_info">
-			<ul id="thinkcmf_notices">
-				<li><img src="/admin/themes/simplebootx/Public/assets/images/loading.gif"style="vertical-align: middle;" /><span style="display: inline-block; vertical-align: middle;">加载中...</span></li>
-			</ul>
-		</div>
-		<h4 class="well"><?php echo L('SYSTEM_INFORMATIONS');?></h4>
+		
+		<h4 class="well">会员总览</h4>
 		<div class="home_info">
 			<ul>
 				<?php if(is_array($server_info)): $i = 0; $__LIST__ = $server_info;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li><em><?php echo ($key); ?></em> <span><?php echo ($vo); ?></span></li><?php endforeach; endif; else: echo "" ;endif; ?>
 			</ul>
 		</div>
-		<h4 class="well"><?php echo L('INITIATE_TEAM');?></h4>
+		<h4 class="well">店铺总览</h4>
 		<div class="home_info" id="home_devteam">
 			<ul>
 				<li><em>ThinkCMF</em> <a href="http://www.thinkcmf.com" target="_blank">www.thinkcmf.com</a></li>
@@ -81,7 +75,7 @@ li {
 				<li><em><?php echo L('CONTACT_EMAIL');?></em> <span>cmf@simplewind.net</span></li>
 			</ul>
 		</div>
-		<h4 class="well"><?php echo L('CONTRIBUTORS');?></h4>
+		<h4 class="well">广告总览</h4>
 		<div class="">
 			<ul class="inline" style="margin-left: 25px;">
 				<li>Kin Ho</li>

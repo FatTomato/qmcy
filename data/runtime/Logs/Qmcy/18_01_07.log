@@ -1,0 +1,8 @@
+[ 2018-01-07T10:39:29+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=member&a=sendSms
+ERR: 1146:Table 'xcx.xcx_vaildcode' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_vaildcode`
+
+[ 2018-01-07T10:41:25+08:00 ] 127.0.0.1 /index.php?g=qmcy&m=member&a=sendSms
+ERR: 1146:Table 'xcx.xcx_vaildcode' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `xcx_vaildcode`
+

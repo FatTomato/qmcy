@@ -1,0 +1,57 @@
+[ 2018-01-04T11:39:47+08:00 ] 127.0.0.1 /index.php?g=Admin&m=public&a=dologin
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000419s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001004s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000267s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002080s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.001002s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.001122s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `xcx_users` WHERE `user_login` = 'admin' LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `xcx_role_user` [ RunTime:0.0027s ]
+SQL: SELECT `role_id` FROM xcx_role_user a INNER JOIN xcx_role as b on a.role_id =b.id  WHERE `user_id` = '1' AND `status` = 1  [ RunTime:0.0024s ]
+SQL: UPDATE `xcx_users` SET `user_login`='admin',`user_pass`='###768709a5b8b6c83f8d5492e387c25415',`user_nicename`='admin',`user_email`='chengzheng67@126.com',`user_url`='',`avatar`=NULL,`sex`='0',`birthday`='2000-01-01',`signature`=NULL,`last_login_ip`='127.0.0.1',`last_login_time`='2018-01-04 11:39:47',`create_time`='2017-10-19 01:01:23',`user_activation_key`='',`user_status`='1',`score`='0',`user_type`='1',`coin`='0',`mobile`='' WHERE `id` = '1' [ RunTime:0.0010s ]
+
+[ 2018-01-04T11:39:52+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-04T11:39:58+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=197&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-04T11:39:59+08:00 ] 127.0.0.1 /index.php?g=Admin&m=menu&a=add
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-04T11:40:28+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=add_post
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000498s ]
+INFO: Run Behavior\CheckLangBehavior [ RunTime:0.001133s ]
+INFO: Run Common\Behavior\UrldecodeGetBehavior [ RunTime:0.000267s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002368s ]
+INFO: [ admin_begin ] --START--
+INFO: Run Common\Behavior\AdminDefaultLangBehavior [ RunTime:0.002093s ]
+INFO: [ admin_begin ] --END-- [ RunTime:0.002191s ]
+SQL: SHOW COLUMNS FROM `xcx_users` [ RunTime:0.0007s ]
+SQL: SELECT * FROM `xcx_users` WHERE `id` = '1' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `xcx_menu` [ RunTime:0.0005s ]
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+SQL: SHOW COLUMNS FROM `xcx_auth_rule` [ RunTime:0.0004s ]
+NOTIC: [8] Undefined index: validate D:\Work\qmcy\simplewind\Core\Library\Think\Model.class.php 第 1185 行.
+SQL: SELECT * FROM `xcx_menu` WHERE `app` = 'Portal' AND `model` = 'AdminFeedback' AND `action` = 'index' LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT `parentid` FROM `xcx_menu` WHERE `id` = 0 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined index: auto D:\Work\qmcy\simplewind\Core\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `xcx_menu` (`parentid`,`name`,`app`,`model`,`action`,`data`,`icon`,`remark`,`status`,`type`) VALUES ('0','反馈管理','Portal','AdminFeedback','index','','','','1','1') [ RunTime:0.0004s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `xcx_auth_rule` WHERE `name` = 'portal/adminfeedback/index' LIMIT 1   [ RunTime:0.0008s ]
+SQL: INSERT INTO `xcx_auth_rule` (`name`,`module`,`type`,`title`) VALUES ('portal/adminfeedback/index','Portal','admin_url','反馈管理') [ RunTime:0.0003s ]
+SQL: SELECT * FROM `xcx_menu` WHERE `app` = 'Portal' ORDER BY `listorder` ASC,`app` ASC,`model` ASC,`action` ASC  [ RunTime:0.0005s ]
+NOTIC: [2] mkdir(): File exists D:\Work\qmcy\application\Admin\Controller\MenuController.class.php 第 247 行.
+
+[ 2018-01-04T11:40:29+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-04T12:56:53+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=index
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
+[ 2018-01-04T12:56:57+08:00 ] 127.0.0.1 /index.php?g=Admin&m=Menu&a=edit&id=198&menuid=
+NOTIC: D方法实例化没找到模型类Common\Model\AuthRuleModel
+
