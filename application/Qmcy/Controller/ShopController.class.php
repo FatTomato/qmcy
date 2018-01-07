@@ -268,7 +268,7 @@ class ShopController extends BaseController {
 		}
 
 		// 逆解析
-		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$shop['lng'].','.$shop['lat'].'&key='.C('TXMAP_N');
+		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$shop['lat'].','.$shop['lng'].'&key='.C('TXMAP_N');
 		$re_n = http_get($url);
 		$shop['province'] = $re_n['result']['ad_info']['province'];
 		$shop['city'] = $re_n['result']['ad_info']['city'];
