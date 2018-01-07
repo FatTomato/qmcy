@@ -21,7 +21,11 @@ class AdminFeedbackController extends AdminbaseController {
     
     // 后台文章管理列表
     public function index(){
-        $this->fb_list = $this->fb_model->select();
+        $fb_list = $this->fb_model->order('addtime desc')->select();
+        foreach ($fb_list as &$value) {
+           $value['info'] = mb_substr($value['info'], 0, 60);
+        }
+        $this->fb_list = $fb_list;
         $this->display();
     }
     
