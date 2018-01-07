@@ -256,6 +256,9 @@ class ShopController extends BaseController {
 			'cg_id'=>'店铺分类',
 			'start_time'=>'开店时间',
 			'end_time'=>'闭店时间',
+			'shop_addr_name'=>'shop_addr_name',
+			'lat'=>'lat',
+			'lng'=>'lng',
 		];
 		$shop = [];
 		foreach ($post_data as $key => $value) {
