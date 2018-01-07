@@ -35,7 +35,6 @@ class ShopController extends BaseController {
 		$shop['probation'] = (bool)$shop['probation'];//是否体验豪华版
 
 		$shop['cg_name'] = M('Categorys')->where(array('cg_id'=>$shop['cg_id']))->getField('name');
-		unset($shop['cg_id']);
 
 		if ($this->user_result['member_id'] == $shop['member_id']) {
 			$shop['is_owner'] = true;
