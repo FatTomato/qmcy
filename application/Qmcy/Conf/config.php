@@ -9,7 +9,9 @@ $configs = array(
     // sms app key
     'SMSAPPKEY' => 'be8213170077e97a041c27120751bb6c',
     // 归属地
-    'APPCODE' => '176ae1263fbe41f9a482ef06fc820572'
+    'APPCODE' => '176ae1263fbe41f9a482ef06fc820572',
+    // 逆地址解析
+    'TXMAP_N' => 'GIBBZ-DGRKG-WZZQM-IFLJ7-7BKF6-4SBZK'
 );
 
 return array_merge($configs);

@@ -267,6 +267,13 @@ class ShopController extends BaseController {
 			}
 		}
 
+		// 逆解析
+		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$shop['lng'].','.$shop['lat'].'&key='.C('TXMAP_N');
+		$re_n = http_get($url);
+		$shop['province'] = $re_n['result']['ad_info']['province'];
+		$shop['city'] = $re_n['result']['ad_info']['city'];
+		$shop['district'] = $re_n['result']['ad_info']['district'];
+
 		$shop['member_id'] = $this->user_result['member_id'];
 		$shop['add_time'] = date('Y-m-d H:i:s');
 		$shop['is_new'] = $shop['is_new'] == 'true'? 1: 0;

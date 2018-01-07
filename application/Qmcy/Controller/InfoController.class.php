@@ -160,8 +160,11 @@ class InfoController extends BaseController {
 			$this->jerror('您还没有登录！');
 		}
 		$cg_id = (int)I('request.cg_id');
-		$post_content = (string)I('request.post_content');
-		$post_addr = (string)I('request.post_addr');
+		$post_content = I('request.post_content');
+		$post_addr = I('request.post_addr');
+		$post_addr_name = I('request.shop_addr_name');
+		$lat = I('request.lat');
+		$lng = I('request.lng');
 		$smeta = I('request.smeta');
 
 		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
@@ -169,8 +172,8 @@ class InfoController extends BaseController {
 		}
 
 		$cate = M('Categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
-
-		$post_date = $this->info_m->where(array('type'=>1, 'post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
+		// 发布频率
+		$post_date = $this->info_m->where(array('post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
 		if ($post_date) {
 			$d = time()-strtotime($post_date);
 			if ($d < 1800) {
@@ -179,14 +182,6 @@ class InfoController extends BaseController {
 			}
 		}
 
-		if ($cate['type'] == 0) {
-			$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
-			if ($point < 100) {
-				$this->jerror("积分不足，请增加活跃度来获取积分！");
-			}
-		}
-		
-
 		$info['post_author'] = $this->user_result['member_id'];
 		$info['post_date'] = date('Y-m-d H:i:s');
 		$info['post_content'] = $post_content;
@@ -194,6 +189,15 @@ class InfoController extends BaseController {
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 		$info['smeta'] = $smeta;
+		$info['lat'] = $lat;
+		$info['lng'] = $lng;
+		$info['post_addr_name'] = $post_addr_name;
+		// 逆解析
+		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$lng.','.$lat.'&key='.C('TXMAP_N');
+		$re_n = http_get($url);
+		$info['province'] = $re_n['result']['ad_info']['province'];
+		$info['city'] = $re_n['result']['ad_info']['city'];
+		$info['district'] = $re_n['result']['ad_info']['district'];
 
 		$result = $this->info_m->add($info);
 
@@ -203,9 +207,12 @@ class InfoController extends BaseController {
 			$data['cg_name'] = $cate['name'];
 			$re = M('InfosRelationships')->add($data);
 			if ($re) {
+				// todo 100限制
+
 				$point = [];
-				$point['action'] = $cate['type'] == 1? '0': '4';
-				$point['point'] = $cate['type'] == 1? '30': '-100';
+				$random = rand(1,10);
+				$point['action'] = '0';
+				$point['point'] = $random;
 				$point['member_id'] = $this->user_result['member_id'];
 				$point['addtime'] = date('Y-m-d H:i:s');
 				$point['daily_date'] = date('Y-m-d 00:00:00');
@@ -215,6 +222,7 @@ class InfoController extends BaseController {
 				A('Point')->setPoint($point);
 				
 				$jret['flag'] = 1;
+				$jret['result'] = $random;
 	        	$this->ajaxReturn($jret);
 			}else{
 				$this->jerror('发布失败');
@@ -481,33 +489,6 @@ class InfoController extends BaseController {
 	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('删除失败');
-		}
-	}
-
-	// 信息举报
-	public function tipOff(){
-		if (empty($this->user_result['member_id'])) {
-			$this->jerror('您还没有登录！');
-		}
-		$post_id = (int)I('request.post_id');
-		$type = (int)I('request.type');
-		$content = (int)I('request.content');
-
-		if (isset($post_id) && !empty($post_id) && isset($type) && !empty($type) && isset($content) && !empty($content)) {
-			$data['member_id'] = $this->user_result['member_id'];
-			$data['content'] = $content;
-			$data['type'] = $type;
-			$data['post_id'] = $post_id;
-			$data['createtime'] = date('Y-m-d H:i:s');
-			$re = M('InfoTipoff')->add($data);
-		}else{
-			$this->jerror('参数缺失');
-		}
-		if ($re !== false) {
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
-		}else{
-			$this->jerror('举报失败');
 		}
 	}
 
