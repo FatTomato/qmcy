@@ -23,7 +23,7 @@ class InfoController extends BaseController {
 
 		$join = '__MEMBER__ b ON a.post_author = b.member_id';
 
-		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.member_id';
+		$field = 'a.id,a.post_addr,a.post_addr_name,a.lat,a.lng,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.member_id';
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
 		if(!empty($this->user_result['member_id'])){
@@ -80,7 +80,7 @@ class InfoController extends BaseController {
 		$join1 = '__MEMBER__ c ON a.post_author = c.member_id';
 		$join2 = '__INFOS_RELATIONSHIPS__ b ON a.id = b.object_id';
 
-		$field = 'a.id,a.post_addr,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.status,c.userphoto,c.username,c.member_id';
+		$field = 'a.id,a.post_addr,a.post_addr_name,a.lat,a.lng,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.status,c.userphoto,c.username,c.member_id';
 		
 		$where['b.status'] = 1;
 		// 各分类下的信息列表
