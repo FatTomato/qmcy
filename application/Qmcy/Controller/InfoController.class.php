@@ -162,7 +162,7 @@ class InfoController extends BaseController {
 		$cg_id = (int)I('request.cg_id');
 		$post_content = I('request.post_content');
 		$post_addr = I('request.post_addr');
-		$post_addr_name = I('request.shop_addr_name');
+		$post_addr_name = I('request.post_addr_name');
 		$lat = I('request.lat');
 		$lng = I('request.lng');
 		$smeta = I('request.smeta');
@@ -188,12 +188,12 @@ class InfoController extends BaseController {
 		$info['post_addr'] = $post_addr;
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
-		$info['smeta'] = $smeta;
+		$info['smeta'] = strlen($smeta)>0? $smeta: '';
 		$info['lat'] = $lat;
 		$info['lng'] = $lng;
 		$info['post_addr_name'] = $post_addr_name;
 		// 逆解析
-		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$lng.','.$lat.'&key='.C('TXMAP_N');
+		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$lat.','.$lng.'&key='.C('TXMAP_N');
 		$re_n = http_get($url);
 		$info['province'] = $re_n['result']['ad_info']['province'];
 		$info['city'] = $re_n['result']['ad_info']['city'];
