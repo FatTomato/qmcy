@@ -296,6 +296,7 @@ class ShopController extends BaseController {
 				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
 				$point['weekly_m'] = M('weekly_points');
 				A('Point')->setPoint($point);
+			}
 		}
 
 		if ($result) {
