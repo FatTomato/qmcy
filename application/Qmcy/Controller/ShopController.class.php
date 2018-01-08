@@ -285,6 +285,17 @@ class ShopController extends BaseController {
 			$result = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->save($shop);
 		}else{
 			$result = $this->shop_m->add($shop);
+			// 首次添加店铺，积分+50
+			if ($re_phone == '') {
+				$point['action'] = '3';
+				$point['point'] = '50';
+				$point['member_id'] = $this->user_result['member_id'];
+				$point['addtime'] = date('Y-m-d H:i:s');
+				$point['daily_date'] = date('Y-m-d 00:00:00');
+				$point['daily_m'] = M('daily_points');
+				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+				$point['weekly_m'] = M('weekly_points');
+				A('Point')->setPoint($point);
 		}
 
 		if ($result) {

@@ -72,29 +72,29 @@ class PointController extends BaseController {
 		foreach ($re as &$value) {
 			switch ($value['action']) {
 				case '0':
-					$value['action'] = '发布圈子';
+					$value['action'] = '发布信息';
 					break;
 				case '1':
 					$value['action'] = '被点赞';
 					break;
 				case '2':
-					$value['action'] = '发表评论';
+					$value['action'] = '绑定手机';
 					break;
 				case '3':
-					$value['action'] = '制作名片';
+					$value['action'] = '上传店铺';
 					break;
 				case '4':
-					$value['action'] = '发布便民';
+					$value['action'] = '推荐用户';
 					break;
 				case '5':
 					$value['action'] = '信息违规';
 					break;
-				case '6':
-					$value['action'] = '最新活动';
-					break;
-				case '7':
-					$value['action'] = '拉新';
-					break;
+				// case '6':
+				// 	$value['action'] = '最新活动';
+				// 	break;
+				// case '7':
+				// 	$value['action'] = '拉新';
+				// 	break;
 			}
 		}
 

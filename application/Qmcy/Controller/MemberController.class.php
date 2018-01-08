@@ -154,7 +154,8 @@ class MemberController extends BaseController {
 					$value['icon'] = sp_get_image_preview_url($value['icon']);
 				}
 			}
-			$memberinfo['message_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
+			
+			$memberinfo['message_num'] = M('Message')->alias('m')->join('__INFO_COMMENTS__ c ON c.id = m.comment_id')->where(array('m.member_id'=>$this->user_result['member_id'], 'm.status'=>0))->count();
 			$m_id = $this->user_result['member_id'];
 		} elseif ($member_id !== $this->user_result['member_id']) {
 			$memberinfo = $this->m_m->field('member_id,username,userphoto,point')->where(array('member_id'=>$member_id))->find();
@@ -234,6 +235,16 @@ class MemberController extends BaseController {
 	                $invite_userid = $this->m_m->where(array('openId'=>S($invite_sign)))->getField('member_id');
 	                if ($invite_userid) {
 	                    $memberinfo['invite_userid'] = $invite_userid;
+	                    // 介绍人积分
+	                    $point['action'] = '4';
+						$point['point'] = '100';
+						$point['member_id'] = $invite_userid;
+						$point['addtime'] = date('Y-m-d H:i:s');
+						$point['daily_date'] = date('Y-m-d 00:00:00');
+						$point['daily_m'] = M('daily_points');
+						$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+						$point['weekly_m'] = M('weekly_points');
+						A('Point')->setPoint($point);
 	                }
 	            }
 		    }
@@ -291,7 +302,7 @@ class MemberController extends BaseController {
 	// 发送验证码
 	public function sendSms(){
 		if (empty($this->user_result['member_id'])) {
-			// $this->jerror('您还没有登录！');
+			$this->jerror('您还没有登录！');
 		}
 		$phone = I('request.phone');
 		if(empty($phone)){
@@ -339,6 +350,7 @@ class MemberController extends BaseController {
 		if (empty($validcode)) {
 			$this->jerror('请输入验证码！');
 		}
+		$re_phone = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->getField('phone');
 		if (S($this->user_result['member_id'].'pvalid')) {
 			if (S($this->user_result['member_id'].'pvalid') == $validcode) {
 				$re = $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('phone'=>$phone));
@@ -351,19 +363,21 @@ class MemberController extends BaseController {
 
 		if ($re) {
 			$this->jret['flag'] = 1;
+			// 首次绑定手机，积分+50
+			if ($re_phone == '') {
+				$point['action'] = '2';
+				$point['point'] = '50';
+				$point['member_id'] = $this->user_result['member_id'];
+				$point['addtime'] = date('Y-m-d H:i:s');
+				$point['daily_date'] = date('Y-m-d 00:00:00');
+				$point['daily_m'] = M('daily_points');
+				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+				$point['weekly_m'] = M('weekly_points');
+				A('Point')->setPoint($point);
+			}
 
-			// 归属地gsd_  todo
-		// $phone = '15732804546';
-		// 	$gsd_host = "https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?cb=jQuery1102023396538315909576_1515295291546&resource_name=guishudi&query=".$phone."&_=1515295291553";
-		   
-		//     $re = file_get_contents($gsd_host);
-		//     $arr = explode(',', substr($re,335));exit; 
-		 	// 0 => string 'prov":"�ӱ�"' (length=12)
-			// 1 => string ' "city":"��ˮ"' (length=14)
-			// 2 => string ' "type":"�й��ƶ�"' (length=18)
-		//     if ($re['status'] == 0) {
-		    	// $this->m_m->where(array('member_id'=>$this->user_result['member_id']))->save(array('city'=>$re['result']['city'], 'province'=>$re['result']['province'], 'company'=>$re['result']['company']));
-		//     }
+		// 归属地gsd_  todo
+		
 
 			$this->ajaxReturn($this->jret);
 		} else {
@@ -377,27 +391,31 @@ class MemberController extends BaseController {
 			$this->jerror('您还没有登录！');
 		}
 
-		$ids = M('Message')->where(array('member_id'=>$this->user_result['member_id']))->getField('comment_id', true);
+		$messages = M('Message')->alias('m')->join('__INFO_COMMENTS__ c ON c.id = m.comment_id')->field('m.comment_id')->where(array('m.member_id'=>$this->user_result['member_id']))->select();
+		if ($messages) {
+			$ids = array_column($messages, 'comment_id');
+		} else {
+			$this->jerror('您暂时没有消息！');
+		}
+
 		$unread_ids = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->getField('comment_id', true);
 
-		if ($ids) {
-			$comments = M('info_comments')->where(array('id'=>array('in',$ids),'status'=>1))->order('createtime desc')->select();
+		$comments = M('info_comments')->where(array('id'=>array('in',$ids),'status'=>1))->order('createtime desc')->select();
 
-			foreach ($comments as  &$value) {
-				if (!($value['post_id'] == $this->user_result['member_id'] && $value['to_mid'] != $this->user_result['member_id'])) {
-					unset($value['to_mid']);
-					unset($value['to_name']);
-					unset($value['to_userphoto']);
-				}
-				if ($unread_ids) {
-					if (in_array($value['id'], $unread_ids)) {
-						$value['is_new'] = true;
-					}
-				}
-				
-				$info = M('Infos')->where(array('id'=>$value['post_id']))->getField('post_content');
-				$value['info'] = mb_substr($info, 0, 10);
+		foreach ($comments as  &$value) {
+			if (!($value['post_id'] == $this->user_result['member_id'] && $value['to_mid'] != $this->user_result['member_id'])) {
+				unset($value['to_mid']);
+				unset($value['to_name']);
+				unset($value['to_userphoto']);
 			}
+			if ($unread_ids) {
+				if (in_array($value['id'], $unread_ids)) {
+					$value['is_new'] = true;
+				}
+			}
+			
+			$info = M('Infos')->where(array('id'=>$value['post_id']))->getField('post_content');
+			$value['info'] = mb_substr($info, 0, 10);
 		}
 
 		M('Message')->where(array('member_id'=>$this->user_result['member_id']))->save(array('status'=>1));

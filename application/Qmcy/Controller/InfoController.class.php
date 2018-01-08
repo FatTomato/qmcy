@@ -72,7 +72,6 @@ class InfoController extends BaseController {
 		$post = I('request.post');
 		$member_id = I('request.member_id');
 		$star = I('request.star');
-		// $pagination = (array)I('request.pagination');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 		$type = I('request.type');
@@ -172,14 +171,15 @@ class InfoController extends BaseController {
 		}
 
 		$cate = M('Categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
-		// 发布频率
-		$post_date = $this->info_m->where(array('post_author'=>$this->user_result['member_id']))->order('post_date desc')->getField('post_date');
-		if ($post_date) {
-			$d = time()-strtotime($post_date);
-			if ($d < 1800) {
-				$minute = ceil((1800-$d)/60);
-				$this->jerror("发布过于频繁，请".$minute."分钟后再试！");
-			}
+		// 发布频率，半小时最多三条  &&  每天最多20条
+		$daily_num = $this->info_m->where(array('post_author'=>$this->user_result['member_id'], 'post_date'=>array('EGT',date('Y-m-d 00:00:00'))))->count();
+		if ($daily_num >= 20) {
+			$this->jerror('今天已发布达上限，请明天再操作！');
+		}
+		$flag_time = date('Y-m-d H:i:s', time()-1800);
+		$hh_num = $this->info_m->where(array('post_author'=>$this->user_result['member_id'], 'post_date'=>array('EGT',$flag_time))->order('post_date desc')->count();
+		if ($hh_num >= 3) {
+			$this->jerror("发布过于频繁，请稍后再试！");
 		}
 
 		$info['post_author'] = $this->user_result['member_id'];
@@ -207,22 +207,24 @@ class InfoController extends BaseController {
 			$data['cg_name'] = $cate['name'];
 			$re = M('InfosRelationships')->add($data);
 			if ($re) {
-				// todo 100限制
-
-				$point = [];
-				$random = rand(1,10);
-				$point['action'] = '0';
-				$point['point'] = $random;
-				$point['member_id'] = $this->user_result['member_id'];
-				$point['addtime'] = date('Y-m-d H:i:s');
-				$point['daily_date'] = date('Y-m-d 00:00:00');
-				$point['daily_m'] = M('daily_points');
-				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
-				$point['weekly_m'] = M('weekly_points');
-				A('Point')->setPoint($point);
-				
 				$jret['flag'] = 1;
-				$jret['result'] = $random;
+				$jret['result'] = 0;
+				// todo 100限制
+				$total_point = M('detail_points')->where(array('member_id'=>$this->user_result['member_id'], 'action'=>'0'))->sum('point');
+				if ( $total_point < 100 ) {
+					$point = [];
+					$random = rand(1,10);
+					$point['action'] = '0';
+					$point['point'] = $random;
+					$point['member_id'] = $this->user_result['member_id'];
+					$point['addtime'] = date('Y-m-d H:i:s');
+					$point['daily_date'] = date('Y-m-d 00:00:00');
+					$point['daily_m'] = M('daily_points');
+					$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+					$point['weekly_m'] = M('weekly_points');
+					A('Point')->setPoint($point);
+					$jret['result'] = $random;
+				}
 	        	$this->ajaxReturn($jret);
 			}else{
 				$this->jerror('发布失败');
@@ -232,6 +234,7 @@ class InfoController extends BaseController {
 		}
 	}
 
+	// 上传图片
 	public function upPic(){
 		
 	    $savepath='qmcy/'.date('Ymd').'/';
@@ -281,18 +284,17 @@ class InfoController extends BaseController {
 		if ($to_mid == $this->user_result['member_id']) {
 			$this->jerror('不可以给自己回复');
 		}
-		// 不可一直评论同一信息
+		// 同一信息评论限制：每10分钟可评论一次
 		$createtime = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->order('createtime desc')->getField('createtime');
 		if ($createtime) {
 			$d = time()-strtotime($createtime);
-			if ($d < 1800) {
-				$minute = ceil((1800-$d)/60);
+			if ($d < 600) {
+				$minute = ceil((600-$d)/60);
 				$this->jerror("评论过于频繁，请".$minute."分钟后再试！");
 			}
 		}
 
 		$data['post_id'] = $id;
-
 		$data['from_mid'] = $this->user_result['member_id'];
 		$data['from_name'] = $this->user_result['username'];
 		$data['from_userphoto'] = $this->user_result['userphoto'];
@@ -304,23 +306,8 @@ class InfoController extends BaseController {
 			$data['to_userphoto'] = $to_userphoto;
 		}
 		$re = M('info_comments')->add($data);
-		// 有没有评论过
-		$comment_id = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->getField('id');
 
 		if ($re) {
-			// 未评论过，且该信息不是自己发布的，有积分
-			if(!isset($comment_id) && ($post_author !== $this->user_result['member_id'])){
-				$point['action'] = '2';
-				$point['point'] = '10';
-				$point['member_id'] = $this->user_result['member_id'];
-				$point['addtime'] = date('Y-m-d H:i:s');
-				$point['daily_date'] = date('Y-m-d 00:00:00');
-				$point['daily_m'] = M('daily_points');
-				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
-				$point['weekly_m'] = M('weekly_points');
-				A('Point')->setPoint($point);
-			}
-
 			// 我的消息
 			if (($post_author != $from_mid) && ($post_author != $to_mid) && !empty($to_mid)) {
 				$message[0]['member_id'] = $post_author;
@@ -357,6 +344,7 @@ class InfoController extends BaseController {
 		}else{
 			$this->jerror("参数缺失");
 		}
+		$random = 0;
 
 		$post_like = $this->info_m->where($where)->field('post_author,post_like')->find();
 		$post_like_arr = strlen($post_like['post_like'])>0? explode(',', $post_like['post_like']): [];
@@ -372,17 +360,20 @@ class InfoController extends BaseController {
 				$data['post_like'] = implode(',', $post_like_arr);
 				$re = $this->info_m->where($where)->save($data);
 			}
-			// 点赞被赞人获得积分
-			$point['action'] = '1';
-			$point['point'] = '10';
-			$point['member_id'] = $post_like['post_author'];
-			$point['addtime'] = date('Y-m-d H:i:s');
-			$point['daily_date'] = date('Y-m-d 00:00:00');
-			$point['daily_m'] = M('daily_points');
-			$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
-			$point['weekly_m'] = M('weekly_points');
-			A('Point')->setPoint($point);
-
+			// 点赞被赞人获得积分，限制每日50
+			$total_point = M('detail_points')->where(array('member_id'=>$post_like['post_author'], 'action'=>'1'))->sum('point');
+			if ($total_point < 50) {
+				$random = rand(1,5);
+				$point['action'] = '1';
+				$point['point'] = $random;
+				$point['member_id'] = $post_like['post_author'];
+				$point['addtime'] = date('Y-m-d H:i:s');
+				$point['daily_date'] = date('Y-m-d 00:00:00');
+				$point['daily_m'] = M('daily_points');
+				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+				$point['weekly_m'] = M('weekly_points');
+				A('Point')->setPoint($point);
+			}
 		}elseif ($action == 'false') {
 			if (!in_array($this->user_result['member_id'], $post_like_arr)) {
 				$this->jerror("未点赞，不可取消点赞");
@@ -395,6 +386,7 @@ class InfoController extends BaseController {
 
 		if ($re !== false) {
 			$jret['flag'] = 1;
+			$jret['result'] = $random;
 	        $this->ajaxReturn($jret);
 		}else{
 			$this->jerror('点赞失败');
@@ -470,7 +462,7 @@ class InfoController extends BaseController {
 	}
 
 	// 评论删除
-	public function delComment(){
+	public function delComment(){;
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('您还没有登录！');
 		}
