@@ -1,0 +1,138 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="javascript:;">所有举报</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('AdminTipoff/index')}">
+			分类 : 
+			<select name="type" style="width: 65px;">
+				<option value='0' <if condition = "$formget.type eq 0">selected="selected"</if>>全部</option>
+				<foreach name="type" item="vo"  key="k">
+				<option value="{$k}" <if condition = "$formget.type eq $k">selected="selected"</if>>{$vo}</option>
+				</foreach>
+			</select> &nbsp;&nbsp;
+			审核 : 
+			<select name="check" style="width: 65px;">
+				<option value='0' <if condition = "$formget.check eq 0">selected="selected"</if>>全部</option>
+				<foreach name="check" item="vo"  key="k">
+				<option value="{$k}" <if condition = "$formget.check eq $k">selected="selected"</if>>{$vo}</option>
+				</foreach>
+			</select> &nbsp;&nbsp;
+			<input type="submit" class="btn btn-primary" value="搜索" />
+			<a class="btn btn-danger" href="{:U('AdminShop/index')}">清空</a>
+		</form>
+		<form class="js-ajax-form" action="" method="post">
+			
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						<th width="15"><label><input type="checkbox" class="js-check-all" data-direction="x" data-checklist="js-check-x"></label></th>
+						<th width="30">ID</th>
+						<th width="30">用户ID</th>
+						<th width="30">被举报ID</th>
+						<th width="40">被举报类型</th>
+						<th width="350">内容</th>
+						<th width="40">状态</th>
+						<th width="30">操作</th>
+					</tr>
+				</thead>
+				<php>
+					$status = [0=>'未审核',1=>'通过',2=>'不通过'];
+				</php>
+				<foreach name="to_list" item="vo">
+				<tr>
+					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.tid}" title="ID:{$vo.tid}"></td>
+                    <td><b>{$vo.tid}</b></td>
+                    <td>{$vo.member_id}</td>
+                    <td>
+                    	<if condition="$vo.type eq 'info'">
+                    		<a href="{:U('AdminInfo/edit',array('id'=>$vo['id']))}" target="_blank">
+                    	<elseif condition="$vo.type eq 'shop'"/>
+                    		<a href="{:U('AdminShop/edit',array('id'=>$vo['id']))}" target="_blank">
+                    	</if>
+                    	{$vo.id}</a>
+                    </td>
+                    <td>{$vo.type}</td>
+					<td>{$vo.content}</td>
+					<td>{$status[$vo['status']]}</td>
+					<td><a href="{:U('AdminTipoff/edit',array('tid'=>$vo['tid']))}">查看</a></td>
+				</tr>
+				</foreach>
+				
+			</table>
+			<div class="pagination">{$page}</div>
+		</form>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script>
+		function refersh_window() {
+			var refersh_time = getCookie('refersh_time');
+			if (refersh_time == 1) {
+				window.location = "{:U('AdminTipoff/index',$formget)}";
+			}
+		}
+		setInterval(function() {
+			refersh_window();
+		}, 2000);
+		$(function() {
+			setCookie("refersh_time", 0);
+			Wind.use('ajaxForm', 'artDialog', 'iframeTools', function() {
+				//批量复制
+				$('.js-articles-copy').click(function(e) {
+					var ids=[];
+					$("input[name='ids[]']").each(function() {
+						if ($(this).is(':checked')) {
+							ids.push($(this).val());
+						}
+					});
+					
+					if (ids.length == 0) {
+						art.dialog.through({
+							id : 'error',
+							icon : 'error',
+							content : '您没有勾选信息，无法进行操作！',
+							cancelVal : '关闭',
+							cancel : true
+						});
+						return false;
+					}
+					
+					ids= ids.join(',');
+					art.dialog.open("__ROOT__/index.php?g=portal&m=AdminTipoff&a=copy&ids="+ ids, {
+						title : "批量复制",
+						width : "300px"
+					});
+				});
+				//批量移动
+				$('.js-articles-move').click(function(e) {
+					var ids=[];
+					$("input[name='ids[]']").each(function() {
+						if ($(this).is(':checked')) {
+							ids.push($(this).val());
+						}
+					});
+					
+					if (ids.length == 0) {
+						art.dialog.through({
+							id : 'error',
+							icon : 'error',
+							content : '您没有勾选信息，无法进行操作！',
+							cancelVal : '关闭',
+							cancel : true
+						});
+						return false;
+					}
+					
+					ids= ids.join(',');
+					art.dialog.open("__ROOT__/index.php?g=portal&m=AdminTipoff&a=move&old_term_id={$term.term_id|default=0}&ids="+ ids, {
+						title : "批量移动",
+						width : "300px"
+					});
+				});
+			});
+		});
+	</script>
+</body>
+</html>

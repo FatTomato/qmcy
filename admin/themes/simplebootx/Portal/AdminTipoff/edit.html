@@ -1,0 +1,80 @@
+<admintpl file="header" />
+</head>
+<body>
+	<div class="wrap js-check-wrap">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('AdminTipoff/index')}">举报管理</a></li>
+			<li class="active"><a href="#">查看举报</a></li>
+		</ul>
+		<form action="{:U('AdminTipoff/check')}" method="post" class="form-horizontal js-ajax-forms" enctype="multipart/form-data">
+			<div class="row-fluid">
+				<div class="span9">
+					<table class="table table-bordered">
+						<tr>
+							<th width="90">类型</th>
+							<td>
+								<input type="text" class="fb" style="width: 400px;" name="" value="{$to.type}" placeholder="请输入标题"/>
+							</td>
+						</tr>
+						<tr>
+							<th width="90">内容</th>
+							<td>
+								<input type="text" class="fb" style="width: 400px;" name="" value="{$to.content}" placeholder="请输入标题"/>
+							</td>
+						</tr>
+						<php>$status=[1=>'已通过',2=>'未通过'];</php>
+						<tr>
+							<th width="90">审核</th>
+							<td>
+								<if condition="$to.status eq 0">
+									<select name="check" style="width: 105px;">
+										<option value='1' >通过</option>
+										<option value='2' >未通过</option>
+									</select>
+								<else />
+									<input type="text" class="fb" style="width: 400px;" name="" value="{$status[$to['status']]}"/>
+								</if>
+							</td>
+						</tr>
+						<input type="hidden" style="width: 400px;" name="tid" value="{$to.tid}"/>
+						<input type="hidden" style="width: 400px;" name="id" value="{$to.id}"/>
+						<input type="hidden" style="width: 400px;" name="illegal_id" value="{$to.illegal_id}"/>
+						<input type="hidden" style="width: 400px;" name="type" value="{$to.type}"/>
+					</table>
+				</div>
+			</div>
+			<div class="form-actions">
+				<button class="btn btn-primary js-ajax-submit" type="submit">提交</button>
+				<a class="btn" href="{:U('AdminTipoff/index')}">返回</a>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+	<script type="text/javascript">
+		$(".fb").attr("disabled","disabled");
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			$(".js-ajax-close-btn").on('click', function(e) {
+				e.preventDefault();
+				Wind.use("artDialog", function() {
+					art.dialog({
+						id : "question",
+						icon : "question",
+						fixed : true,
+						lock : true,
+						background : "#CCCCCC",
+						opacity : 0,
+						content : "您确定需要关闭当前页面嘛？",
+						ok : function() {
+							setCookie("refersh_time", 1);
+							window.close();
+							return true;
+						}
+					});
+				});
+			});
+		});
+	</script>
+</body>
+</html>

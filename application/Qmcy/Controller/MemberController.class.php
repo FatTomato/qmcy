@@ -453,13 +453,16 @@ class MemberController extends BaseController {
 		}else{
 			$last_time = M('Tipoff')->where(array('member_id'=>$this->user_result['member_id']))->getField('addtime');
 			if ( time()-strtotime($last_time) < 600 ) {
-				$this->jerror('操作过于频繁，稍后再试！');
+				$this->jerror('您刚提交过举报，请稍后再操作！');
 			} else {
 				$data['member_id'] = $this->user_result['member_id'];
 				$data['content'] = $content;
 				$data['type'] = $type;
 				$data['id'] = $id;
 				$data['addtime'] = date('Y-m-d H:i:s');
+				$m = $type=='info'? M('Infos'): M('Shop');
+				$field = $type=='info'? 'post_author': 'member_id';
+				$data['illegal_id'] = $m->where(array('id'=>$id))->getField($field);
 				$re = M('Tipoff')->add($data);
 			}
 		}

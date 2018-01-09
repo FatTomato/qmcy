@@ -23,19 +23,19 @@ class InfoController extends BaseController {
 
 		$join = '__MEMBER__ b ON a.post_author = b.member_id';
 
-		$field = 'a.id,a.post_addr,a.post_addr_name,a.lat,a.lng,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.userphoto,b.username,b.member_id';
+		$field = 'a.*,b.userphoto,b.username,b.member_id';
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
-		if(!empty($this->user_result['member_id'])){
-			$post_like = strlen($value['post_like'])>0? explode(',', $value['post_like']): [];
-			$stars = strlen($value['stars'])>0? explode(',', $value['stars']): [];
+		$post_like = strlen($info['post_like'])>0? explode(',', $info['post_like']): [];
+		$stars = strlen($info['stars'])>0? explode(',', $info['stars']): [];
+		if($this->user_result['member_id']){
 			$info['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
 			$info['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
 			$info['id_del'] = $this->user_result['member_id'] == $info['member_id']? true: false;
 		}
 		
-		$info['post_like'] = $post_like == ['']? 0: count($post_like);
-		$info['stars'] = $stars == ['']? 0: count($stars);
+		$info['post_like'] = $post_like == []? 0: count($post_like);
+		$info['stars'] = $stars == []? 0: count($stars);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		if (strlen($info['smeta'])>0 ) {
 			$info['smeta'] = explode(',',$info['smeta']);
@@ -77,14 +77,13 @@ class InfoController extends BaseController {
 		$type = I('request.type');
 
 		$join1 = '__MEMBER__ c ON a.post_author = c.member_id';
-		$join2 = '__INFOS_RELATIONSHIPS__ b ON a.id = b.object_id';
 
-		$field = 'a.id,a.post_addr,a.post_addr_name,a.lat,a.lng,a.post_date,a.post_content,a.smeta,a.post_like,a.stars,b.status,c.userphoto,c.username,c.member_id';
+		$field = 'a.*,c.userphoto,c.username,c.member_id';
 		
-		$where['b.status'] = 1;
+		$where['a.status'] = 1;
 		// 各分类下的信息列表
 		if (isset($cg_id) && !empty($cg_id)) {
-			$where['b.cg_id'] = $cg_id;
+			$where['a.cg_id'] = $cg_id;
 		}
 		// 我的发布
 		if ($post == 'true') {
@@ -92,7 +91,7 @@ class InfoController extends BaseController {
 				$this->jerror('参数缺失!');
 			}
 			if ($member_id == $this->user_result['member_id']) {
-				unset($where['b.status']);
+				unset($where['a.status']);
 			}
 			$where['a.post_author']=$member_id;
 		}
@@ -121,12 +120,12 @@ class InfoController extends BaseController {
 			$limit = $epage;
 		}
 
-		$list = $this->info_m->alias('a')->join($join1)->join($join2)->field($field)->where($where)->order($order)->limit($limit)->select();
+		$list = $this->info_m->alias('a')->join($join1)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as $key => &$value) {
+			$post_like = strlen($value['post_like'])>0? explode(',', $value['post_like']): [];
+			$stars = strlen($value['stars'])>0? explode(',', $value['stars']): [];
 			if(!empty($this->user_result['member_id'])){
-				$post_like = strlen($value['post_like'])>0? explode(',', $value['post_like']): [];
-				$stars = strlen($value['stars'])>0? explode(',', $value['stars']): [];
 				$value['is_like'] = in_array($this->user_result['member_id'], $post_like)? true: false;
 				$value['is_star'] = in_array($this->user_result['member_id'], $stars)? true: false;
 				$value['is_del'] = $this->user_result['member_id'] == $value['member_id']? true: false;
@@ -138,8 +137,8 @@ class InfoController extends BaseController {
 				}
 			}
 			
-			$value['post_like'] = $post_like == ['']? 0: count($post_like);
-			$value['stars'] = $stars == ['']? 0: count($stars);
+			$value['post_like'] = $post_like == []? 0: count($post_like);
+			$value['stars'] = $stars == []? 0: count($stars);
 			$value['status'] = (bool)$value['status'];
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
 		}
@@ -158,40 +157,40 @@ class InfoController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('您还没有登录！');
 		}
-		$cg_id = (int)I('request.cg_id');
-		$post_content = I('request.post_content');
-		$post_addr = I('request.post_addr');
-		$post_addr_name = I('request.post_addr_name');
-		$lat = I('request.lat');
-		$lng = I('request.lng');
+		$post_data = [
+			'cg_id'=>'分类',
+			'post_content'=>'内容',
+			'post_addr'=>'post_addr',
+			'post_addr_name'=>'post_addr_name',
+			'lat'=>'lat',
+			'lng'=>'lng',
+		];
+		$info = [];
+		foreach ($post_data as $key => $value) {
+			$info[$key] = I('request.'.$key);
+			if (empty($info[$key])) {
+				$this->jerror($value.'不能为空');
+			}
+		}
 		$smeta = I('request.smeta');
 
-		if (empty($cg_id) || empty($post_content) || empty($post_addr)) {
-			$this->jerror("参数缺失");
-		}
-
-		$cate = M('Categorys')->field('type,name')->where(array('cg_id'=>$cg_id))->find();
+		$cate = M('Categorys')->field('type,name')->where(array('cg_id'=>$info['cg_id']))->find();
 		// 发布频率，半小时最多三条  &&  每天最多20条
 		$daily_num = $this->info_m->where(array('post_author'=>$this->user_result['member_id'], 'post_date'=>array('EGT',date('Y-m-d 00:00:00'))))->count();
 		if ($daily_num >= 20) {
 			$this->jerror('今天已发布达上限，请明天再操作！');
 		}
 		$flag_time = date('Y-m-d H:i:s', time()-1800);
-		$hh_num = $this->info_m->where(array('post_author'=>$this->user_result['member_id'], 'post_date'=>array('EGT',$flag_time))->order('post_date desc')->count();
+		$hh_num = $this->info_m->where(array('post_author'=>$this->user_result['member_id'], 'post_date'=>array('EGT',$flag_time)))->order('post_date desc')->count();
 		if ($hh_num >= 3) {
 			$this->jerror("发布过于频繁，请稍后再试！");
 		}
 
 		$info['post_author'] = $this->user_result['member_id'];
 		$info['post_date'] = date('Y-m-d H:i:s');
-		$info['post_content'] = $post_content;
-		$info['post_addr'] = $post_addr;
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 		$info['smeta'] = strlen($smeta)>0? $smeta: '';
-		$info['lat'] = $lat;
-		$info['lng'] = $lng;
-		$info['post_addr_name'] = $post_addr_name;
 		// 逆解析
 		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$lat.','.$lng.'&key='.C('TXMAP_N');
 		$re_n = http_get($url);
@@ -202,33 +201,25 @@ class InfoController extends BaseController {
 		$result = $this->info_m->add($info);
 
 		if ($result) {
-			$data['object_id'] = $result;
-			$data['cg_id'] = $cg_id;
-			$data['cg_name'] = $cate['name'];
-			$re = M('InfosRelationships')->add($data);
-			if ($re) {
-				$jret['flag'] = 1;
-				$jret['result'] = 0;
-				// todo 100限制
-				$total_point = M('detail_points')->where(array('member_id'=>$this->user_result['member_id'], 'action'=>'0'))->sum('point');
-				if ( $total_point < 100 ) {
-					$point = [];
-					$random = rand(1,10);
-					$point['action'] = '0';
-					$point['point'] = $random;
-					$point['member_id'] = $this->user_result['member_id'];
-					$point['addtime'] = date('Y-m-d H:i:s');
-					$point['daily_date'] = date('Y-m-d 00:00:00');
-					$point['daily_m'] = M('daily_points');
-					$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
-					$point['weekly_m'] = M('weekly_points');
-					A('Point')->setPoint($point);
-					$jret['result'] = $random;
-				}
-	        	$this->ajaxReturn($jret);
-			}else{
-				$this->jerror('发布失败');
+			$jret['flag'] = 1;
+			$jret['result'] = 0;
+			// todo 100限制
+			$total_point = M('detail_points')->where(array('member_id'=>$this->user_result['member_id'], 'action'=>'0'))->sum('point');
+			if ( $total_point < 100 ) {
+				$point = [];
+				$random = rand(1,10);
+				$point['action'] = '0';
+				$point['point'] = $random;
+				$point['member_id'] = $this->user_result['member_id'];
+				$point['addtime'] = date('Y-m-d H:i:s');
+				$point['daily_date'] = date('Y-m-d 00:00:00');
+				$point['daily_m'] = M('daily_points');
+				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+				$point['weekly_m'] = M('weekly_points');
+				A('Point')->setPoint($point);
+				$jret['result'] = $random;
 			}
+        	$this->ajaxReturn($jret);
 		}else{
 			$this->jerror('发布失败');
 		}
@@ -236,7 +227,6 @@ class InfoController extends BaseController {
 
 	// 上传图片
 	public function upPic(){
-		
 	    $savepath='qmcy/'.date('Ymd').'/';
 	    $config=array(
         		'rootPath' => './'.C("UPLOADPATH"),
@@ -448,12 +438,11 @@ class InfoController extends BaseController {
 		}
 		$post_author = $this->info_m->where(array('id'=>$id))->getField('post_author');
 		if ($post_author == $this->user_result['member_id']) {
-			$re1 = $this->info_m->where(array('id'=>$id))->delete();
-			$re2 = M('InfosRelationships')->where(array('object_id'=>$id))->delete();
+			$re = $this->info_m->where(array('id'=>$id))->delete();
 		}else{
 			$this->jerror("只可以删除自己发布的信息");
 		}
-		if ($re1 !== false && $re2 !== false) {
+		if ($re !== false) {
 			$jret['flag'] = 1;
 	        $this->ajaxReturn($jret);
 		}else{
