@@ -87,43 +87,40 @@ class AdController extends BaseController {
 		$cg_id = (int)I('request.cg_id');
 		$istop = (int)I('request.istop');
 		$recommended = (int)I('request.recommended');
-		// $pagination = (array)I('request.pagination');
 		$lastid = (int)I('request.lastid');
 		$epage = (int)I('request.epage');
 		// 各分类
 		if (isset($cg_id) && !empty($cg_id) && isset($istop) && !empty($istop)) {
 			$son_cg = M('Categorys')->where(array('parent'=>$cg_id))->getField('cg_id', true);
 			if (isset($son_cg)) {
-				$where['b.cg_id'] = array('in', implode(',', array_merge(array($cg_id),$son_cg)));
+				$where['cg_id'] = array('in', implode(',', array_merge(array($cg_id),$son_cg)));
 			}else{
-				$where['b.cg_id'] = $cg_id;
+				$where['cg_id'] = $cg_id;
 			}
 			
-			$where['a.istop'] = $istop;
+			$where['istop'] = $istop;
 		}
 		// 首页
 		if (isset($recommended) && !empty($recommended)) {
-			$where['a.recommended'] = $recommended;
+			$where['recommended'] = $recommended;
 		}
 		// 所有的都需要审核通过
-		$where['a.post_status'] = 1;
+		$where['post_status'] = 1;
 
 		// 排序规则：活动状态>排序数值>结束时间
-		$order = 'a.post_expire desc,b.listorder desc,a.end_time';
+		$order = 'post_expire desc,b.listorder desc,end_time';
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$where['a.id'] = array('GT',$lastid);
+				$where['id'] = array('GT',$lastid);
 			}
 			$limit = $epage;
 		}
 
-		$join = '__ADS_RELATIONSHIPS__ b ON a.id = b.object_id';
+		$field = '*';
 
-		$field = 'a.post_title,a.post_discount,a.start_time,a.end_time,a.id,a.smeta,a.post_expire,a.store_lng,a.store_lat,a.altas,a.shop_id';
-
-		$list = $this->ad_m->alias('a')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
+		$list = $this->ad_m->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
 			if ($value['smeta']) {
