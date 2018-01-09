@@ -8,7 +8,10 @@
 		<form class="well form-search" method="post" action="{:U('AdminInfo/index')}">
 			分类： 
 			<select name="cg_id" style="width: 120px;">
-				<option value='0'>全部</option>{$taxonomys}
+				<option value='0' <if condition = "$formget.cg_id eq 0">selected="selected"</if>>全部</option>
+				<foreach name="cg_id" item="vo"  key="k">
+				<option value="{$k}" <if condition = "$formget.cg_id eq $k">selected="selected"</if>>{$vo}</option>
+				</foreach>
 			</select> &nbsp;&nbsp;
 			时间：
 			<input type="text" name="start_time" class="js-datetime" value="{$formget.start_time|default=''}" style="width: 120px;" autocomplete="off">-
@@ -48,7 +51,7 @@
 				<foreach name="posts" item="vo">
 				<tr>
 					<td><input type="checkbox" class="js-check" data-yid="js-check-y" data-xid="js-check-x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
-					<td><input name="listorders[{$vo.infosid}]" class="input input-order" type="text" size="5" value="{$vo.listorder}"></td>
+					<td><input name="listorders[{$vo.id}]" class="input input-order" type="text" size="5" value="{$vo.listorder}"></td>
 					<td>{$vo.id}</td>
                     <td>{$vo.username}</td>
                     <td>{$vo.post_addr}</td>

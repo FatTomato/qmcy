@@ -13,18 +13,18 @@ use Common\Controller\AdminbaseController;
 class AdminShopController extends AdminbaseController {
     
 	protected $shop_model;
-	protected $categroys_model;
+	protected $categorys_model;
 	
 	function _initialize() {
 		parent::_initialize();
 		$this->shop_model = D("Portal/Shop");
-		$this->categroys_model = D("Portal/Categorys");
+		$this->categorys_model = D("Portal/Categorys");
 	}
 	
 	// 后台店铺管理列表
 	public function index(){
 		$this->_lists();
-		$this->cg_id = $this->categroys_model->where(array('type'=>2))->order(array("listorder"=>"asc"))->getField('cg_id,name');
+		$this->cg_id = $this->categorys_model->where(array('type'=>2))->order(array("listorder"=>"asc"))->getField('cg_id,name');
 		$this->level = [1=>'初级版',2=>'豪华版',3=>'已过期'];
 		$this->check = [1=>'未审核',2=>'已审核'];
 		$this->is_recruit = [1=>'无',2=>'有'];
@@ -36,7 +36,7 @@ class AdminShopController extends AdminbaseController {
 	// 店铺编辑
 	public function edit(){
 		$id=  I("get.id",0,'intval');
-		$this->cg_id = $this->categroys_model->where(array('type'=>2))->order(array("listorder"=>"asc"))->getField('cg_id,name');
+		$this->cg_id = $this->categorys_model->where(array('type'=>2))->order(array("listorder"=>"asc"))->getField('cg_id,name');
 		$shop=$this->shop_model->where("id=$id")->find();
 		$shop['shop_pic'] = $shop['shop_pic'] !== ''? explode(',', $shop['shop_pic']): [];
 		$shop['shop_contact'] = M('Member')->where(array('member_id'=>$shop['member_id']))->getField('username');

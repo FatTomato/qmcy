@@ -27,7 +27,11 @@
 						<tr>
 							<th width="100">广告分类</th>
 							<td>
-								<select style="max-height: 100px;" name="cg_id">{$taxonomys}</select>
+								<select style="max-height: 100px;" name="post[cg_id]">
+									<foreach name="cg_id" item="vo"  key="k">
+										<option value="{$k}" <if condition = "$formget.cg_id eq $k">selected="selected"</if>>{$vo}</option>
+									</foreach>
+								</select>
 							</td>
 						</tr>
 						<tr>

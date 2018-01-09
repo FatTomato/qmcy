@@ -27,7 +27,11 @@
 						<tr>
 							<th width="80">分类</th>
 							<td>
-								<select class="infos" style="max-height: 100px;" name="cg_id">{$taxonomys}</select>
+								<select class="infos" style="max-height: 100px;" name="cg_id">
+									<foreach name="cg_id" item="vo"  key="k">
+									<option value="{$k}" <if condition = "$post.cg_id eq $k">selected="selected"</if>>{$vo}</option>
+									</foreach>
+								</select>
 							</td>
 						</tr>
 						<tr>

@@ -13,28 +13,23 @@ use Common\Controller\AdminbaseController;
 class AdminAdsController extends AdminbaseController {
     
 	protected $ads_model;
-	protected $ads_relationships_model;
-	protected $categroys_model;
+	protected $categorys_model;
 	
 	function _initialize() {
 		parent::_initialize();
 		$this->ads_model = D("Portal/Ads");
-		$this->categroys_model = D("Portal/Categorys");
-		$this->ads_relationships_model = D("Portal/AdsRelationships");
+		$this->categorys_model = D("Portal/Categorys");
+		$this->cg_id = $this->categorys_model->where(array('type'=>array('IN',[0,1])))->order(array("listorder"=>"asc"))->getField('cg_id,name');
 	}
 	
 	// 后台文章管理列表
 	public function index(){
 		$this->_lists();
-		$this->_getTree();
 		$this->display();
 	}
 	
 	// 文章添加
 	public function add(){
-
-		$this->_getTermTree();
-
 		$this->display();
 	}
 	
@@ -47,15 +42,6 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			// $key = C('TXMAP');
-			// $addr = $article['store_addr'];
-			// $url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
-			// $lat_lng = http_get($url);
-			// if($lat_lng['status'] !== 0){
-			// 	$this->error("位置解析失败！");
-			// }
-			// $article['store_lat'] = $lat_lng['result']['location']['lat'];
-			// $article['store_lng'] = $lat_lng['result']['location']['lng'];
 			$article['post_status']=0;
 			$article['shop_id'] = M('Shop')->where(array('shop_name'=>$article['store_name']))->getField('id');
 			if (!$article['shop_id']) {
@@ -72,14 +58,7 @@ class AdminAdsController extends AdminbaseController {
 			$result=$this->ads_model->add($article);
 			M('Shop')->where(array('shop_name'=>$article['store_name']))->save(array('is_sale'=>1));
 			if ($result) {
-				
-				$re = $this->ads_relationships_model->add(array("cg_id"=>intval($_POST['cg_id']),"object_id"=>$result));
-				
-				if($re){
-					$this->success("添加成功！");
-				} else {
-					$this->error("添加失败！");
-				}
+				$this->success("添加成功！");
 			}else {
 					$this->error("添加失败！");
 			}
@@ -91,8 +70,6 @@ class AdminAdsController extends AdminbaseController {
 	public function edit(){
 		$id=  I("get.id",0,'intval');
 		
-		$ads_relationship = M('AdsRelationships')->where(array("object_id"=>$id,"status"=>1))->getField("cg_id",true);
-		$this->_getTermTree($ads_relationship);
 		$post=$this->ads_model->where("id=$id")->find();
 		$this->assign("post",$post);
 		$this->assign("altas",json_decode($post['altas'],true));
@@ -108,15 +85,6 @@ class AdminAdsController extends AdminbaseController {
 			$article=I("post.post");
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
-			// $key = C('TXMAP');
-			// $addr = $article['store_addr'];
-			// $url = 'http://apis.map.qq.com/ws/geocoder/v1/?address='.$addr.'&key='.$key;
-			// $lat_lng = http_get($url);
-			// if($lat_lng['status'] !== 0){
-			// 	$this->error("位置解析失败！");
-			// }
-			// $article['store_lat'] = $lat_lng['result']['location']['lat'];
-			// $article['store_lng'] = $lat_lng['result']['location']['lng'];
 			if(!empty($_POST['photos_url'])){
 				foreach ($_POST['photos_url'] as $key=>$url){
 					$photourl=sp_asset_relative_url($url);
@@ -126,12 +94,7 @@ class AdminAdsController extends AdminbaseController {
 			}
 			$result=$this->ads_model->save($article);
 			if ($result!==false) {
-				$re = $this->ads_relationships_model->where(array('object_id'=>$_POST['post']['id']))->save(array('cg_id'=>$_POST['cg_id']));
-				if($re !== false){
-					$this->success("保存成功！");
-				} else {
-					$this->error("保存sss失败！");
-				}
+				$this->success("保存成功！");
 			} else {
 				$this->error("保存失败！");
 			}
@@ -140,12 +103,12 @@ class AdminAdsController extends AdminbaseController {
 	
 	// 文章排序
 	public function listorders() {
-		$status = parent::_listorders($this->ads_relationships_model);
-		if ($status) {
-			$this->success("排序更新成功！");
-		} else {
-			$this->error("排序更新失败！");
-		}
+		$ids = $_POST['listorders'];
+        foreach ($ids as $key => $r) {
+            $data['listorder'] = $r;
+            $this->ads_model->where(array('id' => $key))->save($data);
+        }
+		$this->success("排序更新成功！");
 	}
 	
 	/**
@@ -156,36 +119,32 @@ class AdminAdsController extends AdminbaseController {
 		$cg_id=I('request.cg_id',0,'intval');
 		
 		if(!empty($cg_id)){
-		    $where['b.cg_id']=$cg_id;
+		    $where['a.cg_id']=$cg_id;
 		}
 		
 		$start_time=I('request.start_time');
 		if(!empty($start_time)){
-		    $where['end_time']=array(
+		    $where['a.end_time']=array(
 		        array('EGT',$start_time)
 		    );
 		}
 		
 		$end_time=I('request.end_time');
 		if(!empty($end_time)){
-		    if(empty($where['end_time'])){
-		        $where['end_time']=array();
+		    if(empty($where['a.end_time'])){
+		        $where['a.end_time']=array();
 		    }
-		    array_push($where['end_time'], array('ELT',$end_time));
+		    array_push($where['a.end_time'], array('ELT',$end_time));
 		}
 		
 		$keyword=I('request.keyword');
 		if(!empty($keyword)){
-		    $where['post_title']=array('like',"%$keyword%");
+		    $where['a.post_title']=array('like',"%$keyword%");
 		}
 			
 		$this->ads_model
 		->alias("a")
 		->where($where);
-		
-		
-		$this->ads_model->join("__ADS_RELATIONSHIPS__ b ON a.id = b.object_id");
-		
 		
 		$count=$this->ads_model->count();
 			
@@ -198,8 +157,7 @@ class AdminAdsController extends AdminbaseController {
 		->limit($page->firstRow , $page->listRows)
 		->order("a.post_date DESC");
 		
-	    $this->ads_model->field('a.*,c.user_login,c.user_nicename,b.listorder,b.adsid');
-	    $this->ads_model->join("__ADS_RELATIONSHIPS__ b ON a.id = b.object_id");
+	    $this->ads_model->field('a.*,c.user_login,c.user_nicename');
 		
 		$posts=$this->ads_model->select();
 		foreach($posts as &$v){
@@ -210,54 +168,6 @@ class AdminAdsController extends AdminbaseController {
 		$this->assign("page", $page->show('Admin'));
 		$this->assign("formget",array_merge($_GET,$_POST));
 		$this->assign("posts",$posts);
-	}
-	
-	// 获取文章分类树结构 select 形式
-	private function _getTree(){
-		$cg_id=empty($_REQUEST['cg_id'])?0:intval($_REQUEST['cg_id']);
-		$result = $this->categroys_model->order(array("listorder"=>"asc"))->select();
-		
-		$tree = new \Tree();
-		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminTerm/add", array("parent" => $r['cg_id'])) . '">添加子类</a> | <a href="' . U("AdminTerm/edit", array("id" => $r['cg_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminTerm/delete", array("id" => $r['cg_id'])) . '">删除</a> ';
-			$r['visit'] = "<a href='#'>访问</a>";
-			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['cg_id'];
-			$r['parentid']=$r['parent'];
-			$r['selected']=$cg_id==$r['cg_id']?"selected":"";
-			$array[] = $r;
-		}
-		
-		$tree->init($array);
-		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
-		$taxonomys = $tree->get_tree(0, $str);
-		$this->assign("taxonomys", $taxonomys);
-	}
-	
-	// 获取文章分类树结构 
-	private function _getTermTree($term=array()){
-		$result = $this->categroys_model->order(array("listorder"=>"asc"))->select();
-		
-		$tree = new \Tree();
-		$tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
-		$tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-		foreach ($result as $r) {
-			$r['str_manage'] = '<a href="' . U("AdminTerm/add", array("parent" => $r['cg_id'])) . '">添加子类</a> | <a href="' . U("AdminTerm/edit", array("id" => $r['cg_id'])) . '">修改</a> | <a class="js-ajax-delete" href="' . U("AdminTerm/delete", array("id" => $r['cg_id'])) . '">删除</a> ';
-			$r['visit'] = "<a href='#'>访问</a>";
-			$r['taxonomys'] = $this->taxonomys[$r['taxonomy']];
-			$r['id']=$r['cg_id'];
-			$r['parentid']=$r['parent'];
-			$r['selected']=in_array($r['cg_id'], $term)?"selected":"";
-			$r['checked'] =in_array($r['cg_id'], $term)?"checked":"";
-			$array[] = $r;
-		}
-		
-		$tree->init($array);
-		$str="<option value='\$id' \$selected>\$spacer\$name</option>";
-		$taxonomys = $tree->get_tree(0, $str);
-		$this->assign("taxonomys", $taxonomys);
 	}
 	
 	// 文章审核
@@ -326,13 +236,12 @@ class AdminAdsController extends AdminbaseController {
 		}
 	}
 	
-	// 清除已经删除的文章
+	// 删除的文章
 	public function delete(){
 		if(isset($_POST['ids'])){
 			$ids = I('post.ids/a');
 			$ids = array_map('intval', $ids);
 			$status=$this->ads_model->where(array("id"=>array('in',$ids)))->delete();
-			$this->ads_relationships_model->where(array('object_id'=>array('in',$ids)))->delete();
 			
 			if ($status!==false) {
 				$this->success("删除成功！");
@@ -343,7 +252,6 @@ class AdminAdsController extends AdminbaseController {
 			if(isset($_GET['id'])){
 				$id = I("get.id",0,'intval');
 				$status=$this->ads_model->where(array("id"=>$id))->delete();
-				$this->ads_relationships_model->where(array('object_id'=>$id))->delete();
 				
 				if ($status!==false) {
 					$this->success("删除成功！");

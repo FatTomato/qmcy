@@ -19,6 +19,23 @@ class AdController extends BaseController {
 		$this->ad_m = M('Ads');
 	}
 
+	public function ss(){
+		$list = M('InfosRelationships')->select();
+		foreach ($list as $key => $value) {
+			$where['id'] = $value['object_id'];
+			$data['cg_id'] = $value['cg_id'];
+			$data['cg_name'] = $value['cg_name'];
+			M('Infos')->where($where)->save($data);
+		}
+		$list = M('AdsRelationships')->select();
+		foreach ($list as $key => $value) {
+			$where1['id'] = $value['object_id'];
+			$data1['cg_id'] = $value['cg_id'];
+			// $data['cg_name'] = $value['cg_name'];
+			M('Ads')->where($where1)->save($data1);
+		}
+	}
+
 	// 广告详情
 	public function getAdInfo(){
 		$id = (int)I('request.id');
