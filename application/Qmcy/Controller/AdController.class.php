@@ -19,23 +19,6 @@ class AdController extends BaseController {
 		$this->ad_m = M('Ads');
 	}
 
-	public function ss(){
-		$list = M('InfosRelationships')->select();
-		foreach ($list as $key => $value) {
-			$where['id'] = $value['object_id'];
-			$data['cg_id'] = $value['cg_id'];
-			$data['cg_name'] = $value['cg_name'];
-			M('Infos')->where($where)->save($data);
-		}
-		$list = M('AdsRelationships')->select();
-		foreach ($list as $key => $value) {
-			$where1['id'] = $value['object_id'];
-			$data1['cg_id'] = $value['cg_id'];
-			// $data['cg_name'] = $value['cg_name'];
-			M('Ads')->where($where1)->save($data1);
-		}
-	}
-
 	// 广告详情
 	public function getAdInfo(){
 		$id = (int)I('request.id');
@@ -108,7 +91,7 @@ class AdController extends BaseController {
 		$where['post_status'] = 1;
 
 		// 排序规则：活动状态>排序数值>结束时间
-		$order = 'post_expire desc,b.listorder desc,end_time';
+		$order = 'post_expire desc,listorder desc,end_time';
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
 		if (isset($lastid) && isset($epage)) {
