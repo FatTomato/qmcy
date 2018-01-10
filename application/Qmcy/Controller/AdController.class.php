@@ -65,7 +65,7 @@ class AdController extends BaseController {
 		}
 	}
 	
-	// 广告列表
+	// 广告列表 1
 	public function getAdsList(){
 		$cg_id = (int)I('request.cg_id');
 		$istop = (int)I('request.istop');
