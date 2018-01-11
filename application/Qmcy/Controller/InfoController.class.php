@@ -164,6 +164,9 @@ class InfoController extends BaseController {
 			'post_addr_name'=>'post_addr_name',
 			'lat'=>'lat',
 			'lng'=>'lng',
+			'province'=>'province',
+			'city'=>'city',
+			'district'=>'district',
 		];
 		$info = [];
 		foreach ($post_data as $key => $value) {
@@ -191,12 +194,6 @@ class InfoController extends BaseController {
 		$info['type'] = $cate['type'];
 		$info['cg_name'] = $cate['name'];
 		$info['smeta'] = strlen($smeta)>0? $smeta: '';
-		// 逆解析
-		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$lat.','.$lng.'&key='.C('TXMAP_N');
-		$re_n = http_get($url);
-		$info['province'] = $re_n['result']['ad_info']['province'];
-		$info['city'] = $re_n['result']['ad_info']['city'];
-		$info['district'] = $re_n['result']['ad_info']['district'];
 
 		$result = $this->info_m->add($info);
 

@@ -258,6 +258,9 @@ class ShopController extends BaseController {
 			'shop_addr_name'=>'shop_addr_name',
 			'lat'=>'lat',
 			'lng'=>'lng',
+			'province'=>'province',
+			'city'=>'city',
+			'district'=>'district',
 		];
 		$shop = [];
 		foreach ($post_data as $key => $value) {
@@ -266,13 +269,6 @@ class ShopController extends BaseController {
 				$this->jerror($value.'不能为空');
 			}
 		}
-
-		// 逆解析
-		$url = 'http://apis.map.qq.com/ws/geocoder/v1/?location='.$shop['lat'].','.$shop['lng'].'&key='.C('TXMAP_N');
-		$re_n = http_get($url);
-		$shop['province'] = $re_n['result']['ad_info']['province'];
-		$shop['city'] = $re_n['result']['ad_info']['city'];
-		$shop['district'] = $re_n['result']['ad_info']['district'];
 
 		$shop['member_id'] = $this->user_result['member_id'];
 		$shop['add_time'] = date('Y-m-d H:i:s');
