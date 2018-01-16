@@ -22,7 +22,7 @@ class CategoryController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 
-		$field = 'cg_id,name,icon,description';
+		$field = 'cg_id,name,icon,description,price';
 
 		$cicle_info = $this->cg_m->where($where)->field($field)->find();
 
@@ -37,9 +37,9 @@ class CategoryController extends BaseController {
 		$cicle_info['icon'] = sp_get_image_preview_url($cicle_info['icon']);
 
 		if ($cicle_info !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $cicle_info;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $cicle_info;
+	        $this->ajaxReturn($this->jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -54,8 +54,8 @@ class CategoryController extends BaseController {
 		$where['parent'] = (int)$parent_id;
 
 		$order = 'listorder desc';
-		$field = 'cg_id,name,icon,description';
-		$limit = '10';
+		$field = 'cg_id,name,icon,description,price';
+		$limit = '100';
 
 		$cg_list = $this->cg_m->where($where)->field($field)->order($order)->limit($limit)->select();
 
@@ -81,11 +81,29 @@ class CategoryController extends BaseController {
 		}
 
 		if ($cg_list !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $cg_list;
-	        $this->ajaxReturn($jret);
+			$this->jret['result'] = $cg_list;
+			$this->jret['flag'] = 1;
+			
+	        $this->ajaxReturn($this->jret);
 		}else {
 			$this->jerror("查询失败");
 		}
+	}
+
+	// 是否收费
+	public function getPrice(){
+		$cg_id = I("request.cg_id");
+		if (isset($cg_id) && !empty($cg_id)) {
+			$where['cg_id'] = $cg_id;
+		}else{
+			$this->jerror("参数缺失");
+		}
+		$cg = $this->cg_m->where(array('cg_id'=>$cg_id))->find();
+
+		$this->jret['result']['price'] = $cg['price'];
+		$this->jret['result']['intro'] = $cg['description'];
+		$this->jret['flag'] = 1;
+			
+	    $this->ajaxReturn($this->jret);
 	}
 }

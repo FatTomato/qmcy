@@ -30,8 +30,8 @@ class FeedbackController extends BaseController {
 		$fb_data['addtime'] = date('Y-m-d H:i:s');
 		$re = $this->fb_m->add($fb_data);
 		if ($re) {
-			$jret['flag'] = 1;
-			$this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->ajaxReturn($this->jret);
 		} else {
 			$this->jerror('反馈失败');
 		}

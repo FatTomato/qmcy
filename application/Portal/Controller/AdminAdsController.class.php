@@ -19,7 +19,7 @@ class AdminAdsController extends AdminbaseController {
 		parent::_initialize();
 		$this->ads_model = D("Portal/Ads");
 		$this->categorys_model = D("Portal/Categorys");
-		$this->cg_id = $this->categorys_model->where(array('type'=>array('IN',[0,1])))->order(array("listorder"=>"asc"))->getField('cg_id,name');
+		$this->cg_id = $this->categorys_model->where(array('type'=>2))->order(array("listorder"=>"asc"))->getField('cg_id,name');
 	}
 	
 	// 后台文章管理列表
@@ -43,9 +43,11 @@ class AdminAdsController extends AdminbaseController {
 			$article['smeta'] = sp_asset_relative_url($_POST['smeta']);
 			$article['post_content']=htmlspecialchars_decode($article['post_content']);
 			$article['post_status']=0;
-			$article['shop_id'] = M('Shop')->where(array('shop_name'=>$article['store_name']))->getField('id');
-			if (!$article['shop_id']) {
-				$this->error("店铺不存在！");
+			if ($article['store_name'] !== '官方') {
+				$article['shop_id'] = M('Shop')->where(array('shop_name'=>$article['store_name']))->getField('id');
+				if (!$article['shop_id']) {
+					$this->error("店铺不存在！");
+				}
 			}
 			// 相册图集
 			if(!empty($_POST['photos_url'])){
@@ -56,7 +58,9 @@ class AdminAdsController extends AdminbaseController {
 				$article['altas']=json_encode($_POST['altas']);
 			}
 			$result=$this->ads_model->add($article);
-			M('Shop')->where(array('shop_name'=>$article['store_name']))->save(array('is_sale'=>1));
+			if ($article['store_name'] !== '官方') {
+				M('Shop')->where(array('shop_name'=>$article['store_name']))->save(array('is_sale'=>1));
+			}
 			if ($result) {
 				$this->success("添加成功！");
 			}else {

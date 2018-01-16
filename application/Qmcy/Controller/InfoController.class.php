@@ -36,6 +36,7 @@ class InfoController extends BaseController {
 		
 		$info['post_like'] = $post_like == []? 0: count($post_like);
 		$info['stars'] = $stars == []? 0: count($stars);
+		$info['post_date'] = formate_date($info['post_date']);
 		$info['comment_count'] = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->count();
 		if (strlen($info['smeta'])>0 ) {
 			$info['smeta'] = explode(',',$info['smeta']);
@@ -45,22 +46,23 @@ class InfoController extends BaseController {
 		}
 
 		$comments = M('info_comments')->where(array('post_id'=>$id, 'status'=>1))->order('createtime desc')->select();
-		foreach ($comments as  &$value) {
-			if ($value['to_mid'] ==0) {
-				unset($value['to_mid']);
-				unset($value['to_name']);
-				unset($value['to_userphoto']);
+		foreach ($comments as &$v) {
+			if ($v['to_mid'] ==0) {
+				unset($v['to_mid']);
+				unset($v['to_name']);
+				unset($v['to_userphoto']);
 			}
 			if(!empty($this->user_result['member_id'])){
-				$value['is_del'] = $this->user_result['member_id'] == $value['from_mid']? true: false;
+				$v['is_del'] = $this->user_result['member_id'] == $v['from_mid']? true: false;
 			}
+			$v['createtime'] = formate_date($v['createtime']);
 		}
 		$info['comments'] = $comments;
 
 		if($info !== false){
-			$jret['flag'] = 1;
-			$jret['result'] = $info;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $info;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -140,13 +142,14 @@ class InfoController extends BaseController {
 			$value['post_like'] = $post_like == []? 0: count($post_like);
 			$value['stars'] = $stars == []? 0: count($stars);
 			$value['status'] = (bool)$value['status'];
+			$value['post_date'] = formate_date($value['post_date']);
 			$value['comment_count'] = M('info_comments')->where(array('post_id'=>$value['id'], 'status'=>1))->count();
 		}
 
 		if ($list !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $list;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $list;
+	        $this->ajaxReturn($this->jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -198,8 +201,8 @@ class InfoController extends BaseController {
 		$result = $this->info_m->add($info);
 
 		if ($result) {
-			$jret['flag'] = 1;
-			$jret['result'] = 0;
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = 0;
 			// todo 100限制
 			$total_point = M('detail_points')->where(array('member_id'=>$this->user_result['member_id'], 'action'=>'0'))->sum('point');
 			if ( $total_point < 100 ) {
@@ -214,9 +217,9 @@ class InfoController extends BaseController {
 				$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
 				$point['weekly_m'] = M('weekly_points');
 				A('Point')->setPoint($point);
-				$jret['result'] = $random;
+				$this->jret['result'] = $random;
 			}
-        	$this->ajaxReturn($jret);
+        	$this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('发布失败');
 		}
@@ -239,9 +242,9 @@ class InfoController extends BaseController {
 			foreach ($info as $key => $value) {
 				$filepath[$key] = $savepath.$value['savename'];
 			}
-			$jret['flag'] = 1;
-			$jret['result'] = $filepath;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $filepath;
+	        $this->ajaxReturn($this->jret);
         } else {
             $this->jerror($upload->getError());
         }
@@ -311,8 +314,8 @@ class InfoController extends BaseController {
 				M('Message')->add($message);
 			}
 
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$msg = isset($to_mid)? '回复失败': '评论失败';
 			$this->jerror($msg);
@@ -372,9 +375,9 @@ class InfoController extends BaseController {
 		}
 
 		if ($re !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $random;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $random;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('点赞失败');
 		}
@@ -417,8 +420,8 @@ class InfoController extends BaseController {
 		}
 		
 		if ($re !== false) {
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('收藏失败');
 		}
@@ -440,8 +443,8 @@ class InfoController extends BaseController {
 			$this->jerror("只可以删除自己发布的信息");
 		}
 		if ($re !== false) {
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('删除失败');
 		}
@@ -463,8 +466,8 @@ class InfoController extends BaseController {
 			$this->jerror("只可以删除自己发布的评论");
 		}
 		if ($re !== false) {
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('删除失败');
 		}

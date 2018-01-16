@@ -37,13 +37,13 @@ class AdController extends BaseController {
 		}
 		if ($ad['altas']) {
 			$ad['altas'] = json_decode($ad['altas'],true);
-			foreach ($ad['altas'] as $key => &$value) {
-				$value = sp_get_image_preview_url($value);
+			foreach ($ad['altas'] as $key => &$v) {
+				$v = sp_get_image_preview_url($v);
 			}
 		}
 		$shop = M('Shop')->field('shop_name,shop_logo')->where(array('id'=>$ad['shop_id']))->find();
 		$ad['shop_name'] = $shop['shop_name'];
-		$ad['shop_logo'] = $shop['shop_logo'];
+		$ad['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 		$ad['start_time'] = substr($ad['start_time'], 0, 10);
 		$ad['end_time'] = substr($ad['end_time'], 0, 10);
 		$post_hits_arr = explode(',',$ad['post_hits']);
@@ -57,9 +57,9 @@ class AdController extends BaseController {
 		}
 
 		if($ad !== false){
-			$jret['flag'] = 1;
-			$jret['result'] = $ad;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $ad;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -119,13 +119,13 @@ class AdController extends BaseController {
 			$value['end_time'] = substr($value['end_time'], 0, 10);
 			$shop = M('Shop')->field('shop_name,shop_logo')->where(array('id'=>$value['shop_id']))->find();
 			$value['shop_name'] = $shop['shop_name'];
-			$value['shop_logo'] = $shop['shop_logo'];
+			$value['shop_logo'] = sp_get_image_preview_url($shop['shop_logo']);
 		}
 
 		if ($list !== false) {
-			$jret['flag'] = 1;
-			$jret['result'] = $list;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $list;
+	        $this->ajaxReturn($this->jret);
 		}else {
 			$this->jerror("查询失败");
 		}
@@ -141,9 +141,9 @@ class AdController extends BaseController {
 
 		$content = M('Illustrate')->field('content')->where(array('name'=>$name))->find();
 		if ($content) {
-			$jret['flag'] = 1;
-			$jret['result'] = $content;
-			$this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $content;
+			$this->ajaxReturn($this->jret);
 		} else {
 			$this->jerror('请求失败');
 		}

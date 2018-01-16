@@ -71,7 +71,7 @@ function sp_get_current_userid(){
  */
 function sp_get_host(){
 	$host=$_SERVER["HTTP_HOST"];
-	$protocol=is_ssl()?"https://":"http://";
+	$protocol="https://";//is_ssl()?"https://":"http://";
 	return $protocol.$host;
 }
 
@@ -2219,4 +2219,20 @@ function randomFromDev($len) {
     $result = strtr($result, '+/', '-_');
 
     return substr($result, 0, $len);
+}
+
+function formate_date($date){
+	if ( date('Y-m-d 00:00:00')<=$date ) {
+		$diff = time()-strtotime($date);
+		if ( $diff<3600 ) {
+			$min = floor($diff/60);
+			return $min==0?'刚刚':$min.'分钟前';
+		} else {
+			return floor($diff/3600).'小时前';
+		}
+	} elseif ( (date('Y-m-d 00:00:00',strtotime("-1 day"))<=$date) && (date('Y-m-d 00:00:00')>$date) ) {
+		return '昨天';
+	} else {
+		return $date;
+	}
 }

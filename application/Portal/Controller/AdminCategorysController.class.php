@@ -46,6 +46,7 @@ class AdminCategorysController extends AdminbaseController {
 					<td>\$spacer \$name</a></td>
 	    			<td>\$types</td>
 	    			<td><img src='\$icon' width='50px'/></td>
+	    			<td>\$price</td>
 					<td>\$str_manage</td>
 				</tr>";
 		$taxonomys = $tree->get_tree(0, $str);

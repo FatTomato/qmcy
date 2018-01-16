@@ -32,9 +32,9 @@ class MemberController extends BaseController {
 		}
 
 		if($fans !== false){
-			$jret['flag'] = 1;
-			$jret['result'] = $fans;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $fans;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -55,9 +55,9 @@ class MemberController extends BaseController {
 		}
 
 		if($follows !== false){
-			$jret['flag'] = 1;
-			$jret['result'] = $follows;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $follows;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -96,8 +96,8 @@ class MemberController extends BaseController {
 		}
 
 		if($re){
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 	    	$msg = $action == 'false'? '取关失败': '关注失败';
 			$this->jerror($msg);
@@ -130,8 +130,8 @@ class MemberController extends BaseController {
 		}
 
 		if($re){
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 	    	$msg = $action == 'false'? '退出圈子失败': '加入圈子失败';
 			$this->jerror($msg);
@@ -174,9 +174,9 @@ class MemberController extends BaseController {
 		}
 
 		if ($memberinfo) {
-			$jret['flag'] = 1;
-			$jret['result'] = $memberinfo;
-		    $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $memberinfo;
+		    $this->ajaxReturn($this->jret);
 		}
 	}
 
@@ -291,7 +291,7 @@ class MemberController extends BaseController {
 		$member = M('Member')->where(array('openId'=>$openId))->find();
         $this->jret['reset']['is_reg'] = empty($member)? 0: 1;
 
-		$session3rd = md5(time());//randomFromDev(16);
+		$session3rd = randomFromDev(16);
 		S($session3rd, $openId, 86400*7);
 
 	    $this->jret['flag'] = 1;
@@ -421,22 +421,22 @@ class MemberController extends BaseController {
 		M('Message')->where(array('member_id'=>$this->user_result['member_id']))->save(array('status'=>1));
 
 		if ($comments) {
-			$jret['flag'] = 1;
-			$jret['result'] = $comments;
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $comments;
 		} else {
 			$this->jerror('获取消息失败！');
 		}
 
-        $this->ajaxReturn($jret);
+        $this->ajaxReturn($this->jret);
 	}
 
 	// 首页获取是否有新消息
 	public function isUnread(){
 		if ($this->user_result['member_id']) {
-			$jret['unread_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
+			$this->jret['unread_num'] = M('Message')->where(array('member_id'=>$this->user_result['member_id'], 'status'=>0))->count();
 		}
-		$jret['flag'] = 1;
-		$this->ajaxReturn($jret);
+		$this->jret['flag'] = 1;
+		$this->ajaxReturn($this->jret);
 	}
 
 	// 信息&&店铺举报
@@ -467,8 +467,8 @@ class MemberController extends BaseController {
 			}
 		}
 		if ($re !== false) {
-			$jret['flag'] = 1;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+	        $this->ajaxReturn($this->jret);
 		}else{
 			$this->jerror('举报失败');
 		}

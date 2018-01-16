@@ -49,11 +49,11 @@ class PointController extends BaseController {
 		$re = M('weekly_points')->alias('a')->join($join)->where($where)->field('a.member_id, a.addtime, a.point, b.userphoto, b.username')->order('a.point desc')->limit('50')->select();
 
 		if (isset($re)) {
-			$jret['flag'] = 1;
-			$jret['result']['list'] = $re;
-			$jret['result']['start_time'] = $re['0']['addtime'];
-			$jret['result']['end_time'] = date('Y-m-d 23:59:59',strtotime($re['0']['addtime']." +6 days"));
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result']['list'] = $re;
+			$this->jret['result']['start_time'] = $re['0']['addtime'];
+			$this->jret['result']['end_time'] = date('Y-m-d 23:59:59',strtotime($re['0']['addtime']." +6 days"));
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -99,9 +99,9 @@ class PointController extends BaseController {
 		}
 
 		if (isset($re)) {
-			$jret['flag'] = 1;
-			$jret['result'] = $re;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $re;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -113,7 +113,7 @@ class PointController extends BaseController {
 			$this->jerror('您还没有登录！');
 		}
 		$where['member_id'] = $this->user_result['member_id'];
-		$where['addtime'] = array('EGT',date('Y-m-d'));
+		$where['addtime'] = array('EGT',date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days')));
 		$field = 'addtime,point';
 		$re = M('daily_points')->field($field)->where($where)->order('addtime')->select();
 
@@ -122,9 +122,9 @@ class PointController extends BaseController {
 		}
 
 		if (isset($re)) {
-			$jret['flag'] = 1;
-			$jret['result'] = $re;
-	        $this->ajaxReturn($jret);
+			$this->jret['flag'] = 1;
+			$this->jret['result'] = $re;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -139,11 +139,11 @@ class PointController extends BaseController {
 		$point = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
 
 		if($point !== false){
-			$jret['flag'] = 1;
+			$this->jret['flag'] = 1;
 			$is_enough = $point > 100?true:false;
-			$jret['result']['point'] = $point;
-			$jret['result']['is_enough'] = $is_enough;
-	        $this->ajaxReturn($jret);
+			$this->jret['result']['point'] = $point;
+			$this->jret['result']['is_enough'] = $is_enough;
+	        $this->ajaxReturn($this->jret);
 	    }else {
 			$this->jerror("查询失败");
 		}
@@ -154,18 +154,18 @@ class PointController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('您还没有登录！');
 		}
-		$jret['flag'] = 1;
+		$this->jret['flag'] = 1;
 
-		$jret['result']['total_point'] = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
+		$this->jret['result']['total_point'] = M('Member')->where(array('member_id'=>$this->user_result['member_id']))->getField('point');
 
 		$where1['member_id'] = $this->user_result['member_id'];
 		$where1['addtime'] = array('EGT',date('Y-m-d 00:00:00'));
-		$jret['result']['daily_point'] = M('detail_points')->where($where1)->sum('point');
+		$this->jret['result']['daily_point'] = M('detail_points')->where($where1)->sum('point');
 
 		$where2['member_id'] = $this->user_result['member_id'];
 		$where2['addtime'] = array('EGT',date('Y-m-d'));
-		$jret['result']['weekly_point'] = M('daily_points')->where($where2)->sum('point');
+		$this->jret['result']['weekly_point'] = M('daily_points')->where($where2)->sum('point');
 		
-		$this->ajaxReturn($jret);
+		$this->ajaxReturn($this->jret);
 	}
 }
