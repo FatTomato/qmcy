@@ -48,6 +48,12 @@ class PointController extends BaseController {
 		$where['a.addtime'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
 		$re = M('weekly_points')->alias('a')->join($join)->where($where)->field('a.member_id, a.addtime, a.point, b.userphoto, b.username')->order('a.point desc')->limit('50')->select();
 
+		foreach ($re as &$value) {
+			if (mb_strlen($value['username'] > 10)) {
+				$value['username'] = mb_substr($value['username'], 0, 10).'...';
+			}
+		}
+
 		if (isset($re)) {
 			$this->jret['flag'] = 1;
 			$this->jret['result']['list'] = $re;
@@ -89,12 +95,12 @@ class PointController extends BaseController {
 				case '5':
 					$value['action'] = '信息违规';
 					break;
-				// case '6':
-				// 	$value['action'] = '最新活动';
-				// 	break;
-				// case '7':
-				// 	$value['action'] = '拉新';
-				// 	break;
+				case '6':
+					$value['action'] = '举报通过审核';
+					break;
+				case '7':
+					$value['action'] = '反馈通过审核';
+					break;
 			}
 		}
 

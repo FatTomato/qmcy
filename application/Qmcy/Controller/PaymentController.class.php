@@ -257,23 +257,20 @@ class PaymentController extends BaseController {
                 $updata['order_status'] = 'ok';
                 if(M('Wxorder')->where($where)->save($updata)){
                 	// 业务逻辑
-                	if ($order_status['body'] == '息壤小镇-保证金' && ($post_data['total_fee'] == '19800' || $post_data['total_fee'] == '1') ) {
+                	if ($order_status['body'] == '息壤小镇-保证金' && $post_data['total_fee'] == '19800' ) {
                 		$save_data['deposit'] = 1;
                 		$save_data['deal_time'] = date('Y-m-d H:i:s');
                 		M('Shop')->where(array('member_id'=>$order_status['member_id']))->save($save_data);
-                	} elseif ($order_status['body'] == '息壤小镇-店铺升级') {
+                	} elseif ($order_status['body'] == '息壤小镇-升级豪华版') {
                 		switch ($post_data['total_fee']) {
                 			case '16800':
-                				$vip_time = date("Y-m-d H:i:s",strtotime("+3 month"));
+                				$vip_time = date("Y-m-d H:i:s",strtotime("+3 month +1 day"));
                 				break;
                 			case '25800':
-                				$vip_time = date("Y-m-d H:i:s",strtotime("+6 month"));
+                				$vip_time = date("Y-m-d H:i:s",strtotime("+6 month +1 day"));
                 				break;
                 			case '36500':
-                				$vip_time = date("Y-m-d H:i:s",strtotime("+1 year"));
-                				break;
-                			case '1':
-                				$vip_time = date("Y-m-d H:i:s",strtotime("+1 week"));
+                				$vip_time = date("Y-m-d H:i:s",strtotime("+1 year +1 day"));
                 				break;
                 		}
                 		$save_data['vip_time'] = $vip_time;
@@ -325,7 +322,7 @@ class PaymentController extends BaseController {
 			    $result = $this->wxrefundapi();
 			    if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
 			    	M('Wxorder')->where(array('trade_no'=>$result['out_refund_no']))->save(array('order_status'=>'ok'));
-			    	M('Shop')->where(array('member_id'=>$this->user_result['member_id']))->save(array('deposit'=>0));
+			    	M('Shop')->where(array('member_id'=>$this->user_result['member_id']))->save(array('deposit'=>2));
 			    	$this->jret['flag'] = 1;
 			    	$this->ajaxReturn($this->jret);
 			    } else {

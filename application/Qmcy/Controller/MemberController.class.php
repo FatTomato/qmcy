@@ -70,8 +70,8 @@ class MemberController extends BaseController {
 		}
 		$is_follow = I('request.is_follow');
 		$member_id = (int)I('request.member_id');
-		$name = (string)I('request.name');
-		$photo = (string)I('request.photo');
+		$name = (string)I('request.username');
+		$photo = (string)I('request.userphoto');
 
 		if (empty($member_id)) {
 			$this->jerror("参数缺失");
@@ -157,7 +157,7 @@ class MemberController extends BaseController {
 			
 			$memberinfo['message_num'] = M('Message')->alias('m')->join('__INFO_COMMENTS__ c ON c.id = m.comment_id')->where(array('m.member_id'=>$this->user_result['member_id'], 'm.status'=>0))->count();
 			$m_id = $this->user_result['member_id'];
-		} elseif ($member_id !== $this->user_result['member_id']) {
+		} elseif ($member_id != $this->user_result['member_id']) {
 			$memberinfo = $this->m_m->field('member_id,username,userphoto,point')->where(array('member_id'=>$member_id))->find();
 
 			if (!empty($this->user_result['member_id'])) {
@@ -216,7 +216,7 @@ class MemberController extends BaseController {
 			$pc = new WXBizDataCrypt($appid, $sessionKey);
 		    $errCode = $pc->decryptData($encryptedData, $iv, $data);
 
-		    if ($errCode !== 0) {
+		    if ($errCode != 0) {
 		        $this->jerror("encryptData Not Match");
 		    }
 
@@ -320,7 +320,7 @@ class MemberController extends BaseController {
 				$this->jerror('手机号已存在，请勿重复验证！');
 			}
 		}else{
-			$this->jerror('手机号有误！');
+			$this->jerror('手机号格式有误！');
 		}
 		$appid = C('SMSAPPID');
 		$appkey = C('SMSAPPKEY');
@@ -390,7 +390,7 @@ class MemberController extends BaseController {
 		if (empty($this->user_result['member_id'])) {
 			$this->jerror('您还没有登录！');
 		}
-
+		// 已读/未读都返回
 		$messages = M('Message')->alias('m')->join('__INFO_COMMENTS__ c ON c.id = m.comment_id')->field('m.comment_id')->where(array('m.member_id'=>$this->user_result['member_id']))->select();
 		if ($messages) {
 			$ids = array_column($messages, 'comment_id');
@@ -451,6 +451,9 @@ class MemberController extends BaseController {
 		if (empty($id) || empty($type) || empty($content)) {
 			$this->jerror('参数缺失');
 		}else{
+			if ( mb_strlen($content)>20 ) {
+				$this->jerror('最多发布20个字哦！');
+			}
 			$last_time = M('Tipoff')->where(array('member_id'=>$this->user_result['member_id']))->getField('addtime');
 			if ( time()-strtotime($last_time) < 600 ) {
 				$this->jerror('您刚提交过举报，请稍后再操作！');

@@ -18,18 +18,22 @@ class ShopController extends BaseController {
 	public function getShopDetail(){
 		$id = I('request.id');
 		if (isset($id) && !empty($id)) {
-			$where['id'] = $id;
+			$where['s.id'] = $id;
 		}else{
 			$this->jerror("参数缺失");
 		}
 		
-		$field = '*';
-		$shop = $this->shop_m->field($field)->where($where)->find();
+		$field = 's.*';
+		$join = '__MEMBER__ m ON m.member_id = s.member_id';
+		$shop = $this->shop_m->alias('s')->join($join)->field($field)->where($where)->find();
+		if ( $shop['status']!=1 ) {
+			$this->jerror('该店铺已下架！');
+		}
 
 		$shop['is_new'] = (bool)$shop['is_new'];//新店
 		$shop['is_brand'] = (bool)$shop['is_brand'];//连锁
 		$shop['is_recruit'] = (bool)$shop['is_recruit'];//招聘
-		$shop['deposit'] = (bool)$shop['deposit'];//保证金
+		$shop['deposit'] = $shop['deposit']==1?true:false;//保证金
 		$shop['is_sale'] = (bool)$shop['is_sale'];//活动
 		$shop['shop_property'] = (bool)$shop['shop_property'];//店铺性质
 		$shop['probation'] = (bool)$shop['probation'];//是否体验豪华版
@@ -65,7 +69,7 @@ class ShopController extends BaseController {
 
 		// 是否续费
 		$remainder_time = strtotime($shop['vip_time']) - time();
-		if ( ($shop['level']==0 && $shop['probation']==1) || ($shop['vip_type']==0 && $shop['level']==1) || ($shop['vip_type']==1 && $remainder_time<=604800) ) {
+		if ( ($shop['level']==0 && $shop['probation']==1) || ($shop['level']==1 && $remainder_time<=604800) ) {
 			$shop['is_remind'] = 1;
 		}
 		
@@ -106,16 +110,16 @@ class ShopController extends BaseController {
 		$epage = (int)I('request.epage');
 
 		if (isset($cg_id) && !empty($cg_id)) {
-			$where['cg_id'] = $cg_id;
+			$where['s.cg_id'] = $cg_id;
 		}
 		if ($is_sale == 'true') {
-			$where['is_sale'] = 1;
+			$where['s.is_sale'] = 1;
 		}
 		if ($is_recruit == 'true') {
-			$where['is_recruit'] = 1;
+			$where['s.is_recruit'] = 1;
 		}
 		if ($is_deposit == 'true') {
-			$where['deposit'] = 1;
+			$where['s.deposit'] = 1;
 		}
 		// 我的收藏
 		if ($star == 'true') {
@@ -124,7 +128,7 @@ class ShopController extends BaseController {
 			}
 			$star_ids = $this->shop_star_m->where(array('member_id'=>$this->user_result['member_id'], 'status'=>1))->getField('shop_id', true);
 			if ($star_ids) {
-				$where['id'] = array('in', $star_ids);
+				$where['s.id'] = array('in', $star_ids);
 			} else {
 				$this->jret['flag'] = 1;
 				$this->jret['result'] = [];
@@ -132,21 +136,23 @@ class ShopController extends BaseController {
 			}
 		}
 
-		$where['status'] = 1;
+		$where['s.status'] = 1;
 
-		$order = 'deal_time desc';
+		// $order = 'deal_time desc';
+		$order = 's.id desc';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
-				$last_deal_time = $this->shop_m->where(array('id'=>$lastid))->getField('deal_time');
-				$where['deal_time'] = array('LT',$last_deal_time);
+				// $last_deal_time = $this->shop_m->where(array('id'=>$lastid))->getField('deal_time');
+				// $where['s.deal_time'] = array('LT',$last_deal_time);
+				$where['s.id'] = array('LT', $lastid);
 			}
 			$limit = $epage;
 		}
 
-		$field = '*';
-
-		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
+		$field = 's.*';
+		$join = '__MEMBER__ m ON m.member_id = s.member_id';
+		$list = $this->shop_m->alias('s')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
 			if($value['check']==1){
@@ -169,7 +175,7 @@ class ShopController extends BaseController {
 			}
 			unset($value['is_sale']);
 
-			$value['deposit'] = (bool)$value['deposit'];
+			$value['deposit'] = $value['deposit']==1?true:false;//保证金
 			$value['shop_property'] = (bool)$value['shop_property'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
@@ -190,29 +196,29 @@ class ShopController extends BaseController {
 		$epage = (int)I('request.epage');
 
 		if (isset($kword) && !empty($kword)) {
-			$map['shop_name']  = array('like', '%'.$kword.'%');
-			$map['shop_major']  = array('like','%'.$kword.'%');
+			$map['s.shop_name']  = array('like', '%'.$kword.'%');
+			$map['s.shop_major']  = array('like','%'.$kword.'%');
 			$map['_logic'] = 'or';
 			$where['_complex'] = $map;
 		}else{
 			$this->jerror('kword can`t be null!');
 		}
 
-		$where['status'] = 1;
+		$where['s.status'] = 1;
 
 		$order = 'deal_time';
 
 		if (isset($lastid) && isset($epage)) {
 			if($lastid != 0){
 				$last_deal_time = $this->shop_m->where(array('id'=>$lastid))->getField('deal_time');
-				$where['deal_time'] = array('LT',$last_deal_time);
+				$where['s.deal_time'] = array('LT',$last_deal_time);
 			}
 			$limit = $epage;
 		}
 
-		$field = '*';
-
-		$list = $this->shop_m->field($field)->where($where)->order($order)->limit($limit)->select();
+		$field = 's.*';
+		$join = '__MEMBER__ m ON m.member_id = s.member_id';
+		$list = $this->shop_m->alias('s')->join($join)->field($field)->where($where)->order($order)->limit($limit)->select();
 
 		foreach ($list as &$value) {
 			if($value['check']==1){
@@ -232,7 +238,7 @@ class ShopController extends BaseController {
 				$value['ad_list'] = M('Ads')->field($field)->where(array('shop_id'=>$id, 'post_status'=>1))->order($order)->limit('1')->select();
 			}
 			unset($value['is_sale']);
-			$value['deposit'] = (bool)$value['deposit'];
+			$value['deposit'] = $value['deposit']==1?true:false;//保证金
 			$value['shop_property'] = (bool)$value['shop_property'];
 			$value['shop_logo'] = sp_get_image_preview_url($value['shop_logo']);
 		}
@@ -280,6 +286,16 @@ class ShopController extends BaseController {
 				$this->jerror($value.'不能为空');
 			}
 		}
+		// 字数限制
+		if (mb_strlen($shop['shop_name'])>12) {
+			$this->jerror('店铺名称不可超过12个字');
+		}
+		if (mb_strlen($shop['shop_major'])>24) {
+			$this->jerror('主营业务不可超过24个字');
+		}
+		if (mb_strlen($shop['shop_detail'])>500) {
+			$this->jerror('店铺详情不可超过500个字');
+		}
 
 		$shop['member_id'] = $this->user_result['member_id'];
 		$shop['add_time'] = date('Y-m-d H:i:s');
@@ -292,19 +308,12 @@ class ShopController extends BaseController {
 		if ($shop_id) {
 			$result = $this->shop_m->where(array('member_id'=>$this->user_result['member_id']))->save($shop);
 		}else{
+			// 店铺名不可相同
+			$shop_name = $this->shop_m->where(array('shop_name'=>$shop['shop_name']))->find();
+			if ($shop_name!=false) {
+				$this->jerror('店铺名称已存在！');
+			}
 			$result = $this->shop_m->add($shop);
-			// 首次添加店铺，积分+50
-			// if ($re_phone == '') {
-			// 	$point['action'] = '3';
-			// 	$point['point'] = '50';
-			// 	$point['member_id'] = $this->user_result['member_id'];
-			// 	$point['addtime'] = date('Y-m-d H:i:s');
-			// 	$point['daily_date'] = date('Y-m-d 00:00:00');
-			// 	$point['daily_m'] = M('daily_points');
-			// 	$point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
-			// 	$point['weekly_m'] = M('weekly_points');
-			// 	A('Point')->setPoint($point);
-			// }
 		}
 
 		if ($result) {
@@ -327,7 +336,7 @@ class ShopController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 		$member_id = $this->shop_m->where($where)->getField('member_id');
-		if ($this->user_result['member_id'] !== $member_id) {
+		if ($this->user_result['member_id'] != $member_id) {
 			$this->jerror('只可以操作自己的店铺！');
 		}
 		$data = [];
@@ -428,6 +437,22 @@ class ShopController extends BaseController {
 				$this->jerror($value.'不能为空');
 			}
 		}
+		// 字数限制
+		if ( mb_strlen($recruit['jd'])>20 ) {
+			$this->jerror('招聘职位字数不可超过20字');
+		}
+		if ( (int)($recruit['num'])>20 ) {
+			$this->jerror('招聘人数不可超过20人');
+		}
+		if ( mb_strlen($recruit['salary'])>20 ) {
+			$this->jerror('薪资位字数不可超过20个字');
+		}
+		if ( mb_strlen($recruit['benefits'])>100 ) {
+			$this->jerror('福利字数不可超过100个字');
+		}
+		if ( mb_strlen($recruit['demand'])>100 ) {
+			$this->jerror('职位要求字数不可超过100个字');
+		}
 
 		$recruit_num = $this->recruit_m->where(array('shop_id'=>$recruit['shop_id']))->count();
 		if ($recruit_num > 9) {
@@ -514,5 +539,16 @@ class ShopController extends BaseController {
 		$this->ajaxReturn($this->jret);
 	}
 
-	// todo 押金
+	// 5 9 * * * curl "localhost:8837/jserv/hdiCheck" -o a
+	public function upShopStatus(){
+		// 统计过期条数
+		$where['vip_time'] = array('ELT',date('Y-m-d H:i:s'));
+		$where['level'] = 1;
+		$ids = $this->shop_m->where($where)->getField('id', true);
+
+		$save_data['level'] = 0;
+		$save_data['vip_type'] = 0;
+		$save_where['id'] = array('IN', $ids);
+		$this->shop_m->where($save_where)->save($save_data);
+	}
 }

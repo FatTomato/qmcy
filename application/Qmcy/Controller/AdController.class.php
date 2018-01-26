@@ -28,7 +28,7 @@ class AdController extends BaseController {
 			$this->jerror("参数缺失");
 		}
 
-		$field = 'id,shop_id,post_content,post_title,post_excerpt,post_discount,start_time,end_time,post_expire,smeta,store_name,store_addr,store_contact,store_phone,store_time,post_hits,store_lat,store_lng,altas';
+		$field = 'id,shop_id,post_content,post_title,post_excerpt,start_time,end_time,post_expire,smeta,store_contact,post_hits,altas,store_name';
 
 		$ad = $this->ad_m->field($field)->where($where)->find();
 
@@ -89,6 +89,10 @@ class AdController extends BaseController {
 		}
 		// 所有的都需要审核通过
 		$where['post_status'] = 1;
+		$where['status'] = 1;
+		// 必须在活动时间内
+		$where['start_time'] = array('ELT', date('Y-m-d H:i:s'));
+		$where['end_time'] = array('EGT', date('Y-m-d H:i:s'));
 
 		// 排序规则：活动状态>排序数值>结束时间
 		$order = 'post_expire desc,listorder desc,end_time';

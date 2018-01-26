@@ -77,7 +77,7 @@ class AdminTipoffController extends AdminbaseController {
             // 扣分
             $point = [];
             $point['action'] = '5';
-            $point['point'] = '-300';
+            $point['point'] = '-1000';
             $point['member_id'] = $_POST['illegal_id'];
             $point['addtime'] = date('Y-m-d H:i:s');
             $point['daily_date'] = date('Y-m-d 00:00:00');
@@ -92,6 +92,17 @@ class AdminTipoffController extends AdminbaseController {
                 // 违规次数达3次 封号
                 M('Member')->where(array('member_id'=>$_POST['illegal_id']))->save(array('islock'=>1));
             }
+            // 加分
+            $point = [];
+            $point['action'] = '6';
+            $point['point'] = '100';
+            $point['member_id'] = $_POST['member_id'];
+            $point['addtime'] = date('Y-m-d H:i:s');
+            $point['daily_date'] = date('Y-m-d 00:00:00');
+            $point['daily_m'] = M('daily_points');
+            $point['weekly_date'] = date('Y-m-d 00:00:00',strtotime(date("Y-m-d")." -".(date('w',strtotime(date("Y-m-d"))) ? date('w',strtotime(date("Y-m-d"))) - 1 : 6).' days'));
+            $point['weekly_m'] = M('weekly_points');
+            $this->setPoint($point);
             
             $re = $this->to_model->where(array('tid'=>$_POST['tid']))->save(array('status'=>1));
         } elseif ($_POST['check'] == 2) {

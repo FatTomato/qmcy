@@ -26,6 +26,9 @@ class InfoController extends BaseController {
 		$field = 'a.*,b.userphoto,b.username,b.member_id';
 
 		$info = $this->info_m->alias('a')->join($join)->field($field)->where($where)->find();
+		if ( $info['status']!=1 ) {
+			$this->jerror('该消息已删除！');
+		}
 		$post_like = strlen($info['post_like'])>0? explode(',', $info['post_like']): [];
 		$stars = strlen($info['stars'])>0? explode(',', $info['stars']): [];
 		if($this->user_result['member_id']){
@@ -112,7 +115,7 @@ class InfoController extends BaseController {
 		}
 		
 		// 排序规则：置顶>发布时间
-		$order = 'a.istop,a.post_date DESC';
+		$order = 'a.istop desc,a.id DESC';
 
 		// todo：活动数量多了需要有偏移量，对应参数也需调整
 		if (isset($lastid) && isset($epage)) {
@@ -163,13 +166,13 @@ class InfoController extends BaseController {
 		$post_data = [
 			'cg_id'=>'分类',
 			'post_content'=>'内容',
-			'post_addr'=>'post_addr',
-			'post_addr_name'=>'post_addr_name',
-			'lat'=>'lat',
-			'lng'=>'lng',
-			'province'=>'province',
-			'city'=>'city',
-			'district'=>'district',
+			// 'post_addr'=>'发布地址',
+			// 'post_addr_name'=>'post_addr_name',
+			// 'lat'=>'lat',
+			// 'lng'=>'lng',
+			// 'province'=>'province',
+			// 'city'=>'city',
+			// 'district'=>'district',
 		];
 		$info = [];
 		foreach ($post_data as $key => $value) {
@@ -177,6 +180,32 @@ class InfoController extends BaseController {
 			if (empty($info[$key])) {
 				$this->jerror($value.'不能为空');
 			}
+		}
+		// 地址、手机号选填
+		$phone = I('request.phone');
+		if (!empty($phone)) {
+			if (preg_match("/^1[34578]\d{9}$/", $phone)) {
+				$info['phone'] = $phone;
+			} else {
+				$this->jerror('手机号格式有误！');
+			}
+		}
+		$post_addr = I('request.post_addr');
+		if (!empty($post_addr)) {
+			$info['post_addr'] = $post_addr;
+			$info['post_addr_name'] = I('request.post_addr_name');
+			$info['lat'] = I('request.lat');
+			$info['lng'] = I('request.lng');
+			$info['province'] = I('request.province');
+			$info['city'] = I('request.city');
+			$info['district'] = I('request.district');
+		}
+
+		if ( mb_strlen($info['post_content'])<10 ) {
+			$this->jerror('最少发布10个字哦！');
+		}
+		if ( mb_strlen($info['post_content'])>300 ) {
+			$this->jerror('最多发布300个字哦！');
 		}
 		$smeta = I('request.smeta');
 
@@ -205,9 +234,9 @@ class InfoController extends BaseController {
 			$this->jret['result'] = 0;
 			// todo 100限制
 			$total_point = M('detail_points')->where(array('member_id'=>$this->user_result['member_id'], 'action'=>'0'))->sum('point');
-			if ( $total_point < 100 ) {
+			if ( $total_point < 200 ) {
 				$point = [];
-				$random = rand(1,10);
+				$random = $cate['type']==1?(rand(1,10)+rand(1,5)):rand(1,10);
 				$point['action'] = '0';
 				$point['point'] = $random;
 				$point['member_id'] = $this->user_result['member_id'];
@@ -267,22 +296,22 @@ class InfoController extends BaseController {
 		
 		$where['id'] = $id;
 		$post_author = $this->info_m->where($where)->getField('post_author');
-		if ($post_author == $this->user_result['member_id'] && empty($to_mid)) {
-			$this->jerror('不可以给自己评论');
-		}
+		// if ($post_author == $this->user_result['member_id'] && empty($to_mid)) {
+		// 	$this->jerror('不可以给自己评论');
+		// }
 
 		if ($to_mid == $this->user_result['member_id']) {
 			$this->jerror('不可以给自己回复');
 		}
 		// 同一信息评论限制：每10分钟可评论一次
-		$createtime = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->order('createtime desc')->getField('createtime');
-		if ($createtime) {
-			$d = time()-strtotime($createtime);
-			if ($d < 600) {
-				$minute = ceil((600-$d)/60);
-				$this->jerror("评论过于频繁，请".$minute."分钟后再试！");
-			}
-		}
+		// $createtime = M('info_comments')->where(array('post_id'=>$id, 'from_mid'=>$this->user_result['member_id']))->order('createtime desc')->getField('createtime');
+		// if ($createtime) {
+		// 	$d = time()-strtotime($createtime);
+		// 	if ($d < 600) {
+		// 		$minute = ceil((600-$d)/60);
+		// 		$this->jerror("评论过于频繁，请".$minute."分钟后再试！");
+		// 	}
+		// }
 
 		$data['post_id'] = $id;
 		$data['from_mid'] = $this->user_result['member_id'];
